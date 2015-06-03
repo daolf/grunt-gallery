@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
   grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
 
-    // Merge task-specific and/or target-specific options with these defaults.
+    /*// Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       punctuation: '.',
       separator: ', '
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
 
       // Print a success message.
       grunt.log.writeln('File "' + file.dest + '" created.');
-    });
+    });*/
   });
 
 };
