@@ -10,12 +10,12 @@
 
 module.exports = function (grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+    // Please see the Grunt documentation for more information regarding task
+    // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
+    grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
 
-    /*// Merge task-specific and/or target-specific options with these defaults.
+        /*// Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       punctuation: '.',
       separator: ', '
@@ -46,6 +46,9 @@ module.exports = function (grunt) {
       // Print a success message.
       grunt.log.writeln('File "' + file.dest + '" created.');
     });*/
-  });
-
+        var config = grunt.config.get([this.name, this.target]);
+        console.log(config.files.src);
+        console.log(config.files.dest);
+        console.log(config.template);
+    });
 };

@@ -54,10 +54,10 @@ module.exports = function (grunt) {
             },
             ext : {
                 files: {
-                    src : ['source1'],
-                    temp : ['template'],
-                    dest : ['dest1']
-                }
+                    src : 'source1',
+                    dest : 'dest1'
+                },
+                template : 'template',
             }
         },
 
