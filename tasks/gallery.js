@@ -13,10 +13,22 @@ var myReaderWriter = require('./lib/readerWriter.js');
 var myParser = require('./lib/parser.js');
 var galleryGenerator = require('./lib/galleryGenerator.js');
 
-var testPath = function(filepath, grunt) {    
+// Test is path dir exist 
+var testPathDir = function(filepath, grunt) {    
     if (!grunt.file.isDir(filepath)) {
         grunt.log.warn('Source file "' + filepath + '" is not directory.');
         return false;
+    } else {
+        return true;
+    }
+};
+// Test is path file exist 
+var testPathFile = function(filepath, grunt) {    
+    if (!grunt.file.isFile(filepath)) {
+        grunt.log.warn('Source file "' + filepath + '" is not directory.');
+        return false;
+    } else {
+        return true;
     }
 };
 
@@ -30,8 +42,12 @@ module.exports = function (grunt) {
         var componentPath = config.files.src;
         var template = config.template;
 
-        testPath(componentPath,grunt);
-        testPath(template,grunt);
+        if (!testPathDir(componentPath,grunt)) {
+            return false;
+        }
+        if (!testPathFile(template,grunt)) {
+            return false;
+        }
 
         var targetPath = './target/';
         var jsonPath = targetPath + 'info.json';
@@ -39,28 +55,15 @@ module.exports = function (grunt) {
         var extractedExamples = [];
         var rawCode;
         var fileName;
-        var stats;
 
         //try if /target exist
-        try {
-            stats = fs.lstatSync('./target');
+        if (!testPathDir(targetPath,grunt)) {
+            grunt.file.mkdir(targetPath);
         }
-        catch (e) {
-            //if not we create it
-            console.log('creating dir /target');
-            fs.mkdirSync('./target');
+        if (!testPathDir(targetPath+'gallery/',grunt)) {
+            grunt.file.mkdir(targetPath+'gallery');
         }
 
-
-        // Test if /target/gallery exist
-        try {
-            stats = fs.lstatSync(targetPath + 'gallery');
-        }
-        catch (e) {
-            //if not we create it
-            console.log('creating dir /target/gallery');
-            fs.mkdirSync(targetPath + 'gallery/');
-        }
 
         //We read the comp directory looking for component
         components = fs.readdirSync(componentPath);
