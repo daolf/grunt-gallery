@@ -1,0 +1,30 @@
+{
+  "name": "grunt-gallery",
+  "version": "0.0.1",
+  "description": "Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)",
+  "repository": "git@git.lbg.office.lyra:pdewulf/grunt-gallery.git",
+  "author": {
+    "name": "Pierre de Wulf",
+    "email": "pierredewulf\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D.dewulf\u001b[2~@lyra-network.com",
+    "url": ""
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-nodeunit": "~0.3.0",
+    "grunt": "~0.4.2",
+    "jshint-stylish": "~0.1.5",
+    "load-grunt-tasks": "~0.3.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}
