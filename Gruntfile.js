@@ -58,7 +58,14 @@ module.exports = function (grunt) {
                     dest : './target/'
                 },
                 template : './views/extComp.jade',
-            }
+            },
+            react : {
+                files: {
+                    src : './publicRessources/react/',
+                    dest : './target/'
+                },
+                template : './views/reactComp.jade',
+            },
         },
 
         // Unit tests.
