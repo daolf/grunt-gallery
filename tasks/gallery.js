@@ -21,7 +21,7 @@ module.exports = function (grunt) {
         
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src;
-        var targetPath = config.files.dest;
+        var targetPath = './target/';
         var jsonPath = targetPath + 'info.json';
         var template = config.template;
         var components;
