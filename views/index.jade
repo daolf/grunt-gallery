@@ -1,0 +1,40 @@
+doctype html
+html
+    head
+        script(type="text/javascript" src="../node_modules/jquery/dist/jquery.js")
+        script(type="text/javascript" src="../node_modules/typeahead.js/dist/typeahead.bundle.min.js")
+        link(rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css")
+        link(rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css")
+        script(type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js")
+        link(rel='stylesheet', type='text/css', href='../src/views/css/index.css')
+    title Home
+    |         
+    body
+        div.container-fluid
+            row
+                div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    h1 Gallery
+            row
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    h2 Search
+                    |                  
+                    |                     
+                    .input-group
+                        input.form-control.form-search.typeahead(type='text', placeholder='Component name', aria-describedby='basic-addon2', data-provided="typeahead")
+                        |                         
+                        span#basic-addon2.input-group-addon
+                            i.glyphicon.glyphicon-search
+                    |                     
+                    br
+                    |                     
+                    br
+            row
+                div.galleryContainer
+                    each val in data
+                        div.col-lg-4.col-md-4.col-sm-6.col-xs-6.thumbnail
+                            div.thumbnailContainer
+                                a.compPict(href='./gallery/'+val.name+'.html') 
+                                    img.img-responsive(src='./img/'+val.name+'.html.png')
+                                a.compName(href='./gallery/'+val.name+'.html') #{val.name}
+            div#body
+        script(type='text/javascript', src='../src/views/js/search.js')

@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        script(src="../../node_modules/codemirror/lib/codemirror.js")
+        link(rel="stylesheet" href="../../node_modules/codemirror/lib/codemirror.css")
+        link(rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap-theme.min.css")
+        link(rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css")
+        link(href="../../node_modules/bootstrap/dist/js/bootstrap.min.js")
+        script(src="../../node_modules/codemirror/mode/javascript/javascript.js")
+        link(rel="stylesheet" href="../../src/views/css/gallery.css")
+        title #{name}
+    body
+        row
+            div.col-lg-12
+                h1
+                    | #{name}
+        row
+            div.col-lg-6.col-md-6.col-sm-6.col-xs-12
+                iframe(src='../iframe/'+name+'.html')
+            div.col-lg-6.col-md-6.col-sm-6.col-xs-12
+                textarea#myTx
+                    | #{example}
+        script(type='text/javascript').
+            /*tanks to Marijn Haverbeke */
+            var indentAll = function(cm) { 
+                var last = cm.lineCount(); 
+                cm.operation(function() { 
+                    for (var i = 0; i < last; ++i) cm.indentLine(i); 
+                }); 
+            } 
+            var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('myTx'), {
+            mode:  "javascript",
+            lineNumbers: true,
+            }); 
+            indentAll(myCodeMirror);
