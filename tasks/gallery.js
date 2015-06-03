@@ -5,50 +5,74 @@
  * Copyright (c) 2015 Pierre de Wulf
  * Licensed under the MIT license.
  */
-
 'use strict';
 
+var fs = require('fs');
+var screenShotGenerator = require('./lib/screenShotGenerator.js');
+var myReaderWriter = require('./lib/readerWriter.js');
+var myParser = require('./lib/parser.js');
+var galleryGenerator = require('./lib/galleryGenerator.js');
 module.exports = function (grunt) {
 
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
 
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
-
-        /*// Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
-
-    // Iterate over all specified file groups.
-    this.files.forEach(function (file) {
-      // Concat specified files.
-      var src = file.src.filter(function (filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function (filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(file.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + file.dest + '" created.');
-    });*/
+        
         var config = grunt.config.get([this.name, this.target]);
-        console.log(config.files.src);
-        console.log(config.files.dest);
-        console.log(config.template);
+        var componentPath = config.files.src;
+        var targetPath = config.files.dest;
+        var jsonPath = targetPath + 'info.json';
+        var template = console.log(config.template);
+        var components;
+        var extractedExamples = [];
+        var rawCode;
+        var fileName;
+        var stats;
+
+        //try if /target exist
+        try {
+            stats = fs.lstatSync('./target');
+        }
+        catch (e) {
+            //if not we create it
+            console.log('creating dir /target');
+            fs.mkdirSync('./target');
+        }
+
+
+        // Test if /target/gallery exist
+        try {
+            stats = fs.lstatSync(targetPath + 'gallery');
+        }
+        catch (e) {
+            //if not we create it
+            console.log('creating dir /target/gallery');
+            fs.mkdirSync(targetPath + 'gallery/');
+        }
+
+        //We read the comp directory looking for component
+        components = fs.readdirSync(componentPath);
+        //We extract example for each of them
+        console.log('Extraction of examples ...');
+        for (var i = 0; i<components.length; i++) {
+            fileName = components[i];
+            rawCode = myReaderWriter.read(componentPath+fileName);
+            var buffer = {
+                name : myParser.removeExtension(fileName),
+                file : componentPath+fileName,
+                example : myParser.extractCleanExamples(rawCode)
+            };
+            extractedExamples.push(buffer);
+        }
+        console.log('Extraction done');
+        console.log('Writing result in '+jsonPath);
+        //We write result in JSON in /target/examples.json
+        myReaderWriter.write(jsonPath, JSON.stringify(extractedExamples));
+        // We now generate galery
+        console.log('Now generating gallery');
+        galleryGenerator.generate(jsonPath,template);
+        console.log('Now generating screenshot');
+        screenShotGenerator.generate(targetPath + 'iframe/',targetPath + 'img/');
     });
 };
