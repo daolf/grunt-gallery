@@ -12,18 +12,29 @@ var screenShotGenerator = require('./lib/screenShotGenerator.js');
 var myReaderWriter = require('./lib/readerWriter.js');
 var myParser = require('./lib/parser.js');
 var galleryGenerator = require('./lib/galleryGenerator.js');
-module.exports = function (grunt) {
 
+var testPath = function(filepath, grunt) {    
+    if (!grunt.file.isDir(filepath)) {
+        grunt.log.warn('Source file "' + filepath + '" is not directory.');
+        return false;
+    }
+};
+
+module.exports = function (grunt) {
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
 
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
-        
+
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src;
+        var template = config.template;
+
+        testPath(componentPath,grunt);
+        testPath(template,grunt);
+
         var targetPath = './target/';
         var jsonPath = targetPath + 'info.json';
-        var template = config.template;
         var components;
         var extractedExamples = [];
         var rawCode;
