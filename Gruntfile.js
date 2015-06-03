@@ -50,10 +50,33 @@ module.exports = function (grunt) {
                 template : './views/reactComp.jade',
             },
         },
-
-        // Unit tests.
-        nodeunit: {
-            tests: ['test/*_test.js']
+        jasmine_nodejs: {
+            options: {
+                // specNameSuffix: 'spec.js', // also accepts an array
+                helperNameSuffix: 'helper.js',
+                useHelpers: false,
+                stopOnFailure: false,
+                // configure one or more built-in reporters
+                reporters: {
+                    console: {
+                        colors: true,
+                        cleanStack: 1,       // (0|false)|(1|true)|2|3
+                        verbosity: 3,        // (0|false)|1|2|(3|true)
+                        listStyle: 'indent', // 'flat'|'indent'
+                        activity: false
+                    }
+                }
+            },
+            local: {
+                // target specific options
+                options: {
+                    useHelpers: false
+                },
+                // spec files
+                specs: [
+                    'test/localSpec/**'
+                ]
+            }
         }
 
     });
@@ -63,7 +86,7 @@ module.exports = function (grunt) {
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'gallery', 'nodeunit']);
+    grunt.registerTask('test', ['clean', 'jasmine_nodejs']);
 
     // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'test']);
