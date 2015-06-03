@@ -21,8 +21,8 @@ var generate = function (file, template) {
     }
 
     var templateIframe = readerWriter.read(template);
-    var templateGallery = readerWriter.read('./src/views/gallery.jade');
-    var templateIndex = readerWriter.read('./src/views/index.jade');
+    var templateGallery = readerWriter.read('./views/gallery.jade');
+    var templateIndex = readerWriter.read('./views/index.jade');
 
     var fnIframe = jade.compile(templateIframe,{pretty : '\t'});
     var fnGallery = jade.compile(templateGallery,{pretty : '\t'});

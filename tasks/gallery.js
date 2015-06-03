@@ -23,7 +23,7 @@ module.exports = function (grunt) {
         var componentPath = config.files.src;
         var targetPath = config.files.dest;
         var jsonPath = targetPath + 'info.json';
-        var template = console.log(config.template);
+        var template = config.template;
         var components;
         var extractedExamples = [];
         var rawCode;

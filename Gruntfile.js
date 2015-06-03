@@ -54,10 +54,10 @@ module.exports = function (grunt) {
             },
             ext : {
                 files: {
-                    src : './source1',
+                    src : './privateRessources/extComp/',
                     dest : './target/'
                 },
-                template : './template',
+                template : './views/extComp.jade',
             }
         },
 
