@@ -85,7 +85,7 @@ module.exports = function (grunt) {
         myReaderWriter.write(jsonPath, JSON.stringify(extractedExamples));
         // We now generate galery
         console.log('Now generating gallery');
-        galleryGenerator.generate(jsonPath,template);
+        galleryGenerator.generate(jsonPath,template,targetPath);
         console.log('Now generating screenshot');
         screenShotGenerator.generate(targetPath + 'iframe/',targetPath + 'img/');
     });
