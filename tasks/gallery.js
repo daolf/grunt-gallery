@@ -49,7 +49,7 @@ module.exports = function (grunt) {
             return false;
         }
 
-        var targetPath = './target/';
+        var targetPath = config.files.dest;
         var jsonPath = targetPath + 'info.json';
         var components;
         var extractedExamples = [];
