@@ -43,6 +43,9 @@ module.exports = function (grunt) {
                     dest : './target/'
                 },
                 template : './views/extComp.jade',
+                dependancies : {
+                        
+                }
             },
             react : {
                 files: {

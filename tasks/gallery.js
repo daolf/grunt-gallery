@@ -36,7 +36,6 @@ var testPathFile = function(filepath, grunt) {
 module.exports = function (grunt) {
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
-
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
 
         var config = grunt.config.get([this.name, this.target]);

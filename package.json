@@ -23,6 +23,7 @@
         "esprima": "2.2.*",
         "estraverse": "4.1.*",
         "es5-shim": "4.1.*",
+        "grunt-contrib-concat": "0.5.*",
         "jade": "1.9.*",
         "jquery": "2.1.*",
         "phantomjs": "1.9.8",
