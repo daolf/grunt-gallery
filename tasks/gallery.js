@@ -66,7 +66,7 @@ module.exports = function (grunt) {
 
 
         //We read the comp directory looking for component
-        components = fs.readdirSync(componentPath);
+        components = myReaderWriter.extractJsFromDir(componentPath);
         //We extract example for each of them
         console.log('Extraction of examples ...');
         for (var i = 0; i<components.length; i++) {
