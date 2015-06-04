@@ -8,6 +8,7 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 var screenShotGenerator = require('./lib/screenShotGenerator.js');
 var myReaderWriter = require('./lib/readerWriter.js');
 var myParser = require('./lib/parser.js');
@@ -71,10 +72,10 @@ module.exports = function (grunt) {
         console.log('Extraction of examples ...');
         for (var i = 0; i<components.length; i++) {
             fileName = components[i];
-            rawCode = myReaderWriter.read(componentPath+fileName);
+            rawCode = myReaderWriter.read(fileName);
             var buffer = {
-                name : myParser.removeExtension(fileName),
-                file : componentPath+fileName,
+                name : myParser.removeExtension(path.basename(fileName)),
+                file : fileName,
                 example : myParser.extractCleanExamples(rawCode)
             };
             extractedExamples.push(buffer);
