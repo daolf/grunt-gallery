@@ -14,12 +14,13 @@ var fs = require('fs');
 var generate = function (file, template, target) {
     // Test if /target/gallery/template exist
     try {
-        stats = fs.lstatSync('./target/iframe');
+        var stats;
+        stats = fs.lstatSync(target + 'iframe');
     }
     catch (e) {
         //if not we create it
-        console.log('creating dir /target/iframe');
-        fs.mkdirSync('./target/iframe/');
+        console.log('creating dir' + target + 'iframe');
+        fs.mkdirSync(target + 'iframe/');
     }
 
     var templateIframe = readerWriter.read(template);
