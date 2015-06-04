@@ -6,8 +6,6 @@
  * Licensed under the MIT license.
  */
 'use strict';
-
-var fs = require('fs');
 var path = require('path');
 var screenShotGenerator = require('./lib/screenShotGenerator.js');
 var myReaderWriter = require('./lib/readerWriter.js');
