@@ -40,7 +40,7 @@ module.exports = function (grunt) {
             ext : {
                 files: {
                     src : './privateRessources/extComp/',
-                    dest : './dist/toto/'
+                    dest : './target/'
                 },
                 template : './views/extComp.jade',
             },
