@@ -69,7 +69,8 @@ module.exports = function (grunt) {
         //generating concat dependancies
         grunt.config.set('concat.indexJS.dest',targetPath+'/js/index.js');
         grunt.config.set('concat.indexCSS.dest',targetPath+'/css/index.css');
-        grunt.task.run(['concat:indexJS','concat:indexCSS']);
+        grunt.config.set('copy.index.dest',targetPath+'/fonts/');
+        grunt.task.run(['concat:indexJS','concat:indexCSS','copy:index']);
 
         //We read the comp directory looking for component
         components = myReaderWriter.extractJsFromDir(componentPath);

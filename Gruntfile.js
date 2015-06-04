@@ -55,6 +55,16 @@ module.exports = function (grunt) {
                 template : './views/reactComp.jade',
             },
         },
+        //to handle font cause they cannot be properly concat
+        copy: {
+            index : {
+                flatten : true,
+                expand: true, 
+                src: './node_modules/bootstrap/fonts/*', 
+                dest: 'toBeDefined', 
+                filter: 'isFile'
+            },       
+        },
         concat : {
             indexJS: {
                 src: ['./node_modules/jquery/dist/jquery.js',
