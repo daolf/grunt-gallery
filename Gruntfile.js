@@ -78,6 +78,20 @@ module.exports = function (grunt) {
                       './node_modules/bootstrap/dist/css/bootstrap.min.css',
                       './views/css/index.css'],
                 dest: 'toBeDefined'
+            },
+            galleryJS: {
+                src: ['./node_modules/jquery/dist/jquery.js',
+                      './node_modules/codemirror/lib/codemirror.js',
+                      './node_modules/bootstrap/dist/js/bootstrap.min.js',
+                      './node_modules/codemirror/mode/javascript/javascript.js',],
+                dest: 'toBeDefined'
+            },
+            galleryCSS: {
+                src: ['./node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+                      './node_modules/bootstrap/dist/css/bootstrap.min.css',
+                      './node_modules/codemirror/lib/codemirror.css',
+                      '/views/css/gallery.css'],
+                dest: 'toBeDefined'
             }
         },
         jasmine_nodejs: {
