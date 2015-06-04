@@ -36,6 +36,7 @@ module.exports = function (grunt) {
         gallery: {
             options: {
                 //to be designed
+                spawn: false
             },
             ext : {
                 files: {
@@ -44,7 +45,7 @@ module.exports = function (grunt) {
                 },
                 template : './views/extComp.jade',
                 dependancies : {
-                        
+
                 }
             },
             react : {
@@ -53,6 +54,21 @@ module.exports = function (grunt) {
                 },
                 template : './views/reactComp.jade',
             },
+        },
+        concat : {
+            indexJS: {
+                src: ['./node_modules/jquery/dist/jquery.js',
+                      './node_modules/typeahead.js/dist/typeahead.bundle.min.js',
+                      './node_modules/bootstrap/dist/js/bootstrap.min.js',
+                      './views/js/search.js'],
+                dest: 'toBeDefined'
+            },
+            indexCSS: {
+                src: ['./node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+                      './node_modules/bootstrap/dist/css/bootstrap.min.css',
+                      './views/css/index.css'],
+                dest: 'toBeDefined'
+            }
         },
         jasmine_nodejs: {
             options: {
@@ -87,6 +103,7 @@ module.exports = function (grunt) {
 
     // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.

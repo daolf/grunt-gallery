@@ -34,6 +34,7 @@ var testPathFile = function(filepath, grunt) {
 };
 
 module.exports = function (grunt) {
+
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
@@ -56,6 +57,7 @@ module.exports = function (grunt) {
         var rawCode;
         var fileName;
 
+
         //try if /target exist
         if (!testPathDir(targetPath,grunt)) {
             grunt.file.mkdir(targetPath);
@@ -64,6 +66,10 @@ module.exports = function (grunt) {
             grunt.file.mkdir(targetPath+'gallery');
         }
 
+        //generating concat dependancies
+        grunt.config.set('concat.indexJS.dest',targetPath+'/js/index.js');
+        grunt.config.set('concat.indexCSS.dest',targetPath+'/css/index.css');
+        grunt.task.run(['concat:indexJS','concat:indexCSS']);
 
         //We read the comp directory looking for component
         components = myReaderWriter.extractJsFromDir(componentPath);
