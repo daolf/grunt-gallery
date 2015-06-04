@@ -15,6 +15,10 @@ describe(title, function () {
         expect(myReaderWriter.read('./test/dummy2.txt')).toEqual('This is it');
             
     });
+    it('Test of recursive search of js files', function() {
+        expect(myReaderWriter.extractJsFromDir('./test/')).toEqual([ './test/localSpecparserSpec.js', './test/localSpecreaderWriterSpec.js' ]);
+        
+    })
     
 
 });

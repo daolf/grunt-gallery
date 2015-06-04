@@ -22,11 +22,11 @@ function extractJsFromDir(dir) {
         currFile = filesInDir[i];
         // if js file
         if (path.extname(currFile) === '.js') {
-            jsList.push(currFile);
+            jsList.push(dir+currFile);
         }
         // if directory we recurse
-        else if (fs.lstatSync(currFile).isDirectory()) {
-            jsList.push(extractJsFromDir(currFile));
+        else if (fs.lstatSync(dir+currFile).isDirectory()) {
+            jsList = jsList.concat(extractJsFromDir(dir+currFile));
         }
     }
     return jsList;
