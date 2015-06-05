@@ -22,39 +22,16 @@ module.exports = function (grunt) {
         var myReaderWriter = require('./lib/readerWriter.js');
         var myParser = require('./lib/parser.js');
         var galleryGenerator = require('./lib/galleryGenerator.js');
-
-        // Test is path dir exist 
-        var testPathDir = function(filepath, grunt) {    
-            if (!grunt.file.isDir(filepath)) {
-                grunt.log.warn('Source file "' + filepath + '" is not directory.');
-                return false;
-            } else {
-                return true;
-            }
-        };
-        // Test is path file exist 
-        var testPathFile = function(filepath, grunt) {    
-            if (!grunt.file.isFile(filepath)) {
-                grunt.log.warn('Source file "' + filepath + '" is not directory.');
-                return false;
-            } else {
-                return true;
-            }
-        };
-        
-
-        var errorConcat = function (error) {
-            console.log('error concat: ' + error);
-        };
+        var tools = require ('./lib/tools.js');
 
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src;
         var template = config.template;
 
-        if (!testPathDir(componentPath,grunt)) {
+        if (!tools.testPathDir(componentPath,grunt)) {
             return false;
         }
-        if (!testPathFile(template,grunt)) {
+        if (!tools.testPathFile(template,grunt)) {
             return false;
         }
 
@@ -67,31 +44,31 @@ module.exports = function (grunt) {
 
 
         //try if /target exist
-        if (!testPathDir(targetPath,grunt)) {
+        if (!tools.testPathDir(targetPath,grunt)) {
             grunt.file.mkdir(targetPath);
         }
-        if (!testPathDir(targetPath+'gallery/',grunt)) {
+        if (!tools.testPathDir(targetPath+'gallery/',grunt)) {
             grunt.file.mkdir(targetPath+'gallery');
         }
-        if (!testPathDir(targetPath+'/css',grunt)) {
+        if (!tools.testPathDir(targetPath+'/css',grunt)) {
             grunt.file.mkdir(targetPath+'/css');
         }
-        if (!testPathDir(targetPath+'/js',grunt)) {
+        if (!tools.testPathDir(targetPath+'/js',grunt)) {
             grunt.file.mkdir(targetPath+'/js');
         }
-        if (!testPathDir(targetPath+'/js/comp',grunt)) {
+        if (!tools.testPathDir(targetPath+'/js/comp',grunt)) {
             grunt.file.mkdir(targetPath+'/js/comp');
         }
 
 
         //concat dependancies 
         console.log('concat js and css');
-        concat.concatFiles(dep.index.js,targetPath+'/js/index.js',errorConcat);
-        concat.concatFiles(dep.index.css,targetPath+'/css/index.css',errorConcat);
-        concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',errorConcat);
-        concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',errorConcat);
-        concat.concatFiles(config.dependencies.css,targetPath+'/css/iframe.css',errorConcat);
-        concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',errorConcat);
+        concat.concatFiles(dep.index.js,targetPath+'/js/index.js',tools.errorConcat);
+        concat.concatFiles(dep.index.css,targetPath+'/css/index.css',tools.errorConcat);
+        concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',tools.errorConcat);
+        concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',tools.errorConcat);
+        concat.concatFiles(config.dependencies.css,targetPath+'/css/iframe.css',tools.errorConcat);
+        concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',tools.errorConcat);
         //copy fonts
         console.log('copying fonts');
         copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
