@@ -24,22 +24,22 @@ h1 {
 
 .thumbnailContainer {
     -webkit-transition: all 1s ease; /* Safari and Chrome */
-  	-moz-transition: all 1s ease; /* Firefox */
-  	-o-transition: all 1s ease; /* IE 9 */
-  	-ms-transition: all 1s ease; /* Opera */
-  	transition: all 1s ease;
+    -moz-transition: all 1s ease; /* Firefox */
+    -o-transition: all 1s ease; /* IE 9 */
+    -ms-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
     height: 100%
 }
 
 .img-responsive {
     height: 150px;
     width: 290px;
-    
+
     -webkit-transition: all 1s ease; /* Safari and Chrome */
-  	-moz-transition: all 1s ease; /* Firefox */
-  	-o-transition: all 1s ease; /* IE 9 */
-  	-ms-transition: all 1s ease; /* Opera */
-  	transition: all 1s ease;
+    -moz-transition: all 1s ease; /* Firefox */
+    -o-transition: all 1s ease; /* IE 9 */
+    -ms-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
 }
 
 .thumbnailContainer:hover {
@@ -47,7 +47,7 @@ h1 {
     -moz-transform:scale(1.20); /* Firefox */
     -ms-transform:scale(1.20); /* IE 9 */
     -o-transform:scale(1.20); /* Opera */
-     transform:scale(1.20);
+    transform:scale(1.20);
     text-decoration: none;
 }
 
@@ -77,19 +77,19 @@ h1 {
 
 
 span.twitter-typeahead {
-  width: 100%;
+    width: 100%;
 }
 .input-group span.twitter-typeahead {
-  display: block !important;
+    display: block !important;
 }
 .input-group span.twitter-typeahead .tt-dropdown-menu {
-  top: 32px !important;
+    top: 32px !important;
 }
 .input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
-  top: 44px !important;
+    top: 44px !important;
 }
 .input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
-  top: 28px !important;
+    top: 28px !important;
 }
 
 .tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
@@ -109,7 +109,7 @@ span.twitter-typeahead {
 }
 
 .tt-hint {
-     display: block;
+    display: block;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;

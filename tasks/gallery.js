@@ -7,6 +7,7 @@
  */
 'use strict';
 var path = require('path');
+var fs_sync = require('fs-sync');
 var concat = require('./lib/concatFiles.js');
 var dep = require('./lib/distribDependancies.js');
 var screenShotGenerator = require('./lib/screenShotGenerator.js');
@@ -36,6 +37,7 @@ var testPathFile = function(filepath, grunt) {
 var errorConcat = function (error) {
     console.log('error concat: ' + error);
 };
+
 
 module.exports = function (grunt) {
 
@@ -76,11 +78,15 @@ module.exports = function (grunt) {
             grunt.file.mkdir(targetPath+'/js');
         }
 
-        //concat dependancies
+        //concat dependancies 
+        console.log('concat js and css');
         concat.concatFiles(dep.index.js,targetPath+'/js/index.js',errorConcat);
         concat.concatFiles(dep.index.css,targetPath+'/css/index.css',errorConcat);
         concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',errorConcat);
         concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',errorConcat);
+        //copy fonts
+        console.log('copying fonts');
+        fs_sync.copy(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
 
         //We read the comp directory looking for component
         components = myReaderWriter.extractJsFromDir(componentPath);

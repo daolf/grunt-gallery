@@ -23,9 +23,9 @@
         "esprima": "2.2.*",
         "estraverse": "4.1.*",
         "es5-shim": "4.1.*",
-        "concat-stream" : "1.4.*",
         "jade": "1.9.*",
         "jquery": "2.1.*",
+        "fs-sync" : "0.2.*",
         "phantomjs": "1.9.8",
         "react": "0.13.*",
         "typeahead.js": "0.11.*"
