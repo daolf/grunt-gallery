@@ -13,23 +13,24 @@ function write(file, data) {
     fs.writeFileSync(file, data);
 }
 
-/* recursively extract js file from dir*/
-function extractJsFromDir(dir) {
-    var jsList = [];
+/* recursively extract js file from dir to put them in a target dir*/
+function extractJsFromDir(dir, target) {
     var currFile;
+    var buff ;
     var filesInDir = fs.readdirSync(dir);
+    console.log(filesInDir);
     for (var i = 0; i<filesInDir.length; i++) {
         currFile = filesInDir[i];
-        // if js file
-        if (path.extname(currFile) === '.js') {
-            jsList.push(dir+'/'+currFile);
-        }
         // if directory we recurse
-        else if (fs.lstatSync(dir+'/'+currFile).isDirectory()) {
-            jsList = jsList.concat(extractJsFromDir(dir+'/'+currFile));
+        if (fs.lstatSync(dir+'/'+currFile).isDirectory()) {
+            extractJsFromDir(dir+'/'+currFile,target);
+        }
+        // if js file
+        else if (path.extname(currFile) === '.js') {
+            buff = read(dir+'/'+currFile);
+            write(target+'/'+currFile,buff);
         }
     }
-    return jsList;
 }
 
 exports.read = read;

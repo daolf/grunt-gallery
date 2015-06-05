@@ -7,6 +7,7 @@
  */
 'use strict';
 var path = require('path');
+var fs = require('fs');
 var copyDir = require('copy-dir');
 var concat = require('./lib/concatFiles.js');
 var dep = require('./lib/distribDependancies.js');
@@ -76,6 +77,9 @@ module.exports = function (grunt) {
         if (!testPathDir(targetPath+'/js',grunt)) {
             grunt.file.mkdir(targetPath+'/js');
         }
+        if (!testPathDir(targetPath+'/js/comp',grunt)) {
+            grunt.file.mkdir(targetPath+'/js/comp');
+        }
         
 
         //concat dependancies 
@@ -91,20 +95,21 @@ module.exports = function (grunt) {
         copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
         console.log('copying components');
         console.log(componentPath+' -> '+targetPath+'/js/');
+        myReaderWriter.extractJsFromDir(componentPath,targetPath+'/js/comp');
         copyDir.sync(componentPath,targetPath+'/js/');
         console.log(config.dependencies.images+ ' -> '+targetPath+'/images/');
         copyDir.sync(config.dependencies.images,targetPath+'/images/');
 
         //We read the comp directory looking for component
-        components = myReaderWriter.extractJsFromDir(componentPath);
+        components = fs.readdirSync(targetPath+'/js/comp');
         //We extract example for each of them
         console.log('Extraction of examples ...');
         for (var i = 0; i<components.length; i++) {
             fileName = components[i];
-            rawCode = myReaderWriter.read(fileName);
+            rawCode = myReaderWriter.read(targetPath+'/js/comp/'+fileName);
             var buffer = {
                 name : myParser.removeExtension(path.basename(fileName)),
-                file : './js/'+path.basename(fileName),
+                file : './js/comp/'+fileName,
                 example : myParser.extractCleanExamples(rawCode)
             };
             extractedExamples.push(buffer);
