@@ -44,7 +44,11 @@ module.exports = function (grunt) {
                     dest : './target/'
                 },
                 template : './views/extComp.jade',
-                dependancies : {
+                dependencies : {
+                    js : ['./privateRessources/extjs.git/src3.4.2/adapter/ext/ext-base-debug.js',
+                          './privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
+                    css : './privateRessources/extjs.git/src3.4.2/resources/css/ext-all.css',
+                    images : './privateRessources/extjs.git/src3.4.2/resources/images/'
 
                 }
             },
@@ -55,7 +59,7 @@ module.exports = function (grunt) {
                 template : './views/reactComp.jade',
             },
         },
-        
+
         jasmine_nodejs: {
             options: {
                 // specNameSuffix: 'spec.js', // also accepts an array

@@ -77,6 +77,7 @@ module.exports = function (grunt) {
         if (!testPathDir(targetPath+'/js',grunt)) {
             grunt.file.mkdir(targetPath+'/js');
         }
+        
 
         //concat dependancies 
         console.log('concat js and css');
@@ -84,9 +85,14 @@ module.exports = function (grunt) {
         concat.concatFiles(dep.index.css,targetPath+'/css/index.css',errorConcat);
         concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',errorConcat);
         concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',errorConcat);
+        concat.concatFiles(config.dependencies.css,targetPath+'/css/iframe.css',errorConcat);
+        concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',errorConcat);
         //copy fonts
         console.log('copying fonts');
         fs_sync.copy(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
+        console.log('copying components');
+        fs_sync.copy(__dirname+'/.'+componentPath,targetPath+'/js/');
+        fs_sync.copy(config.dependencies.images,targetPath+'/images/');
 
         //We read the comp directory looking for component
         components = myReaderWriter.extractJsFromDir(componentPath);
@@ -97,7 +103,7 @@ module.exports = function (grunt) {
             rawCode = myReaderWriter.read(fileName);
             var buffer = {
                 name : myParser.removeExtension(path.basename(fileName)),
-                file : fileName,
+                file : './js/'+path.basename(fileName),
                 example : myParser.extractCleanExamples(rawCode)
             };
             extractedExamples.push(buffer);
