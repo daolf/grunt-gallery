@@ -7,6 +7,8 @@
  */
 'use strict';
 var path = require('path');
+var concat = require('./lib/concatFiles.js');
+var dep = require('./lib/distribDependancies.js');
 var screenShotGenerator = require('./lib/screenShotGenerator.js');
 var myReaderWriter = require('./lib/readerWriter.js');
 var myParser = require('./lib/parser.js');
@@ -29,6 +31,10 @@ var testPathFile = function(filepath, grunt) {
     } else {
         return true;
     }
+};
+
+var errorConcat = function (error) {
+    console.log('error concat: ' + error);
 };
 
 module.exports = function (grunt) {
@@ -63,15 +69,18 @@ module.exports = function (grunt) {
         if (!testPathDir(targetPath+'gallery/',grunt)) {
             grunt.file.mkdir(targetPath+'gallery');
         }
+        if (!testPathDir(targetPath+'/css',grunt)) {
+            grunt.file.mkdir(targetPath+'/css');
+        }
+        if (!testPathDir(targetPath+'/js',grunt)) {
+            grunt.file.mkdir(targetPath+'/js');
+        }
 
-        //generating concat dependancies
-        grunt.config.set('concat.indexJS.dest',targetPath+'/js/index.js');
-        grunt.config.set('concat.indexCSS.dest',targetPath+'/css/index.css');
-        grunt.config.set('copy.index.dest',targetPath+'/fonts/');
-        grunt.config.set('concat.galleryJS.dest',targetPath+'/js/gallery.js');
-        grunt.config.set('concat.galleryCSS.dest',targetPath+'/css/gallery.css');
-        grunt.task.run(['concat:indexJS','concat:indexCSS','copy:index',
-                        'concat:galleryJS','concat:galleryCSS']);
+        //concat dependancies
+        concat.concatFiles(dep.index.js,targetPath+'/js/index.js',errorConcat);
+        concat.concatFiles(dep.index.css,targetPath+'/css/index.css',errorConcat);
+        concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',errorConcat);
+        concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',errorConcat);
 
         //We read the comp directory looking for component
         components = myReaderWriter.extractJsFromDir(componentPath);
