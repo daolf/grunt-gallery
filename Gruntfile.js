@@ -36,13 +36,21 @@ module.exports = function (grunt) {
         gallery: {
             options: {
                 //to be designed
+                spawn: false
             },
             ext : {
                 files: {
-                    src : './privateRessources/extComp/',
+                    src : './privateRessources/extComp',
                     dest : './target/'
                 },
                 template : './views/extComp.jade',
+                dependencies : {
+                    js : ['./privateRessources/extjs.git/src3.4.2/adapter/ext/ext-base-debug.js',
+                          './privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
+                    css : './privateRessources/extjs.git/src3.4.2/resources/css/ext-all.css',
+                    images : './privateRessources/extjs.git/src3.4.2/resources/images/'
+
+                }
             },
             react : {
                 files: {
@@ -51,6 +59,7 @@ module.exports = function (grunt) {
                 template : './views/reactComp.jade',
             },
         },
+
         jasmine_nodejs: {
             options: {
                 // specNameSuffix: 'spec.js', // also accepts an array
@@ -84,6 +93,7 @@ module.exports = function (grunt) {
 
     // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.

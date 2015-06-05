@@ -1,44 +1,46 @@
 {
-    "name": "grunt-gallery",
-    "version": "0.0.1",
-    "description": "Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)",
-    "repository": "git@git.lbg.office.lyra:pdewulf/grunt-gallery.git",
-    "author": {
-        "name": "Pierre de Wulf",
-        "email": "pierredewulf\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D.dewulf\u001b[2~@lyra-network.com",
-        "url": ""
-    },
-    "keywords": [
-        "gruntplugin"
-    ],
-    "main": "Gruntfile.js",
-    "engines": {
-        "node": ">= 0.8.0"
-    },
-    "license": "MIT",
-    "dependencies": {
-        "bootstrap": "3.3.*",
-        "codemirror": "5.3.*",
-        "cli-color": "1.0.*",
-        "esprima": "2.2.*",
-        "estraverse": "4.1.*",
-        "es5-shim": "4.1.*",
-        "jade": "1.9.*",
-        "jquery": "2.1.*",
-        "phantomjs": "1.9.8",
-        "react": "0.13.*",
-        "typeahead.js": "0.11.*"
-    },
-    "devDependencies": {
-        "grunt-contrib-clean": "~0.5.0",
-        "grunt-jasmine-nodejs": "*",
-        "grunt-contrib-jshint": "~0.8.0",
-        "grunt-contrib-nodeunit": "~0.3.0",
-        "grunt": "~0.4.2",
-        "jshint-stylish": "~0.1.5",
-        "load-grunt-tasks": "~0.3.0"
-    },
-    "scripts": {
-        "test": "grunt test"
-    }
+  "name": "grunt-gallery",
+  "version": "0.0.1",
+  "description": "Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)",
+  "repository": "git@git.lbg.office.lyra:pdewulf/grunt-gallery.git",
+  "author": {
+    "name": "Pierre de Wulf",
+    "email": "pierredewulf\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D.dewulf\u001b[2~@lyra-network.com",
+    "url": ""
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "3.3.*",
+    "cli-color": "1.0.*",
+    "codemirror": "5.3.*",
+    "copy-dir": "0.0.7",
+    "es5-shim": "4.1.*",
+    "esprima": "2.2.*",
+    "estraverse": "4.1.*",
+    "fs-sync": "0.2.*",
+    "jade": "1.9.*",
+    "jquery": "2.1.*",
+    "phantomjs": "1.9.8",
+    "react": "0.13.*",
+    "typeahead.js": "0.11.*"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-jasmine-nodejs": "*",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-nodeunit": "~0.3.0",
+    "grunt": "~0.4.2",
+    "jshint-stylish": "~0.1.5",
+    "load-grunt-tasks": "~0.3.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
 }

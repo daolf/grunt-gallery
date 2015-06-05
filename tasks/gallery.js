@@ -6,8 +6,11 @@
  * Licensed under the MIT license.
  */
 'use strict';
-
+var path = require('path');
 var fs = require('fs');
+var copyDir = require('copy-dir');
+var concat = require('./lib/concatFiles.js');
+var dep = require('./lib/distribDependancies.js');
 var screenShotGenerator = require('./lib/screenShotGenerator.js');
 var myReaderWriter = require('./lib/readerWriter.js');
 var myParser = require('./lib/parser.js');
@@ -32,10 +35,14 @@ var testPathFile = function(filepath, grunt) {
     }
 };
 
+var errorConcat = function (error) {
+    console.log('error concat: ' + error);
+};
+
 module.exports = function (grunt) {
+
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
-
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
 
         var config = grunt.config.get([this.name, this.target]);
@@ -56,6 +63,7 @@ module.exports = function (grunt) {
         var rawCode;
         var fileName;
 
+
         //try if /target exist
         if (!testPathDir(targetPath,grunt)) {
             grunt.file.mkdir(targetPath);
@@ -63,21 +71,50 @@ module.exports = function (grunt) {
         if (!testPathDir(targetPath+'gallery/',grunt)) {
             grunt.file.mkdir(targetPath+'gallery');
         }
+        if (!testPathDir(targetPath+'/css',grunt)) {
+            grunt.file.mkdir(targetPath+'/css');
+        }
+        if (!testPathDir(targetPath+'/js',grunt)) {
+            grunt.file.mkdir(targetPath+'/js');
+        }
+        if (!testPathDir(targetPath+'/js/comp',grunt)) {
+            grunt.file.mkdir(targetPath+'/js/comp');
+        }
+        
 
+        //concat dependancies 
+        console.log('concat js and css');
+        concat.concatFiles(dep.index.js,targetPath+'/js/index.js',errorConcat);
+        concat.concatFiles(dep.index.css,targetPath+'/css/index.css',errorConcat);
+        concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',errorConcat);
+        concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',errorConcat);
+        concat.concatFiles(config.dependencies.css,targetPath+'/css/iframe.css',errorConcat);
+        concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',errorConcat);
+        //copy fonts
+        console.log('copying fonts');
+        copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
+        console.log('copying components');
+        console.log(componentPath+' -> '+targetPath+'/js/');
+        myReaderWriter.extractJsFromDir(componentPath,targetPath+'/js/comp');
+        copyDir.sync(componentPath,targetPath+'/js/');
+        console.log(config.dependencies.images+ ' -> '+targetPath+'/images/');
+        copyDir.sync(config.dependencies.images,targetPath+'/images/');
 
         //We read the comp directory looking for component
-        components = fs.readdirSync(componentPath);
+        components = fs.readdirSync(targetPath+'/js/comp');
         //We extract example for each of them
         console.log('Extraction of examples ...');
         for (var i = 0; i<components.length; i++) {
+            console.log('Extraction of '+ components[i]);
             fileName = components[i];
-            rawCode = myReaderWriter.read(componentPath+fileName);
+            rawCode = myReaderWriter.read(targetPath+'/js/comp/'+fileName);
             var buffer = {
-                name : myParser.removeExtension(fileName),
-                file : componentPath+fileName,
+                name : myParser.removeExtension(path.basename(fileName)),
+                file : './js/comp/'+fileName,
                 example : myParser.extractCleanExamples(rawCode)
             };
             extractedExamples.push(buffer);
+            console.log('Extraction of '+ components[i]+ ' done');
         }
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
