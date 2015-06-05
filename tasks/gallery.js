@@ -7,7 +7,7 @@
  */
 'use strict';
 var path = require('path');
-var fs_sync = require('fs-sync');
+var copyDir = require('copy-dir');
 var concat = require('./lib/concatFiles.js');
 var dep = require('./lib/distribDependancies.js');
 var screenShotGenerator = require('./lib/screenShotGenerator.js');
@@ -89,10 +89,10 @@ module.exports = function (grunt) {
         concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',errorConcat);
         //copy fonts
         console.log('copying fonts');
-        fs_sync.copy(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
+        copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
         console.log('copying components');
-        fs_sync.copy(__dirname+'/.'+componentPath,targetPath+'/js/');
-        fs_sync.copy(config.dependencies.images,targetPath+'/images/');
+        copyDir.sync(__dirname+'/.'+componentPath,targetPath+'/js/');
+        copyDir.sync(config.dependencies.images,targetPath+'/images/');
 
         //We read the comp directory looking for component
         components = myReaderWriter.extractJsFromDir(componentPath);
