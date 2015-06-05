@@ -38,7 +38,6 @@ var errorConcat = function (error) {
     console.log('error concat: ' + error);
 };
 
-
 module.exports = function (grunt) {
 
     // Please see the Grunt documentation for more information regarding task
@@ -91,7 +90,9 @@ module.exports = function (grunt) {
         console.log('copying fonts');
         copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
         console.log('copying components');
-        copyDir.sync(__dirname+'/.'+componentPath,targetPath+'/js/');
+        console.log(componentPath+' -> '+targetPath+'/js/');
+        copyDir.sync(componentPath,targetPath+'/js/');
+        console.log(config.dependencies.images+ ' -> '+targetPath+'/images/');
         copyDir.sync(config.dependencies.images,targetPath+'/images/');
 
         //We read the comp directory looking for component
