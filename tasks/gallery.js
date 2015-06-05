@@ -6,44 +6,46 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var path = require('path');
-var fs = require('fs');
-var copyDir = require('copy-dir');
-var concat = require('./lib/concatFiles.js');
-var dep = require('./lib/distribDependancies.js');
-var screenShotGenerator = require('./lib/screenShotGenerator.js');
-var myReaderWriter = require('./lib/readerWriter.js');
-var myParser = require('./lib/parser.js');
-var galleryGenerator = require('./lib/galleryGenerator.js');
-
-// Test is path dir exist 
-var testPathDir = function(filepath, grunt) {    
-    if (!grunt.file.isDir(filepath)) {
-        grunt.log.warn('Source file "' + filepath + '" is not directory.');
-        return false;
-    } else {
-        return true;
-    }
-};
-// Test is path file exist 
-var testPathFile = function(filepath, grunt) {    
-    if (!grunt.file.isFile(filepath)) {
-        grunt.log.warn('Source file "' + filepath + '" is not directory.');
-        return false;
-    } else {
-        return true;
-    }
-};
-
-var errorConcat = function (error) {
-    console.log('error concat: ' + error);
-};
 
 module.exports = function (grunt) {
 
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
+
+        var path = require('path');
+        var fs = require('fs');
+        var copyDir = require('copy-dir');
+        var concat = require('./lib/concatFiles.js');
+        var dep = require('./lib/distribDependancies.js');
+        var screenShotGenerator = require('./lib/screenShotGenerator.js');
+        var myReaderWriter = require('./lib/readerWriter.js');
+        var myParser = require('./lib/parser.js');
+        var galleryGenerator = require('./lib/galleryGenerator.js');
+
+        // Test is path dir exist 
+        var testPathDir = function(filepath, grunt) {    
+            if (!grunt.file.isDir(filepath)) {
+                grunt.log.warn('Source file "' + filepath + '" is not directory.');
+                return false;
+            } else {
+                return true;
+            }
+        };
+        // Test is path file exist 
+        var testPathFile = function(filepath, grunt) {    
+            if (!grunt.file.isFile(filepath)) {
+                grunt.log.warn('Source file "' + filepath + '" is not directory.');
+                return false;
+            } else {
+                return true;
+            }
+        };
+        
+
+        var errorConcat = function (error) {
+            console.log('error concat: ' + error);
+        };
 
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src;
@@ -80,7 +82,7 @@ module.exports = function (grunt) {
         if (!testPathDir(targetPath+'/js/comp',grunt)) {
             grunt.file.mkdir(targetPath+'/js/comp');
         }
-        
+
 
         //concat dependancies 
         console.log('concat js and css');
