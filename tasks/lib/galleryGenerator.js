@@ -1,6 +1,6 @@
 /* the purpose of this file is to generate html files with jade tempates in views */
 var jade = require('jade');
-var readerWriter = require('./readerWriter.js');
+var tools = require('./tools.js');
 var fs = require('fs');
 /*
  * Generate html page for each item in a JSON containing folowing fields : example,file and name
@@ -23,23 +23,23 @@ var generate = function (file, template, target) {
         fs.mkdirSync(target + 'iframe/');
     }
 
-    var templateIframe = readerWriter.read(template);
-    var templateGallery = readerWriter.read(__dirname+'/../../views/gallery.jade');
-    var templateIndex = readerWriter.read(__dirname+'/../../views/index.jade');
+    var templateIframe = tools.read(template);
+    var templateGallery = tools.read(__dirname+'/../../views/gallery.jade');
+    var templateIndex = tools.read(__dirname+'/../../views/index.jade');
 
     var fnIframe = jade.compile(templateIframe,{pretty : '\t'});
     var fnGallery = jade.compile(templateGallery,{pretty : '\t'});
     var fnIndex = jade.compile(templateIndex,{pretty : '\t'});
 
-    var stringData = readerWriter.read(file);
+    var stringData = tools.read(file);
     var JSONdata = JSON.parse(stringData);
     console.log('writing : '+target + 'gallery/index.html');
-    readerWriter.write(target + 'index.html',fnIndex({data: JSONdata}));
+    tools.write(target + 'index.html',fnIndex({data: JSONdata}));
     // for eache component describe in file
     for (var i = 0; i < JSONdata.length; i++) {
         console.log('writing : '+target + 'gallery'+JSONdata[i].name+'.html');
-        readerWriter.write(target + 'iframe/'+JSONdata[i].name+'.html',fnIframe(JSONdata[i]));
-        readerWriter.write(target + 'gallery/'+JSONdata[i].name+'.html',fnGallery(JSONdata[i]));
+        tools.write(target + 'iframe/'+JSONdata[i].name+'.html',fnIframe(JSONdata[i]));
+        tools.write(target + 'gallery/'+JSONdata[i].name+'.html',fnGallery(JSONdata[i]));
     }
 };
 

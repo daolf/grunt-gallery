@@ -19,7 +19,6 @@ module.exports = function (grunt) {
         var concat = require('./lib/concatFiles.js');
         var dep = require('./lib/distribDependancies.js');
         var screenShotGenerator = require('./lib/screenShotGenerator.js');
-        var myReaderWriter = require('./lib/readerWriter.js');
         var myParser = require('./lib/parser.js');
         var galleryGenerator = require('./lib/galleryGenerator.js');
         var tools = require ('./lib/tools.js');
@@ -74,7 +73,7 @@ module.exports = function (grunt) {
         copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
         console.log('copying components');
         console.log(componentPath+' -> '+targetPath+'/js/');
-        myReaderWriter.extractJsFromDir(componentPath,targetPath+'/js/comp');
+        tools.extractJsFromDir(componentPath,targetPath+'/js/comp');
         copyDir.sync(componentPath,targetPath+'/js/');
         console.log(config.dependencies.images+ ' -> '+targetPath+'/images/');
         copyDir.sync(config.dependencies.images,targetPath+'/images/');
@@ -86,7 +85,7 @@ module.exports = function (grunt) {
         for (var i = 0; i<components.length; i++) {
             console.log('Extraction of '+ components[i]);
             fileName = components[i];
-            rawCode = myReaderWriter.read(targetPath+'/js/comp/'+fileName);
+            rawCode = tools.read(targetPath+'/js/comp/'+fileName);
             var buffer = {
                 name : myParser.removeExtension(path.basename(fileName)),
                 file : './js/comp/'+fileName,
@@ -98,7 +97,7 @@ module.exports = function (grunt) {
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
         //We write result in JSON in /target/examples.json
-        myReaderWriter.write(jsonPath, JSON.stringify(extractedExamples));
+        tools.write(jsonPath, JSON.stringify(extractedExamples));
         // We now generate galery
         console.log('Now generating gallery');
         galleryGenerator.generate(jsonPath,template,targetPath);
