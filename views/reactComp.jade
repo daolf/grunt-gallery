@@ -3,13 +3,11 @@ html
     head
         title #{name}
         |         
-        link(rel='stylesheet', type='text/css', href='../../views/css/customCss.css')
-        script(type='text/javascript', src='../../node_modules/es5-shim/es5-shim.min.js')
-        script(type='text/javascript').
-        script(src='../../node_modules/react/dist/react-with-addons.min.js')
+        link(rel='stylesheet', type='text/css', href='../css/iframe.css')
+        script(type='text/javascript', src='../js/iframe.js')
         // LIBS
         // Component
-        script(type='text/javascript', src='../../'+file)
+        script(type='text/javascript', src='../'+file)
     body
         h1
             | #{name}
