@@ -23,64 +23,82 @@ grunt.loadNpmTasks('grunt-gallery');
 In your project's Gruntfile, add a section named `gallery` to the data object passed into `grunt.initConfig()`.
 
 ```js
-grunt.initConfig({
-  gallery: {
-    options: {
-      // Task-specific options go here.
+  grunt.initConfig({
+    gallery: {
+      options: {
+          //to be designed
+          spawn: false
+      },
+      ext : {
+        files: {
+          src : './privateRessources/extComp',
+          dest : './target/'
+        },
+        template : './views/extComp.jade',
+        dependencies : {
+          js : ['./privateRessources/extjs.git/src3.4.2/adapter/ext/ext-base-debug.js',
+                './privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
+          css : './privateRessources/extjs.git/src3.4.2/resources/css/ext-all.css',
+          images : './privateRessources/extjs.git/src3.4.2/resources/images/'
+
+        }
+      },
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-})
+  })
 ```
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+### Files
 
-A string value that is used to do something with whatever.
+#### Files.src
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+The directory containing all the component you want to generate gallery from.
 
-A string value that is used to do something else with whatever else.
+#### Files.dest
 
-### Usage Examples
+Directory you to put the gallery in.
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+### Template
 
-```js
-grunt.initConfig({
-  gallery: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+The jade template where each component will be rendered
+
+### Dependancies
+
+Write here all the dependancies of your templates, all those files will be later concat in a single file.
+
+## Output directory
+
+```
+    \
+    |__ iframe/                contains the html only displaying component, generated from template passed in parameter
+          |__ comp1.html
+          |__ comp2.html
+    |__ gallery/               contains the html page with comp enbeded in iframe + other information
+          |__ comp1.html
+          |__ comp2.html
+    |__ images/                contains all the screenshot generated from iframe/
+          |__ comp1.html.png
+          |__ comp2.html.png
+    |__ css/                   contains css concat files 
+          |__ gallery.css
+          |__ index.css
+          |__ iframe.css
+    |__ js/                    contains js concat files
+          |__ gallery.js
+          |__ index.js
+          |__ iframe.js
+    |__ img/                   contains all img dependancies
+    |__ fonts
+    |__ info.json              contains all the information extracted from components in JSON
+    |__ index.html             index of the gallery
+
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+## Output
+ 
+This is what the output will look like :
 
-```js
-grunt.initConfig({
-  gallery: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
