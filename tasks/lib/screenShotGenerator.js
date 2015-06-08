@@ -42,16 +42,6 @@ var runPhantom = function(file,target) {
  * return nothing
  */
 var generate = function(originPath, target) {
-    // Check if destPath already exist
-    try {
-        stats = fs.lstatSync(target);
-    }
-    catch (e) {
-        //if not we create it
-        console.log('creating dir '+target);
-        fs.mkdirSync(target);
-    }
-
     var lstFiles = fs.readdirSync(originPath);
     console.log(lstFiles);
 

@@ -6,38 +6,6 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var path = require('path');
-var fs = require('fs');
-var copyDir = require('copy-dir');
-var concat = require('./lib/concatFiles.js');
-var dep = require('./lib/distribDependancies.js');
-var screenShotGenerator = require('./lib/screenShotGenerator.js');
-var myReaderWriter = require('./lib/readerWriter.js');
-var myParser = require('./lib/parser.js');
-var galleryGenerator = require('./lib/galleryGenerator.js');
-
-// Test is path dir exist 
-var testPathDir = function(filepath, grunt) {    
-    if (!grunt.file.isDir(filepath)) {
-        grunt.log.warn('Source file "' + filepath + '" is not directory.');
-        return false;
-    } else {
-        return true;
-    }
-};
-// Test is path file exist 
-var testPathFile = function(filepath, grunt) {    
-    if (!grunt.file.isFile(filepath)) {
-        grunt.log.warn('Source file "' + filepath + '" is not directory.');
-        return false;
-    } else {
-        return true;
-    }
-};
-
-var errorConcat = function (error) {
-    console.log('error concat: ' + error);
-};
 
 module.exports = function (grunt) {
 
@@ -45,57 +13,55 @@ module.exports = function (grunt) {
     // creation: http://gruntjs.com/creating-tasks
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
 
+        var path = require('path');
+        var fs = require('fs');
+        var copyDir = require('copy-dir');
+        var concat = require('./lib/concatFiles.js');
+        var dep = require('./lib/distribDependancies.js');
+        var screenShotGenerator = require('./lib/screenShotGenerator.js');
+        var myParser = require('./lib/parser.js');
+        var galleryGenerator = require('./lib/galleryGenerator.js');
+        var tools = require ('./lib/tools.js');
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src;
         var template = config.template;
-
-        if (!testPathDir(componentPath,grunt)) {
-            return false;
-        }
-        if (!testPathFile(template,grunt)) {
-            return false;
-        }
-
         var targetPath = config.files.dest;
         var jsonPath = targetPath + 'info.json';
         var components;
         var extractedExamples = [];
         var rawCode;
         var fileName;
-
-
-        //try if /target exist
-        if (!testPathDir(targetPath,grunt)) {
-            grunt.file.mkdir(targetPath);
+        var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
+        
+        if (!tools.testPathDir(componentPath,grunt)) {
+            console.log(componentPath + ' doesn t exist');
+            return false;
         }
-        if (!testPathDir(targetPath+'gallery/',grunt)) {
-            grunt.file.mkdir(targetPath+'gallery');
-        }
-        if (!testPathDir(targetPath+'/css',grunt)) {
-            grunt.file.mkdir(targetPath+'/css');
-        }
-        if (!testPathDir(targetPath+'/js',grunt)) {
-            grunt.file.mkdir(targetPath+'/js');
-        }
-        if (!testPathDir(targetPath+'/js/comp',grunt)) {
-            grunt.file.mkdir(targetPath+'/js/comp');
+        if (!tools.testPathFile(template,grunt)) {
+            console.log(template + ' doesn t exist');
+            return false;
         }
         
+        //creation of all target subdirectories
+        grunt.file.mkdir(targetPath);
+        pathSubDir.map(function(element) {
+            grunt.file.mkdir(targetPath + element);
+        });
 
         //concat dependancies 
         console.log('concat js and css');
-        concat.concatFiles(dep.index.js,targetPath+'/js/index.js',errorConcat);
-        concat.concatFiles(dep.index.css,targetPath+'/css/index.css',errorConcat);
-        concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',errorConcat);
-        concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',errorConcat);
-        concat.concatFiles(config.dependencies.css,targetPath+'/css/iframe.css',errorConcat);
-        concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',errorConcat);
+        concat.concatFiles(dep.index.js,targetPath+'/js/index.js',tools.errorConcat);
+        concat.concatFiles(dep.index.css,targetPath+'/css/index.css',tools.errorConcat);
+        concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',tools.errorConcat);
+        concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',tools.errorConcat);
+        concat.concatFiles(config.dependencies.css,targetPath+'/css/iframe.css',tools.errorConcat);
+        concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',tools.errorConcat);
         //copy fonts
         console.log('copying fonts');
         copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
         console.log('copying components');
         console.log(componentPath+' -> '+targetPath+'/js/');
-        myReaderWriter.extractJsFromDir(componentPath,targetPath+'/js/comp');
+        tools.extractJsFromDir(componentPath,targetPath+'/js/comp');
         copyDir.sync(componentPath,targetPath+'/js/');
         console.log(config.dependencies.images+ ' -> '+targetPath+'/images/');
         copyDir.sync(config.dependencies.images,targetPath+'/images/');
@@ -107,7 +73,7 @@ module.exports = function (grunt) {
         for (var i = 0; i<components.length; i++) {
             console.log('Extraction of '+ components[i]);
             fileName = components[i];
-            rawCode = myReaderWriter.read(targetPath+'/js/comp/'+fileName);
+            rawCode = tools.read(targetPath+'/js/comp/'+fileName);
             var buffer = {
                 name : myParser.removeExtension(path.basename(fileName)),
                 file : './js/comp/'+fileName,
@@ -119,7 +85,7 @@ module.exports = function (grunt) {
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
         //We write result in JSON in /target/examples.json
-        myReaderWriter.write(jsonPath, JSON.stringify(extractedExamples));
+        tools.write(jsonPath, JSON.stringify(extractedExamples));
         // We now generate galery
         console.log('Now generating gallery');
         galleryGenerator.generate(jsonPath,template,targetPath);
