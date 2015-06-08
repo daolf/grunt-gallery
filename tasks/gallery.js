@@ -32,7 +32,7 @@ module.exports = function (grunt) {
         var rawCode;
         var fileName;
         var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
-        
+
         if (!tools.testPathDir(componentPath,grunt)) {
             console.log(componentPath + ' doesn t exist');
             return false;
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
             console.log(template + ' doesn t exist');
             return false;
         }
-        
+
         //creation of all target subdirectories
         grunt.file.mkdir(targetPath);
         pathSubDir.map(function(element) {
@@ -79,7 +79,10 @@ module.exports = function (grunt) {
                 file : './js/comp/'+fileName,
                 example : myParser.extractCleanExamples(rawCode)
             };
-            extractedExamples.push(buffer);
+            //handle component only if there is example
+            if ( buffer.example.length > 0 ) {
+                extractedExamples.push(buffer);
+            }
             console.log('Extraction of '+ components[i]+ ' done');
         }
         console.log('Extraction done');
