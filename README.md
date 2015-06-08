@@ -98,7 +98,14 @@ Write here all the dependancies of your templates, all those files will be later
 ## Output
  
 This is what the output will look like :
+![alt text](./doc/index.png "Index page of gallery")
 
+### Features :
+
+* Display interactable component
+* Display instanciation code of component
+* Hability to search component
+* Autocompletion 
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
