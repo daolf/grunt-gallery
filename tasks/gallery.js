@@ -22,24 +22,25 @@ module.exports = function (grunt) {
         var myParser = require('./lib/parser.js');
         var galleryGenerator = require('./lib/galleryGenerator.js');
         var tools = require ('./lib/tools.js');
-
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src;
         var template = config.template;
-
-        if (!tools.testPathDir(componentPath,grunt)) {
-            return false;
-        }
-        if (!tools.testPathFile(template,grunt)) {
-            return false;
-        }
-
         var targetPath = config.files.dest;
         var jsonPath = targetPath + 'info.json';
         var components;
         var extractedExamples = [];
         var rawCode;
         var fileName;
+
+        if (!tools.testPathDir(componentPath,grunt)) {
+            console.log(componentPath + ' doesn t exist');
+            return false;
+        }
+        if (!tools.testPathFile(template,grunt)) {
+            console.log(template + ' doesn t exist');
+            return false;
+        }
+
 
 
         //try if /target exist
