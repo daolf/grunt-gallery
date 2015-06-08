@@ -12,16 +12,6 @@ var fs = require('fs');
  * @return nothing      write one html files per item in JSON file
  */
 var generate = function (file, template, target) {
-    // Test if /target/gallery/template exist
-    try {
-        var stats;
-        stats = fs.lstatSync(target + 'iframe');
-    }
-    catch (e) {
-        //if not we create it
-        console.log('creating dir' + target + 'iframe');
-        fs.mkdirSync(target + 'iframe/');
-    }
 
     var templateIframe = tools.read(template);
     var templateGallery = tools.read(__dirname+'/../../views/gallery.jade');

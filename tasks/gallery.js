@@ -31,7 +31,8 @@ module.exports = function (grunt) {
         var extractedExamples = [];
         var rawCode;
         var fileName;
-
+        var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
+        
         if (!tools.testPathDir(componentPath,grunt)) {
             console.log(componentPath + ' doesn t exist');
             return false;
@@ -40,26 +41,12 @@ module.exports = function (grunt) {
             console.log(template + ' doesn t exist');
             return false;
         }
-
-
-
-        //try if /target exist
-        if (!tools.testPathDir(targetPath,grunt)) {
-            grunt.file.mkdir(targetPath);
-        }
-        if (!tools.testPathDir(targetPath+'gallery/',grunt)) {
-            grunt.file.mkdir(targetPath+'gallery');
-        }
-        if (!tools.testPathDir(targetPath+'/css',grunt)) {
-            grunt.file.mkdir(targetPath+'/css');
-        }
-        if (!tools.testPathDir(targetPath+'/js',grunt)) {
-            grunt.file.mkdir(targetPath+'/js');
-        }
-        if (!tools.testPathDir(targetPath+'/js/comp',grunt)) {
-            grunt.file.mkdir(targetPath+'/js/comp');
-        }
-
+        
+        //creation of all target subdirectories
+        grunt.file.mkdir(targetPath);
+        pathSubDir.map(function(element) {
+            grunt.file.mkdir(targetPath + element);
+        });
 
         //concat dependancies 
         console.log('concat js and css');
