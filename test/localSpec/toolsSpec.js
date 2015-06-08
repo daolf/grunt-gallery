@@ -2,7 +2,7 @@
 /*jslint node: true*/
 'use strict';
 
-var myReaderWriter = require('../../tasks/lib/readerWriter.js');
+var myReaderWriter = require('../../tasks/lib/tools.js');
 var title = 'readerWriter.js';
 var fs = require('fs');
 
