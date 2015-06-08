@@ -17,8 +17,8 @@ describe(title, function () {
             
     });
     it('Test of recursive search of js files', function() {
-        myReaderWriter.extractJsFromDir('./test/fakedir','./test/tmp');
-        expect(fs.readdirSync('./test/tmp')).toEqual([ '1.js', '2.js' ] );
+        myReaderWriter.extractJsFromDir('./test/fakedir','./test/expected/extractJS');
+        expect(fs.readdirSync('./test/expected/extractJS')).toEqual([ '1.js', '2.js' ] );
     });
     
 
