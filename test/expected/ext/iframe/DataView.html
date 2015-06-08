@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DataView</title>        
+		<link rel="stylesheet" type="text/css" href="../css/iframe.css">        
+		<!-- ENDLIBS-->
+		<!-- Component-->
+	</head>
+	<body>
+		<button id="button-ct"></button>
+	</body>
+	<script type="text/javascript" src="../js/iframe.js"></script>
+	<script type="text/javascript" src=".././js/comp/DataView.js"></script>
+	<script type="text/javascript">
+		Ext.onReady( function() {
+		var store = new Ext.data.ArrayStore({
+fields: ['fullname', 'first'],
+idIndex: 0 // id for each record will be the first element
+});
+var tpl = new Ext.XTemplate(
+'&amp;lt;tpl for=&quot;.&quot;&amp;gt;',
+'&amp;lt;div class=&quot;thumb-wrap&quot; id=&quot;{name}&quot;&amp;gt;',
+'&amp;lt;div class=&quot;thumb&quot;&amp;gt;&amp;lt;img src=&quot;{url}&quot; title=&quot;{name}&quot;&amp;gt;&amp;lt;/div&amp;gt;',
+'&amp;lt;span class=&quot;x-editable&quot;&amp;gt;{shortName}&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;',
+'&amp;lt;/tpl&amp;gt;',
+'&amp;lt;div class=&quot;x-clear&quot;&amp;gt;&amp;lt;/div&amp;gt;'
+);
+var panel = new Ext.Panel({
+id:'images-view',
+frame:true,
+width:535,
+autoHeight:true,
+collapsible:true,
+layout:'fit',
+title:'Simple DataView',
+items: new Ext.DataView({
+store: store,
+tpl: tpl,
+autoHeight:true,
+multiSelect: true,
+overClass:'x-view-over',
+itemSelector:'div.thumb-wrap',
+emptyText: 'No images to display'
+})
+});
+panel.render(document.body); 
+		});
+	</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../js/gallery.js"></script>
+		<link rel="stylesheet" href="../css/gallery.css">
+		<title>Lyra</title>
+	</head>
+	<body>
+		<row>
+			<div class="col-lg-12">
+				<h1>Lyra</h1>
+			</div>
+		</row>
+		<row>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<iframe src="../iframe/Lyra.html"></iframe>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<textarea id="myTx">var myLyraWin = new Lyra.Window({
+renderTo: Ext.getBody(),
+width: 400,
+height: 300,
+items: [
+{  width: '100%',
+height: '100%',
+title: 'Container Panel',
+xtype:'panel'}
+]
+});
+myLyraWin.show();</textarea>
+			</div>
+		</row>
+		<script type="text/javascript">
+			/*tanks to Marijn Haverbeke */
+			var indentAll = function(cm) { 
+			    var last = cm.lineCount(); 
+			    cm.operation(function() { 
+			        for (var i = 0; i < last; ++i) cm.indentLine(i); 
+			    }); 
+			} 
+			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('myTx'), {
+			mode:  "javascript",
+			lineNumbers: true,
+			}); 
+			indentAll(myCodeMirror);
+		</script>
+	</body>
+</html>

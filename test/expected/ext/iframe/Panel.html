@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Panel</title>        
+		<link rel="stylesheet" type="text/css" href="../css/iframe.css">        
+		<!-- ENDLIBS-->
+		<!-- Component-->
+	</head>
+	<body>
+		<button id="button-ct"></button>
+	</body>
+	<script type="text/javascript" src="../js/iframe.js"></script>
+	<script type="text/javascript" src=".././js/comp/Panel.js"></script>
+	<script type="text/javascript">
+		Ext.onReady( function() {
+		new Ext.Panel({
+title: 'Message Title',
+renderTo: Ext.getBody(),
+width: 200, height: 130,
+bodyCfg: {
+tag: 'center',
+cls: 'x-panel-body',  // Default class not applied if Custom element specified
+html: 'Message'
+},
+footerCfg: {
+tag: 'h2',
+cls: 'x-panel-footer',        // same as the Default class
+html: 'footer html'
+},
+footerCssClass: 'custom-footer', // additional css class, see
+footerStyle:    'background-color:red' // see
+}); 
+		});
+	</script>
+</html>
