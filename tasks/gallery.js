@@ -23,9 +23,9 @@ module.exports = function (grunt) {
 		var galleryGenerator = require('./lib/galleryGenerator.js');
 		var tools = require ('./lib/tools.js');
 		var config = grunt.config.get([this.name, this.target]);
-		var componentPath = config.files.src;
+		var componentPath = config.files.src+'/';
 		var template = config.template;
-		var targetPath = config.files.dest;
+		var targetPath = config.files.dest+'/';
 		var jsonPath = targetPath + 'info.json';
 		var components;
 		var extractedExamples = [];

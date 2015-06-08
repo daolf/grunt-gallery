@@ -21,17 +21,26 @@ var grunt = require('grunt');
 */
 
 exports.module = {
-  setUp: function (done) {
-    // setup here if necessary
-    done();
-  },
-  react: function (test) {
-    test.expect(1);
+	setUp: function (done) {
+		// setup here if necessary
+		done();
+	},
+	react: function (test) {
+		test.expect(1);
 
-    var actual = grunt.file.read('test/tmp/react/index.html');
-    var expected = grunt.file.read('test/expected/react/index.html');
-    test.equal(actual, expected, 'test with react , same index.html');
+		var actual = grunt.file.read('test/tmp/react/index.html');
+		var expected = grunt.file.read('test/expected/react/index.html');
+		test.equal(actual, expected, 'test with react , same index.html');
 
-    test.done();
-  }
+		test.done();
+	},
+	react_without_slash: function (test) {
+		test.expect(1);
+
+		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');
+		var expected = grunt.file.read('test/expected/react/index.html');
+		test.equal(actual, expected, 'test with react without slash at the end of path, same index.html');
+
+		test.done();
+	}
 };
