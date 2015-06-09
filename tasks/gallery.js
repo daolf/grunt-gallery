@@ -12,7 +12,9 @@ module.exports = function (grunt) {
 	// Please see the Grunt documentation for more information regarding task
 	// creation: http://gruntjs.com/creating-tasks
 	grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
-
+		
+		grunt.file.defaultEncoding = 'utf-8';
+		
 		var path = require('path');
 		var fs = require('fs');
 		var copyDir = require('copy-dir');
