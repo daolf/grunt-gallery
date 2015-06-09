@@ -42,5 +42,14 @@ exports.module = {
 		test.equal(actual, expected, 'test with react without slash at the end of path, same index.html');
 
 		test.done();
+	},
+	react_wit_multiple_level: function (test) {
+		test.expect(1);
+
+		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');
+		var expected = grunt.file.read('test/expected/react/index.html');
+		test.equal(actual, expected, 'test with react with a multiple level path output, same index.html');
+
+		test.done();
 	}
 };

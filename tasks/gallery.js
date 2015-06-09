@@ -62,7 +62,6 @@ module.exports = function (grunt) {
 		console.log('copying components');
 		console.log(componentPath+' -> '+targetPath+'/js/');
 		tools.extractJsFromDir(componentPath,targetPath+'/js/comp');
-		copyDir.sync(componentPath,targetPath+'/js/');
 		//copy image only if defined
 		if (config.dependencies.images !== undefined ){
 			console.log(config.dependencies.images+ ' -> '+targetPath+'/images/');
