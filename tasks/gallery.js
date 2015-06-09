@@ -75,7 +75,7 @@ module.exports = function (grunt) {
 		//We extract example for each of them
 		console.log('Extraction of examples ...');
 		for (var i = 0; i<components.length; i++) {
-			console.log('Extraction of '+ components[i]);
+			//console.log('Extraction of '+ components[i]);
 			fileName = components[i];
 			rawCode = tools.read(path.join( targetPath, '/js/comp/', fileName ));
 			var buffer = {
@@ -87,7 +87,7 @@ module.exports = function (grunt) {
 			if ( buffer.example.length > 0 ) {
 				extractedExamples.push(buffer);
 			}
-			console.log('Extraction of '+ components[i]+ ' done');
+			//console.log('Extraction of '+ components[i]+ ' done');
 		}
 		console.log('Extraction done');
 		console.log('Writing result in '+jsonPath);
