@@ -76,6 +76,18 @@ module.exports = function (grunt) {
 					css : './views/css/customCss.css'
 				}
 			},
+			react_multiple_level_path : {
+				files: {
+					src : './publicRessources/react',
+					dest : './test/tmp/react/multiple/level'
+				},
+				template : './views/reactComp.jade',
+				dependencies : {
+					js : ['./node_modules/es5-shim/es5-shim.min.js',
+						  './node_modules/react/dist/react-with-addons.min.js'],
+					css : './views/css/customCss.css'
+				}
+			}
 		},
 		nodeunit: {
 			tests: ['test/*_test.js']
@@ -117,7 +129,7 @@ module.exports = function (grunt) {
 
 	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
 	// plugin's task(s), then test the result.
-	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react','gallery:react_without_slash', 'nodeunit' ]);
+	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react', 'gallery:react_without_slash', 'gallery:react_multiple_level_path', 'nodeunit' ]);
 
 	// By default, lint and run all tests.
 	grunt.registerTask('default', ['jshint', 'test']);

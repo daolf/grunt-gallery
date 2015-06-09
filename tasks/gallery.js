@@ -33,6 +33,8 @@ module.exports = function (grunt) {
 		var fileName;
 		var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
 
+		grunt.file.delete(targetPath);
+
 		if (!tools.testPathDir(componentPath,grunt)) {
 			console.log(componentPath + ' doesn t exist');
 			return false;
@@ -50,33 +52,32 @@ module.exports = function (grunt) {
 
 		//concat dependancies 
 		console.log('concat js and css');
-		concat.concatFiles(dep.index.js,targetPath+'/js/index.js',tools.errorConcat);
-		concat.concatFiles(dep.index.css,targetPath+'/css/index.css',tools.errorConcat);
-		concat.concatFiles(dep.gallery.js,targetPath+'/js/gallery.js',tools.errorConcat);
-		concat.concatFiles(dep.gallery.css,targetPath+'/css/gallery.css',tools.errorConcat);
-		concat.concatFiles(config.dependencies.css,targetPath+'/css/iframe.css',tools.errorConcat);
-		concat.concatFiles(config.dependencies.js,targetPath+'/js/iframe.js',tools.errorConcat);
+		concat.concatFiles(dep.index.js, path.join(targetPath, '/js/index.js'), tools.errorConcat);
+		concat.concatFiles(dep.index.css, path.join(targetPath, '/css/index.css'), tools.errorConcat);
+		concat.concatFiles(dep.gallery.js, path.join(targetPath, '/js/gallery.js'), tools.errorConcat);
+		concat.concatFiles(dep.gallery.css, path.join(targetPath, '/css/gallery.css'), tools.errorConcat);
+		concat.concatFiles(config.dependencies.css, path.join(targetPath, '/css/iframe.css'), tools.errorConcat);
+		concat.concatFiles(config.dependencies.js, path.join(targetPath, '/js/iframe.js'), tools.errorConcat);
 		//copy fonts
 		console.log('copying fonts');
-		copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',targetPath+'/fonts/');
+		copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',path.join( targetPath, '/fonts/'));
 		console.log('copying components');
-		console.log(componentPath+' -> '+targetPath+'/js/');
-		tools.extractJsFromDir(componentPath,targetPath+'/js/comp');
-		copyDir.sync(componentPath,targetPath+'/js/');
+		console.log(componentPath+' -> '+targetPath, '/js/');
+		tools.extractJsFromDir(componentPath,path.join( targetPath, '/js/comp'));
 		//copy image only if defined
 		if (config.dependencies.images !== undefined ){
-			console.log(config.dependencies.images+ ' -> '+targetPath+'/images/');
-			copyDir.sync(config.dependencies.images,targetPath+'/images/');
+			console.log(config.dependencies.images+ ' -> '+path.join( targetPath, '/images/'));
+			copyDir.sync(config.dependencies.images,path.join( targetPath, '/images/'));
 		}
 
 		//We read the comp directory looking for component
-		components = fs.readdirSync(targetPath+'/js/comp');
+		components = fs.readdirSync(path.join( targetPath, '/js/comp'));
 		//We extract example for each of them
 		console.log('Extraction of examples ...');
 		for (var i = 0; i<components.length; i++) {
-			console.log('Extraction of '+ components[i]);
+			//console.log('Extraction of '+ components[i]);
 			fileName = components[i];
-			rawCode = tools.read(targetPath+'/js/comp/'+fileName);
+			rawCode = tools.read(path.join( targetPath, '/js/comp/', fileName ));
 			var buffer = {
 				name : myParser.removeExtension(path.basename(fileName)),
 				file : './js/comp/'+fileName,
@@ -86,7 +87,7 @@ module.exports = function (grunt) {
 			if ( buffer.example.length > 0 ) {
 				extractedExamples.push(buffer);
 			}
-			console.log('Extraction of '+ components[i]+ ' done');
+			//console.log('Extraction of '+ components[i]+ ' done');
 		}
 		console.log('Extraction done');
 		console.log('Writing result in '+jsonPath);
@@ -96,6 +97,6 @@ module.exports = function (grunt) {
 		console.log('Now generating gallery');
 		galleryGenerator.generate(jsonPath,template,targetPath);
 		console.log('Now generating screenshot');
-		screenShotGenerator.generate(targetPath + 'iframe/',targetPath + 'img/');
+		screenShotGenerator.generate(path.join(targetPath + 'iframe/'),path.join(targetPath + 'img/'));
 	});
 };

@@ -37,7 +37,7 @@ function extractJsFromDir(dir, target) {
     var currFile;
     var buff ;
     var filesInDir = fs.readdirSync(dir);
-    console.log(filesInDir);
+    // console.log(filesInDir);
     for (var i = 0; i<filesInDir.length; i++) {
         currFile = filesInDir[i];
         // if directory we recurse

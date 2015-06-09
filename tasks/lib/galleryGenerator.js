@@ -1,7 +1,6 @@
 /* the purpose of this file is to generate html files with jade tempates in views */
 var jade = require('jade');
 var tools = require('./tools.js');
-var fs = require('fs');
 /*
  * Generate html page for each item in a JSON containing folowing fields : example,file and name
  *
