@@ -32,7 +32,9 @@ module.exports = function (grunt) {
 		var rawCode;
 		var fileName;
 		var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
-
+		
+		grunt.file.delete(targetPath);
+		
 		if (!tools.testPathDir(componentPath,grunt)) {
 			console.log(componentPath + ' doesn t exist');
 			return false;
