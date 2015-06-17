@@ -12,3 +12,11 @@ iframe {
 .buttonHome {
     margin-right : 10px
 }
+
+.btnRefresh:focus {
+    border-color: #ccc;
+    background-color: #fff;
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
