@@ -5,6 +5,12 @@ html
         script(src="../js/gallery.js")
         link(rel="stylesheet" href="../css/gallery.css")
         title #{name}
+        script(type='text/javascript').
+            var refreshIframe = function() {
+                var iframe = document.getElementById('iframe');
+                iframe.src = iframe.src;
+            }
+
     body
         row
             div.col-lg-12
@@ -23,7 +29,7 @@ html
                         |                                 
                         span  Debug
                         |                             
-                    a.btn.btn-default(href='../index.html')
+                    button.btn.btn-default(onclick='refreshIframe()')
                         span.glyphicon.glyphicon-refresh(aria-hidden='true')
                         |                                 
                         span  Refresh Component
@@ -31,7 +37,7 @@ html
                 | <br />
         row
             div.col-lg-6.col-md-6.col-sm-6.col-xs-12
-                iframe(src='../iframe/'+name+'.html')
+                iframe(src='../iframe/'+name+'.html' id='iframe')
             div.col-lg-6.col-md-6.col-sm-6.col-xs-12
                 textarea#myTx
                     | #{example}
