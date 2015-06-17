@@ -1,6 +1,6 @@
 .CodeMirror {
-  border: 1px solid #eee;
-  height: 400px;
+    border: 1px solid #eee;
+    height: 400px;
 }
 
 iframe {
@@ -9,3 +9,6 @@ iframe {
     border: 1px solid grey;
 }
 
+.buttonHome {
+    margin-right : 10px
+}
