@@ -67,16 +67,17 @@ module.exports = function (grunt) {
         console.log(componentPath+' -> '+targetPath, '/js/');
         tools.extractJsFromDir(componentPath,path.join( targetPath, '/js/comp'));
         //copy image only if defined
-        if (config.dependencies.images !== undefined ){
-            if (config.dependencies.images instanceof Array) {
-                for (var i=0; i<config.dependencies.images.length; i++) {
-                    console.log(config.dependencies.images[i]+ ' -> '+path.join( targetPath, '/images/'));
-                    copyDir.sync(config.dependencies.images[i],path.join( targetPath, '/images/'));
+        var configImages = config.dependencies.images;
+        if (configImages !== undefined ){
+            if (configImages instanceof Array) {
+                for (var i=0; i<configImages.length; i++) {
+                    console.log(configImages[i]+ ' -> '+path.join( targetPath, '/images/'));
+                    copyDir.sync(configImages[i],path.join( targetPath, '/images/'));
                 }
             }
             else {   
-                console.log(config.dependencies.images+ ' -> '+path.join( targetPath, '/images/'));
-                copyDir.sync(config.dependencies.images,path.join( targetPath, '/images/'))
+                console.log(configImages+ ' -> '+path.join( targetPath, '/images/'));
+                copyDir.sync(configImages,path.join( targetPath, '/images/'));
             }
         }
 
