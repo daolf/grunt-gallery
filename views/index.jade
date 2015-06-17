@@ -10,7 +10,7 @@ html
             div.row
                 div.col-lg-12.col-md-12.col-sm-12.col-xs-12
                     h1 Gallery
-            div.row
+            div.row.searchRow
                 .col-lg-12.col-md-12.col-sm-12.col-xs-12
                     h2 Search
                     |                  
@@ -34,3 +34,19 @@ html
                                 a.compName(href='./gallery/'+val.name+'.html') #{val.name}
             div#body
         script(type='text/javascript', src='./js/index.js')
+        script(type='text/javascript')
+            | var menu = $('.searchRow');
+            | var origOffsetY = menu.offset().top;
+            | 
+            | function scroll() {
+            |     if ($(window).scrollTop() >= origOffsetY) {
+            |         console.log('sick');
+            |         menu.addClass('navbar-fixed-top container-fluid');
+            |         $('.content').addClass('menu-padding');
+            |     } else {
+            |         menu.removeClass('navbar-fixed-top container-fluid');
+            |         $('.content').removeClass('menu-padding');
+            |     }
+            | }
+            | 
+            | document.onscroll = scroll;

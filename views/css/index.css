@@ -11,6 +11,9 @@ h1 {
 .row {
 }
 
+.searchRow {
+    background-color: white
+}
 .thumbnail {
     background-color: grey;
     height: 350px;
