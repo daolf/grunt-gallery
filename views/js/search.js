@@ -1,10 +1,14 @@
+/* global $*/
+
 var allMyComp = $('.thumbnail');
 var compNames = [];
+var compName, myForm;
 /* get all comp names*/
 for (var i = 0; i<allMyComp.length; i++) {
     compName = allMyComp.eq(i).children().eq(0).children('.compName').text();
     compNames.push(compName);
 }
+
 
 /* search through the thumbnail for a comp name in particular
  *
@@ -29,16 +33,16 @@ var searchInThumbnail = function(search) {
 };
 
 $('.form-search').keyup(function() {
-    console.log('keyUp');
     myForm = $('.form-search');
     var currSearch = myForm.val();
     //console.log('search for'+currSearch);
     searchInThumbnail(currSearch);
 });
 
+
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
-    var matches, substringRegex;
+    var matches, substrRegex;
  
     // an array that will be populated with substring matches
     matches = [];
@@ -70,22 +74,20 @@ $('#scrollable-dropdown-menu .typeahead').typeahead({
     source: substringMatcher(compNames)
 });
 
-/*$('.typeahead').bind('typeahead:select', function (obj,datum, name) {
-    searchInThumbnail(datum); 
-    console.log('typeahead:select');
-});
-
-$('.typeahead').bind('typeahead:cursorchange', function (obj,datum, name) {
-    searchInThumbnail(datum); 
-    console.log('typeahead:cursorchange');
-});
-
-$('.typeahead').bind('typeahead:close', function (obj,datum, name) {
-    console.log('typeahead:close');
+$('.typeahead').bind('typeahead:select', function (obj,datum) {
     searchInThumbnail(datum); 
 });
 
-$('.typeahead').bind('typeahead:change', function (obj,datum, name) {
-    console.log('typeahead:change');
-    searchInThumbnail(datum); 
-});*/
+// to be sure that only one suggestion is higlighted
+/*
+ * We get the depper div the mouse is on, and add tt-cursor class
+ */
+$('.tt-menu').on('mouseenter mouseleave mousemove', function() {
+    $('.tt-cursor').removeClass('tt-cursor');
+    var element = $(':hover');
+    if(element.length)
+    {
+        var domElement = element.eq(element.length - 1);
+        domElement.addClass('tt-cursor');
+    }
+});
