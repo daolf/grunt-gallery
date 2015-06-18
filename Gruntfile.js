@@ -79,7 +79,7 @@ module.exports = function (grunt) {
 			react_multiple_level_path : {
 				files: {
 					src : './publicRessources/react',
-					dest : './test/tmp/react/multiple/level'
+					dest : './test/tmp/react_multiple/level'
 				},
 				template : './views/reactComp.jade',
 				dependencies : {
