@@ -27,7 +27,7 @@ var generate = function (file, template, target) {
     // for eache component describe in file
     for (var i = 0; i < JSONdata.length; i++) {
         console.log('writing : '+target + 'gallery'+JSONdata[i].name+'.html');
-        tools.write(target + 'iframe/'+JSONdata[i].name+'.html',fnIframe(JSONdata[i]));
+        tools.write(target + 'iframe/iframe_'+JSONdata[i].name+'.html',fnIframe(JSONdata[i]));
         tools.write(target + 'gallery/'+JSONdata[i].name+'.html',fnGallery(JSONdata[i]));
     }
 };

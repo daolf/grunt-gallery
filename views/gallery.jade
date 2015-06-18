@@ -24,7 +24,7 @@ html
                     span  Home
                     |                         
                 .btn-group
-                    a.btn.btn-default(href='../iframe/#{name}.html' target="_blank")
+                    a.btn.btn-default(href='../iframe/iframe_#{name}.html' target="_blank")
                         span.glyphicon.glyphicon-console(aria-hidden='true')
                         |                                 
                         span  Debug
@@ -37,7 +37,7 @@ html
                 | <br />
         row
             div.col-lg-6.col-md-6.col-sm-6.col-xs-12
-                iframe(src='../iframe/'+name+'.html' id='iframe')
+                iframe(src='../iframe/iframe_'+name+'.html' id='iframe')
             div.col-lg-6.col-md-6.col-sm-6.col-xs-12
                 textarea#myTx
                     | #{example}
