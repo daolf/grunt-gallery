@@ -127,6 +127,13 @@ span.twitter-typeahead {
     line-height: 24px;
 }
 
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+
 .tt-suggestion.tt-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
     color: #fff;
     background-color: #0097cf;
