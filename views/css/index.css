@@ -16,8 +16,8 @@ h1 {
 }
 .thumbnail {
     background-color: grey;
-    height: 350px;
-    padding: 3%;
+    height: 330px;
+    padding: 2%;
     overflow: hidden;
     margin: 0px;
     border: 0px;
@@ -25,41 +25,36 @@ h1 {
 }
 
 .thumbnailContainer {
-    -webkit-transition: all 1s ease; /* Safari and Chrome */
-    -moz-transition: all 1s ease; /* Firefox */
-    -o-transition: all 1s ease; /* IE 9 */
-    -ms-transition: all 1s ease; /* Opera */
-    transition: all 1s ease;
+    -webkit-transition: all 0.5s ease; /* Safari and Chrome */
+    -moz-transition: all 0.5s ease; /* Firefox */
+    -o-transition: all 0.5s ease; /* IE 9 */
+    -ms-transition: all 0.5s ease; /* Opera */
+    transition: all 0.5s ease;
     height: 100%
 }
 
 .img-responsive {
-    height: 150px;
-    width: 290px;
-
-    -webkit-transition: all 1s ease; /* Safari and Chrome */
-    -moz-transition: all 1s ease; /* Firefox */
-    -o-transition: all 1s ease; /* IE 9 */
-    -ms-transition: all 1s ease; /* Opera */
-    transition: all 1s ease;
+    height: 300px;
+    max-height: 300px;
+    width: 320px;
+    max-width: 320px;
+    
 }
 
 .thumbnailContainer:hover {
-    -webkit-transform:scale(1.20); /* Safari and Chrome */
-    -moz-transform:scale(1.20); /* Firefox */
-    -ms-transform:scale(1.20); /* IE 9 */
-    -o-transform:scale(1.20); /* Opera */
-    transform:scale(1.20);
+    -webkit-transform:scale(1.10); /* Safari and Chrome */
+    -moz-transform:scale(1.10); /* Firefox */
+    -ms-transform:scale(1.10); /* IE 9 */
+    -o-transform:scale(1.10); /* Opera */
+    transform:scale(1.10);
     text-decoration: none;
 }
 
 .compName {
-    line-height: 65pt;
+    line-height: 40pt;
     text-align: center;
-    font-size: 20pt;
+    font-size: 18pt;
     color: whitesmoke;
-    display: flex;
-    justify-content: center;
 }
 
 .compName:hover {
