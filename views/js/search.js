@@ -59,13 +59,14 @@ var substringMatcher = function(strs) {
 };
 
 
-$('.typeahead').typeahead({
+$('#scrollable-dropdown-menu .typeahead').typeahead({
     hint: false,
     highlight: true,
-    minLength: 1
+    minLength: 1,
 },
                           {
     name: 'compNames',
+    limit: 100,
     source: substringMatcher(compNames)
 });
 
