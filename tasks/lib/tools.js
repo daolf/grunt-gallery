@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var customCopyDir = require('copy-dir');
+var copy_dir = require('copy-dir');
 
 // Test is path dir exist 
 var testPathDir = function(filepath, grunt) {    
@@ -29,7 +29,11 @@ function write(file, data) {
     fs.writeFileSync(file, data);
 }
 
-/* recursively extract js file from dir to put them in a target dir*/
+/* recursively extract js file from dir to put them in a target dir
+ * @param dir    the directory we want to extract our component from
+ * @param target the directory we will extract our components in 
+ *
+ */
 function extractJsFromDir(dir, target) {
     var currFile;
     var buff ;
@@ -51,20 +55,20 @@ function extractJsFromDir(dir, target) {
 
 
 /* copy all files in given target using copy-dir package
- * @input src   file or array of fildes you want to copy
- * @input dest  directory you want to copy your files in 
+ * @param src   file or array of fildes you want to copy
+ * @param dest  directory you want to copy your files in 
  */
 function customCopyDir(src,dest) {
     if (src !== undefined ){
         if (src instanceof Array) {
             for (var i=0; i<src.length; i++) {
                 console.log(src[i]+ ' -> '+dest);
-                customCopyDir.sync(src[i],dest);
+                copy_dir.sync(src[i],dest);
             }
         }
         else {   
             console.log(src+ ' -> '+dest);
-            customCopyDir.sync(src,dest);
+            copy_dir.sync(src,dest);
         }
     }
 }

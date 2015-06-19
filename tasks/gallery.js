@@ -16,7 +16,6 @@ module.exports = function (grunt) {
         grunt.file.defaultEncoding = 'utf-8';
         
         var path = require('path');
-        var fs = require('fs');
         var copyDir = require('copy-dir');
         var concat = require('./lib/concatFiles.js');
         var dep = require('./lib/distribDependancies.js');
@@ -30,10 +29,7 @@ module.exports = function (grunt) {
         var template = config.template;
         var targetPath = config.files.dest+'/';        
         var jsonPath = targetPath + 'info.json';
-        var components;
         var extractedExamples = [];
-        var rawCode;
-        var fileName;
         var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
 
         grunt.file.delete(targetPath);
@@ -72,26 +68,11 @@ module.exports = function (grunt) {
         if (images !== undefined) {
             tools.customCopyDir(images,path.join( targetPath, '/images/'));
         }
-
-        //We read the comp directory looking for component
-        components = fs.readdirSync(path.join( targetPath, '/js/comp'));
-        //We extract example for each of them
-        console.log('Extraction of examples ...');
-        for (var j = 0; j<components.length; j++) {
-            //console.log('Extraction of '+ components[i]);
-            fileName = components[j];
-            rawCode = tools.read(path.join( targetPath, '/js/comp/', fileName ));
-            var buffer = {
-                name : myParser.removeExtension(path.basename(fileName)),
-                file : './js/comp/'+fileName,
-                example : myParser.extractCleanExamples(rawCode)
-            };
-            //handle component only if there is example
-            if ( buffer.example.length > 0 ) {
-                extractedExamples.push(buffer);
-            }
-            //console.log('Extraction of '+ components[i]+ ' done');
-        }
+        
+        //Extract information of component in /targetPath+'js/comp'
+        console.log('Extraction of information ...');
+        extractedExamples = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'),myParser);
+        
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
         //We write result in JSON in /target/examples.json

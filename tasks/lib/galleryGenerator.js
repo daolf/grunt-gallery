@@ -1,6 +1,44 @@
 /* the purpose of this file is to generate html files with jade tempates in views */
 var jade = require('jade');
 var tools = require('./tools.js');
+var path = require('path');
+var fs = require('fs');
+
+/*
+ * Extract information for each component (filepath) in input
+ * 
+ * @param componentsPath     array of filePath of grphic component
+ * @param parser             parser we use to extract information
+ * @return extractedExamples    Array containing all the information we want about previously given components
+ */
+var extractInformation = function(componentsPath, myParser) { 
+    var fileName;
+    var rawCode;
+    var extractedInformation = [];
+    var components = fs.readdirSync(componentsPath);
+    //We extract example for each of them
+    console.log('Extraction of examples ...');
+    for (var j = 0; j<components.length; j++) {
+        //console.log('Extraction of '+ components[i]);
+        fileName = components[j];
+        rawCode = tools.read(path.join( componentsPath, fileName ));
+        var buffer = {
+            name : myParser.removeExtension(path.basename(fileName)),
+            file : './js/comp/'+fileName,
+            example : myParser.extractCleanExamples(rawCode)
+        };
+        //handle component only if there is example
+        if ( buffer.example.length > 0 ) {
+            extractedInformation.push(buffer);
+        }
+        //console.log('Extraction of '+ components[i]+ ' done');
+    }
+    return extractedInformation;
+};
+
+
+
+
 /*
  * Generate html page for each item in a JSON containing folowing fields : example,file and name
  *
@@ -33,3 +71,4 @@ var generate = function (file, template, target) {
 };
 
 exports.generate = generate;
+exports.extractInformation = extractInformation;
