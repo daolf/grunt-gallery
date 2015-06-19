@@ -65,29 +65,21 @@ module.exports = function (grunt) {
         //copy components
         console.log('copying components');
         console.log(componentPath+' -> '+targetPath, '/js/');
+        // we extract all component in componentPath and copy them in targetPath+/js/comp
         tools.extractJsFromDir(componentPath,path.join( targetPath, '/js/comp'));
         //copy image only if defined
-        var configImages = config.dependencies.images;
-        if (configImages !== undefined ){
-            if (configImages instanceof Array) {
-                for (var i=0; i<configImages.length; i++) {
-                    console.log(configImages[i]+ ' -> '+path.join( targetPath, '/images/'));
-                    copyDir.sync(configImages[i],path.join( targetPath, '/images/'));
-                }
-            }
-            else {   
-                console.log(configImages+ ' -> '+path.join( targetPath, '/images/'));
-                copyDir.sync(configImages,path.join( targetPath, '/images/'));
-            }
+        var images = config.dependencies.images;
+        if (images !== undefined) {
+            tools.customCopyDir(images,path.join( targetPath, '/images/'));
         }
 
         //We read the comp directory looking for component
         components = fs.readdirSync(path.join( targetPath, '/js/comp'));
         //We extract example for each of them
         console.log('Extraction of examples ...');
-        for (var i = 0; i<components.length; i++) {
+        for (var j = 0; j<components.length; j++) {
             //console.log('Extraction of '+ components[i]);
-            fileName = components[i];
+            fileName = components[j];
             rawCode = tools.read(path.join( targetPath, '/js/comp/', fileName ));
             var buffer = {
                 name : myParser.removeExtension(path.basename(fileName)),

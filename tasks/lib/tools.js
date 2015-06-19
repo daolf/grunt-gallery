@@ -1,5 +1,7 @@
 var fs = require('fs');
 var path = require('path');
+var customCopyDir = require('copy-dir');
+
 // Test is path dir exist 
 var testPathDir = function(filepath, grunt) {    
     if (!grunt.file.isDir(filepath)) {
@@ -48,9 +50,29 @@ function extractJsFromDir(dir, target) {
 }
 
 
+/* copy all files in given target using copy-dir package
+ * @input src   file or array of fildes you want to copy
+ * @input dest  directory you want to copy your files in 
+ */
+function customCopyDir(src,dest) {
+    if (src !== undefined ){
+        if (src instanceof Array) {
+            for (var i=0; i<src.length; i++) {
+                console.log(src[i]+ ' -> '+dest);
+                customCopyDir.sync(src[i],dest);
+            }
+        }
+        else {   
+            console.log(src+ ' -> '+dest);
+            customCopyDir.sync(src,dest);
+        }
+    }
+}
+
 
 exports.testPathDir = testPathDir;
 exports.testPathFile = testPathFile;
 exports.read = read;
 exports.write = write;
 exports.extractJsFromDir = extractJsFromDir;
+exports.customCopyDir = customCopyDir;
