@@ -51,7 +51,6 @@ function extractJsFromDir(dir, target) {
 
 exports.testPathDir = testPathDir;
 exports.testPathFile = testPathFile;
-exports.errorConcat = errorConcat ;
 exports.read = read;
 exports.write = write;
 exports.extractJsFromDir = extractJsFromDir;

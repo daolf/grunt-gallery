@@ -91,7 +91,7 @@ module.exports = function (grunt) {
             react_min_match : {
 				files: {
 					src : './publicRessources/react',
-					dest : './test/reactMinMatch/'
+					dest : './test/tmp/reactMinMatch/'
 				},
 				template : './views/reactComp.jade',
 				dependencies : {
