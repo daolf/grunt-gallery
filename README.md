@@ -27,7 +27,6 @@ In your project's Gruntfile, add a section named `gallery` to the data object pa
     gallery: {
       options: {
           //to be designed
-          spawn: false
       },
       ext : {
         files: {
@@ -53,7 +52,7 @@ In your project's Gruntfile, add a section named `gallery` to the data object pa
 
 #### Files.src
 
-The directory containing all the component you want to generate gallery from.
+The directory containing all the component you want to generate gallery from. Be careful, only put one and only onde directory, multiple source dir is currently not supported.
 
 #### Files.dest
 
@@ -85,6 +84,7 @@ Write here all the dependancies of your templates, all those files will be later
           |__ index.css
           |__ iframe.css
     |__ js/                    contains js concat files
+          |-- comp/                 copy of components
           |__ gallery.js
           |__ index.js
           |__ iframe.js
