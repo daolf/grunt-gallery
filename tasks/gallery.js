@@ -16,7 +16,7 @@ module.exports = function (grunt) {
         grunt.file.defaultEncoding = 'utf-8';
         
         var path = require('path');
-        var copyDir = require('copy-dir');
+        var copy_dir = require('copy-dir');
         var concat = require('./lib/concatFiles.js');
         var dep = require('./lib/distribDependancies.js');
         var screenShotGenerator = require('./lib/screenShotGenerator.js');
@@ -57,7 +57,7 @@ module.exports = function (grunt) {
         concat.concatFiles(grunt.file.expand(config.dependencies.css), path.join(targetPath, '/css/iframe.css'));
         //copy fonts
         console.log('copying fonts');
-        copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',path.join( targetPath, '/fonts/'));
+        copy_dir.sync(__dirname+'/../node_modules/bootstrap/fonts/',path.join( targetPath, '/fonts/'));
         //copy components
         console.log('copying components');
         console.log(componentPath+' -> '+targetPath, '/js/');
