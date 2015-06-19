@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('gallery', 'Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)', function () {
 
         grunt.file.defaultEncoding = 'utf-8';
-
+        
         var path = require('path');
         var fs = require('fs');
         var copyDir = require('copy-dir');
@@ -24,10 +24,11 @@ module.exports = function (grunt) {
         var myParser = require('./lib/parser.js');
         var galleryGenerator = require('./lib/galleryGenerator.js');
         var tools = require ('./lib/tools.js');
+        
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src+'/';
         var template = config.template;
-        var targetPath = config.files.dest+'/';
+        var targetPath = config.files.dest+'/';        
         var jsonPath = targetPath + 'info.json';
         var components;
         var extractedExamples = [];
@@ -38,12 +39,10 @@ module.exports = function (grunt) {
         grunt.file.delete(targetPath);
 
         if (!tools.testPathDir(componentPath,grunt)) {
-            console.log(componentPath + ' doesn t exist');
-            return false;
+            grunt.fail.warn(componentPath + ' doesn t exist');
         }
         if (!tools.testPathFile(template,grunt)) {
-            console.log(template + ' doesn t exist');
-            return false;
+            grunt.fail.warn(template + ' doesn t exist');
         }
 
         //creation of all target subdirectories
@@ -54,15 +53,16 @@ module.exports = function (grunt) {
 
         //concat dependancies 
         console.log('concat js and css');
-        concat.concatFiles(dep.index.js, path.join(targetPath, '/js/index.js'), tools.errorConcat);
-        concat.concatFiles(dep.index.css, path.join(targetPath, '/css/index.css'), tools.errorConcat);
-        concat.concatFiles(dep.gallery.js, path.join(targetPath, '/js/gallery.js'), tools.errorConcat);
-        concat.concatFiles(dep.gallery.css, path.join(targetPath, '/css/gallery.css'), tools.errorConcat);
-        concat.concatFiles(config.dependencies.css, path.join(targetPath, '/css/iframe.css'), tools.errorConcat);
-        concat.concatFiles(config.dependencies.js, path.join(targetPath, '/js/iframe.js'), tools.errorConcat);
+        concat.concatFiles(dep.index.js, path.join(targetPath, '/js/index.js'));
+        concat.concatFiles(dep.index.css, path.join(targetPath, '/css/index.css'));
+        concat.concatFiles(dep.gallery.js, path.join(targetPath, '/js/gallery.js'));
+        concat.concatFiles(dep.gallery.css, path.join(targetPath, '/css/gallery.css'));
+        concat.concatFiles(grunt.file.expand(config.dependencies.js), path.join(targetPath, '/js/iframe.js'));
+        concat.concatFiles(grunt.file.expand(config.dependencies.css), path.join(targetPath, '/css/iframe.css'));
         //copy fonts
         console.log('copying fonts');
         copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',path.join( targetPath, '/fonts/'));
+        //copy components
         console.log('copying components');
         console.log(componentPath+' -> '+targetPath, '/js/');
         tools.extractJsFromDir(componentPath,path.join( targetPath, '/js/comp'));

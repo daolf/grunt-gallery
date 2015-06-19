@@ -1,7 +1,7 @@
 var fs = require("fs");
 
 /*
- * @param inputFiles    an array of path of files you want to concat
+ * @param inputFiles    an array of path of files, or one file you want to concat
  * @param target        path of the output file
  */
 var concatFiles = function(inputFiles,target) {

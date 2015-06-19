@@ -87,6 +87,18 @@ module.exports = function (grunt) {
 						  './node_modules/react/dist/react-with-addons.min.js'],
 					css : './views/css/customCss.css'
 				}
+			},
+            react_min_match : {
+				files: {
+					src : './publicRessources/react',
+					dest : './test/reactMinMatch/'
+				},
+				template : './views/reactComp.jade',
+				dependencies : {
+					js : ['./node_modules/es5-shim/es5-shim*.js',
+						  './node_modules/react/dist/react-with-addons*.js'],
+					css : './views/css/customCs*.css'
+				}
 			}
 		},
 		nodeunit: {

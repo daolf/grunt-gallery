@@ -19,11 +19,6 @@ var testPathFile = function(filepath, grunt) {
     }
 };
 
-
-var errorConcat = function (error) {
-    console.log('error concat: ' + error);
-};
-
 function read(file) {
     return fs.readFileSync(file, 'utf8');
 }
