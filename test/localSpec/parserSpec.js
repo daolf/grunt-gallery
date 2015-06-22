@@ -278,5 +278,29 @@ describe('Test of cleanComment', function() {
     });
 });
 
+describe( ' Test of extractedWithRegexp', function () {
+    var regExps = {
+        inherit : {
+            pattern : '(?:Ext.extend\\()(.*),',
+            flags : 'g'
+        }
+    };
+    it ('Test with 1 inheritance', function () {
+        var rawText = " blablabla \n blabla\n Lyra.DatePicker = Ext.extend(Ext.DatePicker, { \n blabla };";
+        var result = parser.extractWithRegexps( regExps, rawText);
+        expect(result.inherit).toEqual(["Ext.DatePicker"]);
+    });
+    it ('Test with 0 inheritance', function () {
+        var rawText = " blablabla \n blabla\n Lyra.DatePicker =  { \n blabla };";
+        var result = parser.extractWithRegexps( regExps, rawText);
+        expect(result.inherit).toEqual([ ]);
+    });
+    it ('Test with 2 inheritance', function () {
+            var rawText = " blablabla  Lyra.DatePicker = Ext.extend(Ext.DatePicker1, { \n blabla }; \n blabla\n  Lyra.DatePicker = Ext.extend(Ext.DatePicker2, { \n blabla }; blabla };";
+            var result = parser.extractWithRegexps( regExps, rawText);
+            expect(result.inherit).toEqual(["Ext.DatePicker1","Ext.DatePicker2"]);
+        });
+});
+
 
 

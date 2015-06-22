@@ -113,15 +113,17 @@ var removeExtension = function (filename) {
  */
 var extractWithRegexps = function( regExps, rawCode ) {
     var inherit = "";
+    var inheritRegExp;
     var result = {
-        inherit : ""
+        inherit : []
     };
     if (regExps !== undefined && regExps.inherit !== undefined ) {  
         //we extract inherit by recreating regexp
-        inherit = new RegExp(regExps.inherit.pattern, regExps.inherit.flags).exec(rawCode);
-        if (inherit && inherit.length > 1 ) {
-            // first element is the whole maching text, with non capturing group, we dont want it
-            result.inherit = inherit.slice(1);
+        inheritRegExp = new RegExp(regExps.inherit.pattern, regExps.inherit.flags);
+        inherit = inheritRegExp.exec(rawCode);
+        while (inherit !== null) {
+            result.inherit.push(inherit[1]);
+            inherit = inheritRegExp.exec(rawCode);
         }
     }
     return result;
