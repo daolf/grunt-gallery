@@ -29,7 +29,8 @@ var extractInformation = function(componentsPath, regExps, myParser) {
             name : myParser.removeExtension(path.basename(fileName)),
             file : './js/comp/'+fileName,
             example : myParser.extractCleanExamples(rawCode),
-            inherit : resultRegexp.inherit
+            inherit : resultRegexp.inherit, 
+            dependencies : myParser.extractDependencies(rawCode)
         };
         //handle component only if there is example
         if ( buffer.example.length > 0 ) {

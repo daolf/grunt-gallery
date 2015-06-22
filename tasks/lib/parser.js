@@ -1,5 +1,6 @@
 var esprima = require('esprima');
 var estraverse = require('estraverse');
+var path = require('path');
 
 /*
  * Generate ast from text with esprima
@@ -104,7 +105,7 @@ var extractCleanExamples = function (code) {
  * @return          filename without extension
  */
 var removeExtension = function (filename) {
-    parts = filename.split('.');
+    var parts = filename.split('.');
     return parts[0];
 };
 
@@ -129,7 +130,19 @@ var extractWithRegexps = function( regExps, rawCode ) {
     return result;
 };
 
-
+/*
+ * Extract dependencies , return array of all dependencies
+ */
+var extractDependencies = function (rawCode) {
+    var regExp = /(?:require.*\(.*["|'])(.*)["|']/g;
+    var computedRegexp = regExp.exec(rawCode);
+    var result = [];
+    while (computedRegexp !== null) {
+        result.push(path.basename(computedRegexp[1]));
+        computedRegexp = regExp.exec(rawCode);
+    }
+    return result;
+};
 
 exports.generateAst = generateAst;
 exports.extractExamplesFromAst = extractExamplesFromAst;
@@ -138,3 +151,4 @@ exports.extractCleanExamples = extractCleanExamples;
 exports.removeExtension = removeExtension;
 exports.cleanComment = cleanComment;
 exports.extractWithRegexps = extractWithRegexps;
+exports.extractDependencies = extractDependencies;

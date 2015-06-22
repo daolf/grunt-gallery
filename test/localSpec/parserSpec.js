@@ -302,5 +302,24 @@ describe( ' Test of extractedWithRegexp', function () {
         });
 });
 
+describe( ' Test of extractDependencies', function () {
+    it ('Test with 1 dependencies', function () {
+        var rawText = " blablabla \n blabla\n require('comp.js') , { \n blabla };";
+        var result = parser.extractDependencies(rawText);
+        expect(result).toEqual(["comp.js"]);
+    });
+    it ('Test with 0 dependencies', function () {
+        var rawText = " blablabla \n blabla\n Lyra.DatePicker =  { \n blabla };";
+        var result = parser.extractDependencies(rawText);
+        expect(result).toEqual([ ]);
+    });
+    it ('Test with 2 dependencies', function () {
+            var rawText = " blablabla  require('comp1.js'), { \n blabla }; \n blabla\n  require ('./ahz./lol/comp2.js'), { \n blabla }; blabla };";
+            var result = parser.extractDependencies(rawText);
+            expect(result).toEqual(["comp1.js","comp2.js"]);
+    });
+});
+
+
 
 
