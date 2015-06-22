@@ -29,7 +29,7 @@ module.exports = function (grunt) {
         var template = config.template;
         var targetPath = config.files.dest+'/';        
         var jsonPath = targetPath + 'info.json';
-        var extractedExamples = [];
+        var extractedInformations = [];
         var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
 
         grunt.file.delete(targetPath);
@@ -71,12 +71,12 @@ module.exports = function (grunt) {
         
         //Extract information of component in /targetPath+'js/comp'
         console.log('Extraction of information ...');
-        extractedExamples = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'),myParser);
+        extractedInformations = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'),myParser);
         
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
         //We write result in JSON in /target/examples.json
-        tools.write(jsonPath, JSON.stringify(extractedExamples));
+        tools.write(jsonPath, JSON.stringify(extractedInformations));
         // We now generate galery
         console.log('Now generating gallery');
         galleryGenerator.generate(jsonPath,template,targetPath);
