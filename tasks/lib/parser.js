@@ -130,9 +130,9 @@ var extractWithRegexps = function( regExps, rawCode ) {
 };
 
 /*
- * Extract dependancies , return array of all dependancies
+ * Extract dependencies , return array of all dependencies
  */
-var extractDependancies = function (rawCode) {
+var extractDependencies = function (rawCode) {
     var regExp = /(?:require.*\()(.*)\)/g;
     var computedRegexp = regExp.exec(rawCode);
     var result = [];
@@ -150,4 +150,4 @@ exports.extractCleanExamples = extractCleanExamples;
 exports.removeExtension = removeExtension;
 exports.cleanComment = cleanComment;
 exports.extractWithRegexps = extractWithRegexps;
-exports.extractDependancies = extractDependancies;
+exports.extractDependencies = extractDependencies;
