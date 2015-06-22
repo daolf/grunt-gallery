@@ -104,7 +104,7 @@ var extractCleanExamples = function (code) {
  * @return          filename without extension
  */
 var removeExtension = function (filename) {
-    parts = filename.split('.');
+    var parts = filename.split('.');
     return parts[0];
 };
 
@@ -129,7 +129,19 @@ var extractWithRegexps = function( regExps, rawCode ) {
     return result;
 };
 
-
+/*
+ * Extract dependancies , return array of all dependancies
+ */
+var extractDependancies = function (rawCode) {
+    var regExp;
+    var computedRegexp = /(?:require\()(.*)\)/g;
+    var result = [];
+    while (computedRegexp !== null) {
+        result.push(computedRegexp[1]);
+        computedRegexp = regExp.exec(rawCode);
+    }
+    return result;
+};
 
 exports.generateAst = generateAst;
 exports.extractExamplesFromAst = extractExamplesFromAst;
@@ -138,3 +150,4 @@ exports.extractCleanExamples = extractCleanExamples;
 exports.removeExtension = removeExtension;
 exports.cleanComment = cleanComment;
 exports.extractWithRegexps = extractWithRegexps;
+exports.extractDependancies = extractDependancies;
