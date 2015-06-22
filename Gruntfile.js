@@ -50,7 +50,13 @@ module.exports = function (grunt) {
 					css : './privateRessources/extjs.git/src3.4.2/resources/css/ext-all.css',
 					images : './privateRessources/extjs.git/src3.4.2/resources/images/'
 
-				}
+				},
+                regexps : {
+                    inherit: {
+                        pattern : "(?:Ext.extend\\()(.*),",
+                        flags : "g"
+                    }
+                }
 			},
 			react : {
 				files: {

@@ -28,6 +28,7 @@ module.exports = function (grunt) {
         var componentPath = config.files.src+'/';
         var template = config.template;
         var targetPath = config.files.dest+'/';        
+        var regExps = config.regexps;
         var jsonPath = targetPath + 'info.json';
         var extractedInformations = [];
         var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
@@ -71,7 +72,7 @@ module.exports = function (grunt) {
         
         //Extract information of component in /targetPath+'js/comp'
         console.log('Extraction of information ...');
-        extractedInformations = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'),myParser);
+        extractedInformations = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'), regExps, myParser);
         
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
