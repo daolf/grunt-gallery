@@ -4,6 +4,7 @@ var tools = require('./tools.js');
 var path = require('path');
 var fs = require('fs');
 
+
 /*
  * Extract information for each component (filepath) in input
  * 
@@ -11,9 +12,10 @@ var fs = require('fs');
  * @param parser             parser we use to extract information
  * @return extractedExamples    Array containing all the information we want about previously given components
  */
-var extractInformation = function(componentsPath, myParser) { 
+var extractInformation = function(componentsPath, regExps, myParser) { 
     var fileName;
     var rawCode;
+    var resultRegexp;
     var extractedInformation = [];
     var components = fs.readdirSync(componentsPath);
     //We extract example for each of them
@@ -22,10 +24,12 @@ var extractInformation = function(componentsPath, myParser) {
         //console.log('Extraction of '+ components[i]);
         fileName = components[j];
         rawCode = tools.read(path.join( componentsPath, fileName ));
+        resultRegexp = myParser.extractWithRegexps( regExps, rawCode );
         var buffer = {
             name : myParser.removeExtension(path.basename(fileName)),
             file : './js/comp/'+fileName,
-            example : myParser.extractCleanExamples(rawCode)
+            example : myParser.extractCleanExamples(rawCode),
+            inherit : resultRegexp.inherit
         };
         //handle component only if there is example
         if ( buffer.example.length > 0 ) {
@@ -40,7 +44,7 @@ var extractInformation = function(componentsPath, myParser) {
 
 
 /*
- * Generate html page for each item in a JSON containing folowing fields : example,file and name
+ * Generate html page for each item in a JSON file containing folowing fields : example,file and name
  *
  * @param file          file name of the JSON file
  * @param template      jade template used for génération

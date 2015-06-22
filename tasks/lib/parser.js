@@ -108,6 +108,26 @@ var removeExtension = function (filename) {
     return parts[0];
 };
 
+/*
+ *  Extract information in the code from regexp object
+ */
+var extractWithRegexps = function( regExps, rawCode ) {
+    var inherit = "";
+    var result = {
+        inherit : ""
+    };
+    if (regExps !== undefined && regExps.inherit !== undefined ) {  
+        //we extract inherit by recreating regexp
+        inherit = new RegExp(regExps.inherit.pattern, regExps.inherit.flags).exec(rawCode);
+        if (inherit && inherit.length > 1 ) {
+            // first element is the whole maching text, with non capturing group, we dont want it
+            result.inherit = inherit.slice(1);
+        }
+    }
+    return result;
+};
+
+
 
 exports.generateAst = generateAst;
 exports.extractExamplesFromAst = extractExamplesFromAst;
@@ -115,3 +135,4 @@ exports.extractRawExamples = extractRawExamples;
 exports.extractCleanExamples = extractCleanExamples;
 exports.removeExtension = removeExtension;
 exports.cleanComment = cleanComment;
+exports.extractWithRegexps = extractWithRegexps;
