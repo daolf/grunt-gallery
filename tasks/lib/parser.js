@@ -133,7 +133,7 @@ var extractWithRegexps = function( regExps, rawCode ) {
  * Extract dependencies , return array of all dependencies
  */
 var extractDependencies = function (rawCode) {
-    var regExp = /(?:require.*\()(.*)\)/g;
+    var regExp = /(?:require.*\(.*["|'])(.*)["|']/g;
     var computedRegexp = regExp.exec(rawCode);
     var result = [];
     while (computedRegexp !== null) {
