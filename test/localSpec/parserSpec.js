@@ -314,7 +314,7 @@ describe( ' Test of extractDependencies', function () {
         expect(result).toEqual([ ]);
     });
     it ('Test with 2 dependencies', function () {
-            var rawText = " blablabla  require('comp1.js'), { \n blabla }; \n blabla\n  require ('comp2.js'), { \n blabla }; blabla };";
+            var rawText = " blablabla  require('comp1.js'), { \n blabla }; \n blabla\n  require ('./ahz./lol/comp2.js'), { \n blabla }; blabla };";
             var result = parser.extractDependencies(rawText);
             expect(result).toEqual(["comp1.js","comp2.js"]);
     });

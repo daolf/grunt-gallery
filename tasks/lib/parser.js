@@ -1,5 +1,6 @@
 var esprima = require('esprima');
 var estraverse = require('estraverse');
+var path = require('path');
 
 /*
  * Generate ast from text with esprima
@@ -137,7 +138,7 @@ var extractDependencies = function (rawCode) {
     var computedRegexp = regExp.exec(rawCode);
     var result = [];
     while (computedRegexp !== null) {
-        result.push(computedRegexp[1]);
+        result.push(path.basename(computedRegexp[1]));
         computedRegexp = regExp.exec(rawCode);
     }
     return result;
