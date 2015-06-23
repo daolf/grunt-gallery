@@ -58,19 +58,60 @@ html
                 .panel-body
                   each val in inherit
                     h4= val
-      div.col-lg-12.col-md-12.col-sm-12.col-xs-12
-        textarea#myTx
-          | #{example}
+      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+        ul.nav.nav-tabs(role='tablist')
+          li.active(role='presentation')
+            a#tabExample(href='#example', aria-controls='Example', role='tab', data-toggle='tab') Example
+          li(role='presentation')
+            a#tabFullCode(href='#fullCode', aria-controls='fullCode', role='tab', data-toggle='tab') Full code
+        .tab-content
+          #example.tab-pane.fade.in.active(role='tabpanel')
+            textarea#exCodeTx
+              | #{example}
+          #fullCode.tab-pane.fade(role='tabpanel')
+            textarea#fullCodeTx
     script(type='text/javascript').
+      // Loading full code of component
+      var fullData;
+      $.ajax({
+             url : "../#{file}",
+             dataType: "text",
+             success : function (data) {
+                 fullData = data;
+             }
+          });
+
       /*tanks to Marijn Haverbeke */
       var indentAll = function(cm) { 
           var last = cm.lineCount(); 
           cm.operation(function() { 
               for (var i = 0; i < last; ++i) cm.indentLine(i); 
           }); 
-      } 
-      var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('myTx'), {
-      mode:  "javascript",
-      lineNumbers: true,
-      }); 
-      indentAll(myCodeMirror);
+      }; 
+
+      var config = {
+          mode:  "javascript",
+          lineNumbers: true
+      };
+      var myCodeMirrorEx;
+      var myCodeMirrorFull;
+
+      myCodeMirrorEx = CodeMirror.fromTextArea(document.getElementById('exCodeTx'), config);
+      indentAll(myCodeMirrorEx);
+
+      // To be sure code is well formated every time we switch tab
+      $('#tabExample').on('shown.bs.tab', function (e) {
+          if (myCodeMirrorEx instanceof CodeMirror ) {
+              myCodeMirrorEx.refresh();
+          } else {
+              myCodeMirrorEx = CodeMirror.fromTextArea(document.getElementById('exCodeTx'), config);
+          }
+      })
+      $('#tabFullCode').on('shown.bs.tab', function (e) {
+          if (myCodeMirrorFull instanceof CodeMirror ) {
+              myCodeMirrorFull.refresh();
+          } else {
+              $("#fullCodeTx").text(fullData);
+              myCodeMirrorFull = CodeMirror.fromTextArea(document.getElementById('fullCodeTx'), config);
+          }
+      })
