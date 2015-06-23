@@ -1,56 +1,76 @@
 doctype html
 html
-    head
-        meta(http-equiv="content-type", content="text/html; charset=UTF-8")
-        script(src="../js/gallery.js")
-        link(rel="stylesheet" href="../css/gallery.css")
-        title #{name}
-        script(type='text/javascript').
-            var refreshIframe = function() {
-                var iframe = document.getElementById('iframe');
-                iframe.src = iframe.src;
-            }
+  head
+    meta(http-equiv="content-type", content="text/html; charset=UTF-8")
+    script(src="../js/gallery.js")
+    link(rel="stylesheet" href="../css/gallery.css")
+    title #{name}
+    script(type='text/javascript').
+      var refreshIframe = function() {
+          var iframe = document.getElementById('iframe');
+          iframe.src = iframe.src;
+      }
 
-    body
-        row
-            div.col-lg-12
-                h1
-                    | #{name}
-        row
-            .col-lg-12.col-md-12.col-sm-12.col-xs-12
-                a.btn.btn-default.buttonHome(href='../index.html')
-                    span.glyphicon.glyphicon-home(aria-hidden='true')
-                    |                             
-                    span  Home
-                    |                         
-                .btn-group
-                    a.btn.btn-default(href='../iframe/iframe_#{name}.html' target="_blank")
-                        span.glyphicon.glyphicon-console(aria-hidden='true')
-                        |                                 
-                        span  Debug
-                        |                             
-                    button.btn.btn-default.btnRefresh(onclick='refreshIframe()')
-                        span.glyphicon.glyphicon-refresh(aria-hidden='true')
-                        |                                 
-                        span  Refresh Component
-                | <br />
-                | <br />
-        row
-            div.col-lg-6.col-md-6.col-sm-6.col-xs-12
-                iframe(src='../iframe/iframe_'+name+'.html' id='iframe')
-            div.col-lg-6.col-md-6.col-sm-6.col-xs-12
-                textarea#myTx
-                    | #{example}
-        script(type='text/javascript').
-            /*tanks to Marijn Haverbeke */
-            var indentAll = function(cm) { 
-                var last = cm.lineCount(); 
-                cm.operation(function() { 
-                    for (var i = 0; i < last; ++i) cm.indentLine(i); 
-                }); 
-            } 
-            var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('myTx'), {
-            mode:  "javascript",
-            lineNumbers: true,
-            }); 
-            indentAll(myCodeMirror);
+  body
+    row
+      div.col-lg-12
+        h1
+          | #{name}
+    row
+      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+        a.btn.btn-default.buttonHome(href='../index.html')
+          span.glyphicon.glyphicon-home(aria-hidden='true')
+          |                             
+          span  Home
+          |                         
+        .btn-group
+          a.btn.btn-default(href='../iframe/iframe_#{name}.html' target="_blank")
+            span.glyphicon.glyphicon-console(aria-hidden='true')
+            |                                 
+            span  Debug
+            |                             
+          button.btn.btn-default.btnRefresh(onclick='refreshIframe()')
+            span.glyphicon.glyphicon-refresh(aria-hidden='true')
+            |                                 
+            span  Refresh Component
+        | <br />
+        | <br />
+    row
+      div.col-lg-9.col-md-9.col-sm-9.col-xs-9.iframeContainer
+        iframe(src='../iframe/iframe_'+name+'.html' id='iframe')
+      div.col-lg-3.col-md-3.col-sm-3.col-xs-3.menuInfo
+        .panel.panel-primary(style='height : 100%')
+          .panel-heading
+            | Info
+          .panel-body(style='padding : 1%')
+            .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='padding : 1%')
+              .panel.panel-info(style='height : 100%')
+                .panel-heading
+                  | Dependencies :
+                .panel-body
+                  lu
+                    each val in dependencies
+                      li= val
+            .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='padding : 1%')
+              .panel.panel-info
+                .panel-heading
+                  | Inherit :
+                .panel-body
+                  each val in inherit
+                    h4= val
+      div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+        textarea#myTx
+          | #{example}
+    script(type='text/javascript').
+      /*tanks to Marijn Haverbeke */
+      var indentAll = function(cm) { 
+          var last = cm.lineCount(); 
+          cm.operation(function() { 
+              for (var i = 0; i < last; ++i) cm.indentLine(i); 
+          }); 
+      } 
+      var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('myTx'), {
+      mode:  "javascript",
+      lineNumbers: true,
+      }); 
+      indentAll(myCodeMirror);
