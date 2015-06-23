@@ -50,10 +50,11 @@ var extractInformation = function(componentsPath, regExps, myParser) {
  * @param file          file name of the JSON file
  * @param template      jade template used for génération
  * @param target        output directory
+ * @param otherInfo     complementary information 
  *
  * @return nothing      write one html files per item in JSON file
  */
-var generate = function (file, template, target) {
+var generate = function (file, otherInfo, template, target) {
 
     var templateIframe = tools.read(template);
     var templateGallery = tools.read(__dirname+'/../../views/gallery.jade');
@@ -66,7 +67,7 @@ var generate = function (file, template, target) {
     var stringData = tools.read(file);
     var JSONdata = JSON.parse(stringData);
     console.log('writing : '+target + 'gallery/index.html');
-    tools.write(target + 'index.html',fnIndex({data: JSONdata}));
+    tools.write(target + 'index.html',fnIndex({data: JSONdata, title: otherInfo.title}));
     // for eache component describe in file
     for (var i = 0; i < JSONdata.length; i++) {
         console.log('writing : '+target + 'gallery'+JSONdata[i].name+'.html');
