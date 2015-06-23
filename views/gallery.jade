@@ -50,16 +50,14 @@ html
                 .panel-body
                   lu
                     each val in dependencies
-                      li
-                      | {val}
+                      li= val
             .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='padding : 1%')
               .panel.panel-info
                 .panel-heading
                   | Inherit :
                 .panel-body
                   each val in inherit
-                      h1
-                      | {val}
+                    h4= val
       div.col-lg-12.col-md-12.col-sm-12.col-xs-12
         textarea#myTx
           | #{example}
