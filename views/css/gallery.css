@@ -28,3 +28,7 @@ iframe {
     padding-left: 5px;
     height: 400px;
 }
+
+.panelsCodeMirror {
+  margin-bottom: 20px
+}
