@@ -3,6 +3,8 @@
  *  phantomGenerator.js <sourceFile> <destPath>
  */
 
+/* global phantom, document, window*/
+
 var webPage = require('webpage');
 var page = webPage.create();
 var system = require('system');
@@ -13,9 +15,7 @@ page.onError = function(msg, trace) {
     if (trace && trace.length) {
         msgStack.push('TRACE:');
         trace.forEach(function(t) {
-            /* jshint ignore:start */
             msgStack.push(' -> ' + t.file + ': ' + t.line + (t.function ? ' (in function "' + t.function +'")' : ''));
-            /* jshint ignore:end */
         });
     }
     console.error(msgStack.join('\n'));

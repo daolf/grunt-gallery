@@ -46,7 +46,7 @@ module.exports = function (grunt) {
 				template : './views/extComp.jade',
 				dependencies : {
 					js : ['./privateRessources/extjs.git/src3.4.2/adapter/ext/ext-base-debug.js',
-						  './privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
+						'./privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
 					css : './privateRessources/extjs.git/src3.4.2/resources/css/ext-all.css',
 					images : './privateRessources/extjs.git/src3.4.2/resources/images/'
 
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim.min.js',
-						  './node_modules/react/dist/react-with-addons.min.js'],
+						'./node_modules/react/dist/react-with-addons.min.js'],
 					css : './views/css/customCss.css'
 				}
 			},
@@ -78,7 +78,7 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim.min.js',
-						  './node_modules/react/dist/react-with-addons.min.js'],
+						'./node_modules/react/dist/react-with-addons.min.js'],
 					css : './views/css/customCss.css'
 				}
 			},
@@ -90,7 +90,7 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim.min.js',
-						  './node_modules/react/dist/react-with-addons.min.js'],
+						'./node_modules/react/dist/react-with-addons.min.js'],
 					css : './views/css/customCss.css'
 				}
 			},
@@ -102,7 +102,7 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim*.js',
-						  './node_modules/react/dist/react-with-addons*.js'],
+						'./node_modules/react/dist/react-with-addons*.js'],
 					css : './views/css/customCs*.css'
 				}
 			}

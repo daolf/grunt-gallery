@@ -51,7 +51,7 @@ var extractExamplesFromAst = function (ast) {
     var computedRegExp;
     var txt;
     estraverse.traverse(ast, {
-        enter: function(node,parent) {
+        enter: function(node) {
             if (node.hasOwnProperty('comments')) {
                 for (var i=0; i<node.comments.length ; i++) {
                     if (node.comments[i].type === 'Block' &&
