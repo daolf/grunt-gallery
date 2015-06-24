@@ -18,7 +18,9 @@ for (var i = 0; i<info.length; i++) {
     compNames.push(info[i].name);
 }
 
-
+/*
+ * We extract component names where their inherit match the search
+ */
 var extractCompNamesFromInheritSearch = function (search) {
     var result = [];
     var currInherit;
@@ -33,6 +35,9 @@ var extractCompNamesFromInheritSearch = function (search) {
     return result;
 };
 
+/*
+ * We extract component names where their dependencies match the search
+ */
 var extractCompNamesFromDependenciesSearch = function (search) {
     var result = [];
     var currDependencies;
@@ -47,6 +52,9 @@ var extractCompNamesFromDependenciesSearch = function (search) {
     return result;
 };
 
+/*
+ * We extract component names where their names match the search
+ */
 var extractCompNamesFromNamesSearch = function (search) {
     var result = [];
     for (var i = 0; i<info.length; i++) {
@@ -57,6 +65,9 @@ var extractCompNamesFromNamesSearch = function (search) {
     return result;
 };
 
+/*
+ * We only display components whose names are in compList
+ */
 var displayComponents = function (compList) {
     var compName;
     for (var i = 0; i<allMyComp.length; i++) {
