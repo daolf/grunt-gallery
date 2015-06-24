@@ -29,6 +29,16 @@ iframe {
     height: 400px;
 }
 
+.menuInfo > .panel-primary > .panel-body {
+    overflow-y: scroll;
+    height: 88%;
+    margin-bottom: 0px;
+}
+
+.panel-body {
+    padding: 5px;
+}
+
 .panelsCodeMirror {
   margin-bottom: 20px
 }
