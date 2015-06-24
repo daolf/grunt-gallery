@@ -1,28 +1,69 @@
-/* global $*/
+/* global $, Bloodhound*/
+
+/* reading JSON files*/
+var info = $.ajax({
+    url : "./info.json",
+    dataType: "text",
+    async: false
+}).responseText;
+
+info = JSON.parse(info);
 
 var allMyComp = $('.thumbnail');
 var compNames = [];
-var compName, myForm;
+var myForm;
+var criteria = "NAME";
 /* get all comp names*/
-for (var i = 0; i<allMyComp.length; i++) {
-    compName = allMyComp.eq(i).children().eq(0).children('.compName').text();
-    compNames.push(compName);
+for (var i = 0; i<info.length; i++) {
+    compNames.push(info[i].name);
 }
 
 
-/* search through the thumbnail for a comp name in particular
- *
- * @param search    the String we search
- *
- * return nothing but display only element with name mathing with search
- */
-var searchInThumbnail = function(search) {
-    console.log('searc...');
-    var compName = '';
+var extractCompNamesFromInheritSearch = function (search) {
+    var result = [];
+    var currInherit;
+    for (var i = 0; i<info.length; i++) {
+        currInherit = info[i].inherit;
+        for (var j = 0; j<currInherit.length; j++) {
+            if ( currInherit[j].toLowerCase().indexOf(search.toLowerCase()) !== -1 ) {
+                result.push(info[i].name);
+            }
+        }
+    }
+    return result;
+};
+
+var extractCompNamesFromDependenciesSearch = function (search) {
+    var result = [];
+    var currDependencies;
+    for (var i = 0; i<info.length; i++) {
+        currDependencies = info[i].dependencies;
+        for (var j = 0; j<currDependencies.length; j++) {
+            if ( currDependencies[j].toLowerCase().indexOf(search.toLowerCase()) !== -1 ) {
+                result.push(info[i].name);
+            }
+        }
+    }
+    return result;
+};
+
+var extractCompNamesFromNamesSearch = function (search) {
+    var result = [];
+    for (var i = 0; i<info.length; i++) {
+        console.log(search);
+        if ( info[i].name.toLowerCase().indexOf(search.toLowerCase()) !== -1 ) {
+                result.push(info[i].name);
+        }
+    }
+    return result;
+};
+
+var displayComponents = function (compList) {
+    var compName;
     for (var i = 0; i<allMyComp.length; i++) {
         compName = allMyComp.eq(i).children().eq(0).children('.compName').text();
         /* if comp name not found we hide it*/
-        if (compName.toLowerCase().indexOf(search.toLowerCase()) === -1 ) {
+        if (compList.indexOf(compName) === -1 ) {
             allMyComp.eq(i).css('display','none');
         }
         /* else we display it*/
@@ -32,13 +73,21 @@ var searchInThumbnail = function(search) {
     }
 };
 
-$('.form-search').keyup(function() {
-    myForm = $('.form-search');
-    var currSearch = myForm.val();
-    //console.log('search for'+currSearch);
-    searchInThumbnail(currSearch);
-});
-
+var search = function (data) {
+    var compList;
+    switch (criteria) {
+        case "NAME" :
+            compList = extractCompNamesFromNamesSearch(data);
+            break;
+        case "INHERIT" :
+            compList = extractCompNamesFromInheritSearch(data);
+            break;
+        case "DEPENDENCIES" :
+            compList = extractCompNamesFromDependenciesSearch(data);
+            break;
+    }
+    displayComponents(compList);
+};
 
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
@@ -67,16 +116,26 @@ $('#scrollable-dropdown-menu .typeahead').typeahead({
     hint: false,
     highlight: true,
     minLength: 1,
-},
-                          {
+},{
     name: 'compNames',
     limit: 100,
-    source: substringMatcher(compNames)
+    source: substringMatcher(compNames),
+});
+
+$('.form-search').keyup(function() {
+    myForm = $('.form-search');
+    var currSearch = myForm.val();
+    search(currSearch);
 });
 
 $('.typeahead').bind('typeahead:select', function (obj,datum) {
-    searchInThumbnail(datum); 
+    console.log('obj :');
+    console.log(obj);
+    console.log('datum : ');
+    console.log(datum);
+    search(datum); 
 });
+
 
 // to be sure that only one suggestion is higlighted
 /*
