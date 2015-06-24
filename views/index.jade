@@ -24,10 +24,13 @@ html
                     ul.nav.nav-tabs(role='tablist')
                         li.active(role='presentation')
                             a#nameSearch(aria-controls='Name', role='tab', data-toggle='tab') Name
+                                span
                         li(role='presentation')
                             a#inheritSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Inherit
+                                span
                         li(role='presentation')
                             a#dependenciesSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Dependencies
+                                span
             div.row
                 div.galleryContainer.container-fluid
                     each val in data
