@@ -130,7 +130,14 @@ $('#scrollable-dropdown-menu .typeahead').typeahead({
     source: substringMatcher(compNames),
 });
 
-$('.form-search').keyup(searchFromValueInForm);
+$('.form-search').keyup(function (e) {
+    //if enter is hit we lose focus
+    if (e.keyCode === 13 ) {
+        $('.form-search').blur();
+    } else {
+        searchFromValueInForm();
+    }
+});
 
 $('.typeahead').bind('typeahead:select', function (obj,datum) {
     search(datum); 
