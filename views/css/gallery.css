@@ -30,7 +30,7 @@ iframe {
 }
 
 .menuInfo > .panel-primary > .panel-body {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 88%;
     margin-bottom: 0px;
 }
