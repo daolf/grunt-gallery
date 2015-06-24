@@ -1,4 +1,4 @@
-/* global $, Bloodhound*/
+/* global $*/
 
 /* reading JSON files*/
 var info = $.ajax({
@@ -50,7 +50,6 @@ var extractCompNamesFromDependenciesSearch = function (search) {
 var extractCompNamesFromNamesSearch = function (search) {
     var result = [];
     for (var i = 0; i<info.length; i++) {
-        console.log(search);
         if ( info[i].name.toLowerCase().indexOf(search.toLowerCase()) !== -1 ) {
                 result.push(info[i].name);
         }
@@ -89,6 +88,12 @@ var search = function (data) {
     displayComponents(compList);
 };
 
+var searchFromValueInForm = function () {
+    myForm = $('.form-search');
+    var currSearch = myForm.val();
+    search(currSearch);
+};
+
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substrRegex;
@@ -111,6 +116,9 @@ var substringMatcher = function(strs) {
   };
 };
 
+///////////////////
+// Event binding //
+///////////////////
 
 $('#scrollable-dropdown-menu .typeahead').typeahead({
     hint: false,
@@ -122,20 +130,11 @@ $('#scrollable-dropdown-menu .typeahead').typeahead({
     source: substringMatcher(compNames),
 });
 
-$('.form-search').keyup(function() {
-    myForm = $('.form-search');
-    var currSearch = myForm.val();
-    search(currSearch);
-});
+$('.form-search').keyup(searchFromValueInForm);
 
 $('.typeahead').bind('typeahead:select', function (obj,datum) {
-    console.log('obj :');
-    console.log(obj);
-    console.log('datum : ');
-    console.log(datum);
     search(datum); 
 });
-
 
 // to be sure that only one suggestion is higlighted
 /*
@@ -150,3 +149,21 @@ $('.tt-menu').on('mouseenter mouseleave mousemove', function() {
         domElement.addClass('tt-cursor');
     }
 });
+
+$('#nameSearch').on('shown.bs.tab', function () {
+    criteria = "NAME";
+    searchFromValueInForm();
+});
+
+$('#inheritSearch').on('shown.bs.tab', function () {
+    criteria = "INHERIT";
+    searchFromValueInForm();
+});
+
+$('#dependenciesSearch').on('shown.bs.tab', function () {
+    criteria = "DEPENDENCIES";
+    searchFromValueInForm();
+});
+
+
+

@@ -20,10 +20,14 @@ html
                         |                         
                         span#basic-addon2.input-group-addon
                             i.glyphicon.glyphicon-search
-                    |                     
                     br
-                    |                     
-                    br
+                    ul.nav.nav-tabs(role='tablist')
+                        li.active(role='presentation')
+                            a#nameSearch(aria-controls='Name', role='tab', data-toggle='tab') Name
+                        li(role='presentation')
+                            a#inheritSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Inherit
+                        li(role='presentation')
+                            a#dependenciesSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Dependencies
             div.row
                 div.galleryContainer.container-fluid
                     each val in data
