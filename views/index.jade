@@ -12,18 +12,23 @@ html
                     h1= title
             div.row.searchRow
                 .col-lg-12.col-md-12.col-sm-12.col-xs-12
-                    h2 Search
-                    |                  
-                    |                     
+                    br                   
                     .input-group#scrollable-dropdown-menu
-                        input.form-control.form-search.typeahead(type='text', placeholder='Component name', aria-describedby='basic-addon2', data-provided="typeahead")
+                        input.form-control.form-search.typeahead(type='text', placeholder='Search', aria-describedby='basic-addon2', data-provided="typeahead")
                         |                         
                         span#basic-addon2.input-group-addon
                             i.glyphicon.glyphicon-search
-                    |                     
                     br
-                    |                     
-                    br
+                    ul.nav.nav-tabs(role='tablist')
+                        li.active(role='presentation')
+                            a#nameSearch(aria-controls='Name', role='tab', data-toggle='tab') Name
+                                span
+                        li(role='presentation')
+                            a#inheritSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Inherit
+                                span
+                        li(role='presentation')
+                            a#dependenciesSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Dependencies
+                                span
             div.row
                 div.galleryContainer.container-fluid
                     each val in data
