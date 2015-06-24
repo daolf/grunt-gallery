@@ -36,28 +36,35 @@ html
         | <br />
         | <br />
     row
-      div.col-lg-9.col-md-9.col-sm-9.col-xs-9.iframeContainer
-        iframe(src='../iframe/iframe_'+name+'.html' id='iframe')
-      div.col-lg-3.col-md-3.col-sm-3.col-xs-3.menuInfo
-        .panel.panel-primary(style='height : 100%')
-          .panel-heading
-            | Info
-          .panel-body(style='padding : 1%')
-            .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='padding : 1%')
-              .panel.panel-info(style='height : 100%')
-                .panel-heading
-                  | Dependencies :
-                .panel-body
-                  lu
-                    each val in dependencies
-                      li= val
-            .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='padding : 1%')
-              .panel.panel-info
-                .panel-heading
-                  | Inherit :
-                .panel-body
-                  each val in inherit
-                    h4= val
+      if dependencies.length > 0 || inherit.length > 0
+        div.col-lg-9.col-md-9.col-sm-9.col-xs-9.iframeContainer
+          iframe(src='../iframe/iframe_'+name+'.html' id='iframe')
+      else
+        div.col-lg-12.col-md-12.col-sm-12.col-xs-12.iframeContainer
+          iframe(src='../iframe/iframe_'+name+'.html' id='iframe')
+      if dependencies.length > 0 || inherit.length > 0
+        div.col-lg-3.col-md-3.col-sm-3.col-xs-3.menuInfo
+          .panel.panel-primary(style='height : 100%')
+            .panel-heading
+              | Info
+            .panel-body(style='padding : 1%')
+              if dependencies.length > 0
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='padding : 1%')
+                  .panel.panel-info(style='height : 100%')
+                    .panel-heading
+                      | Dependencies :
+                    .panel-body
+                      lu
+                        each val in dependencies
+                          li= val
+              if inherit.length > 0
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='padding : 1%')
+                  .panel.panel-info
+                    .panel-heading
+                      | Inherit :
+                    .panel-body
+                      each val in inherit
+                        h4= val
       .col-lg-12.col-md-12.col-sm-12.col-xs-12.panelsCodeMirror
         ul.nav.nav-tabs(role='tablist')
           li.active(role='presentation')
