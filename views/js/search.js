@@ -71,7 +71,8 @@ var extractCompNamesFromNamesSearch = function (search) {
 var displayComponents = function (compList) {
     var compName;
     for (var i = 0; i<allMyComp.length; i++) {
-        compName = allMyComp.eq(i).children().eq(0).children('.compName').text();
+        // very very ugly !!!
+        compName = allMyComp.eq(i).children().eq(0).children().eq(1).children().eq(0).children().eq(0).text();
         /* if comp name not found we hide it*/
         if (compList.indexOf(compName) === -1 ) {
             allMyComp.eq(i).css('display','none');
