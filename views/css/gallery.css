@@ -42,3 +42,10 @@ iframe {
 .panelsCodeMirror {
   margin-bottom: 20px
 }
+
+.btnNewWindow {
+    margin-left: 10px;
+    height: 20px;
+    width : 20px;
+    padding : 0;
+}
