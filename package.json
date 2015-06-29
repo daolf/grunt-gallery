@@ -1,5 +1,6 @@
 {
   "name": "grunt-gallery",
+  "license": "MIT",
   "version": "0.0.1",
   "description": "Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)",
   "repository": "git@git.lbg.office.lyra:pdewulf/grunt-gallery.git",
