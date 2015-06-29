@@ -3,6 +3,8 @@ var fs = require('fs');
 var childProcess = require('child_process');
 var phantomjs = require('phantomjs');
 var binPath = phantomjs.path;
+var success = 0;
+var failure = 0;
 
 
 /* Handling of logs for img generation */
@@ -10,9 +12,11 @@ var customOuts = function (stdout,file) {
     var cli = require('cli-color');
     if (stdout.length === 0) {
         console.log(cli.green(' OK ' + file + '.png'));
+        success++;
     }
     else {
         console.log(cli.red(file) + ': ' + stdout);
+        failure++;
     }
 };
 
@@ -48,6 +52,7 @@ var generate = function(originPath, target) {
     for (var i=0; i<lstFiles.length; i++) {
         runPhantom(originPath+lstFiles[i],target);
     }
+    console.log('Done with '+success+'sucess and '+failure+'failure(s)');
 };
 
 exports.generate = generate;
