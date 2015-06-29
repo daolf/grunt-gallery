@@ -65,7 +65,9 @@ module.exports = function (grunt) {
         console.log(componentPath+' -> '+targetPath, '/js/');
         // we extract all component in componentPath and copy them in targetPath+/js/comp
         tools.extractJsFromDir(componentPath,path.join( targetPath, '/js/comp'));
-        //copy image only if defined
+        // copy image from templates
+            tools.customCopyDir(dep.index.img, path.join( targetPath, '/img/'));
+        //copy image dependancies only if defined
         var images = config.dependencies.images;
         if (images !== undefined) {
             tools.customCopyDir(images,path.join( targetPath, '/images/'));
