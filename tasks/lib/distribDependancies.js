@@ -9,6 +9,7 @@ module.exports = {
         css : [__dirname+'/../../node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
                __dirname+'/../../node_modules/bootstrap/dist/css/bootstrap.min.css',
                __dirname+'/../../views/css/index.css'],
+        img : __dirname+'/../../views/img/'
     },
     /* list of dependencies for the future page component pages of the gallery */
     gallery : {

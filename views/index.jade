@@ -34,7 +34,7 @@ html
                         div.col-lg-4.col-md-4.col-sm-6.col-xs-6.thumbnail
                             div.thumbnailContainer
                                 a.compPict(href='./gallery/'+val.name+'.html') 
-                                    img.img-responsive(src='./img/iframe_'+val.name+'.html.png')
+                                    img.img-responsive(src='./img/iframe_'+val.name+'.html.png', onerror="this.src = './img/missing.png'")
                                 a.compName.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='./gallery/'+val.name+'.html')
                                     .col-lg-9.col-md-9.col-sm-9.col-xs-9.compName
                                         div= val.name
