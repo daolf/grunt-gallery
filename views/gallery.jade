@@ -67,19 +67,35 @@ html
                         h4= val
       .col-lg-12.col-md-12.col-sm-12.col-xs-12.panelsCodeMirror
         ul.nav.nav-tabs(role='tablist')
-          li.active(role='presentation')
-            a#tabExample(href='#example', aria-controls='Example', role='tab', data-toggle='tab') Example
+          each ex, index in example 
+            if index==0
+              if example.length > 1 
+                li.active(role='presentation')
+                  a(id='tabExample'+index, href='#example'+index, aria-controls='Example'+index, role='tab', data-toggle='tab') Example #{index+1}
+              else 
+                li.active(role='presentation')
+                  a(id='tabExample'+index, href='#example'+index, aria-controls='Example'+index, role='tab', data-toggle='tab') Example
+            else
+              li(role='presentation')
+                a(id='tabExample'+index, href='#example'+index, aria-controls='Example'+index, role='tab', data-toggle='tab') Example #{index+1}
           li(role='presentation')
             a#tabFullCode(href='#fullCode', aria-controls='fullCode', role='tab', data-toggle='tab')
               | Full code
               button.btn.btn-default.btnNewWindow(style='cursor:pointer')
                 span.glyphicon.glyphicon-new-window
         .tab-content
-          #example.tab-pane.fade.in.active(role='tabpanel')
-            textarea#exCodeTx
-              | #{example}
+          each ex, index in example
+            if index==0
+              .tab-pane.fade.in.active(role='tabpanel', id='example'+index)
+                textarea(id='exCodeTx'+index)
+                  | #{ex}
+            else
+              .tab-pane.fade(role='tabpanel', id='example'+index)
+                textarea(id='exCodeTx'+index)
+                  | #{ex}
           #fullCode.tab-pane.fade(role='tabpanel')
             textarea#fullCodeTx
+            
     script(type='text/javascript').
       // Loading full code of component
       var fullData;
@@ -103,20 +119,17 @@ html
           mode:  "javascript",
           lineNumbers: true
       };
-      var myCodeMirrorEx;
       var myCodeMirrorFull;
-
-      myCodeMirrorEx = CodeMirror.fromTextArea(document.getElementById('exCodeTx'), config);
-      indentAll(myCodeMirrorEx);
-
-      // To be sure code is well formated every time we switch tab
-      $('#tabExample').on('shown.bs.tab', function (e) {
-          if (myCodeMirrorEx instanceof CodeMirror ) {
-              myCodeMirrorEx.refresh();
+      var myCodeMirrorEx0 = CodeMirror.fromTextArea(document.getElementById('exCodeTx0'), config);
+      indentAll(myCodeMirrorEx0);
+      $('#tabExample0').on('shown.bs.tab', function (e) {
+          if (myCodeMirrorEx0 instanceof CodeMirror ) {
+              myCodeMirrorEx0.refresh();
           } else {
-              myCodeMirrorEx = CodeMirror.fromTextArea(document.getElementById('exCodeTx'), config);
+              indentAll(myCodeMirrorEx0);
           }
-      })
+      }) 
+
       $('#tabFullCode').on('shown.bs.tab', function (e) {
           if (myCodeMirrorFull instanceof CodeMirror ) {
               myCodeMirrorFull.refresh();
@@ -132,3 +145,16 @@ html
               console.log('yolo');
           }
       })
+    each ex, index in example
+      if index!=0
+        script(type='text/javascript').
+          // To be sure code is well formated every time we switch tab
+          var myCodeMirrorEx#{index};
+          $('#tabExample#{index}').on('shown.bs.tab', function (e) {
+              if (myCodeMirrorEx#{index} instanceof CodeMirror ) {
+                  myCodeMirrorEx#{index}.refresh();
+              } else {
+                  myCodeMirrorEx#{index} = CodeMirror.fromTextArea(document.getElementById('exCodeTx#{index}'), config);
+                  indentAll(myCodeMirrorEx#{index});
+              }
+          }) 
