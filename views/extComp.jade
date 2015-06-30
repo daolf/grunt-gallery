@@ -12,7 +12,8 @@ html
         button#button-ct
     script(type='text/javascript', src='../js/iframe.js')
     script(type='text/javascript', src='../'+file)
-    script(type='text/javascript')
-        | Ext.onReady( function() {
-        | #{example} 
-        | });
+    each ex in example
+      script(type='text/javascript')
+          | Ext.onReady( function() {
+          | #{ex} 
+          | });
