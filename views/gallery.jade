@@ -69,8 +69,12 @@ html
         ul.nav.nav-tabs(role='tablist')
           each ex, index in example 
             if index==0
-              li.active(role='presentation')
-                a(id='tabExample'+index, href='#example'+index, aria-controls='Example'+index, role='tab', data-toggle='tab') Example #{index+1}
+              if example.length > 1 
+                li.active(role='presentation')
+                  a(id='tabExample'+index, href='#example'+index, aria-controls='Example'+index, role='tab', data-toggle='tab') Example #{index+1}
+              else 
+                li.active(role='presentation')
+                  a(id='tabExample'+index, href='#example'+index, aria-controls='Example'+index, role='tab', data-toggle='tab') Example
             else
               li(role='presentation')
                 a(id='tabExample'+index, href='#example'+index, aria-controls='Example'+index, role='tab', data-toggle='tab') Example #{index+1}
