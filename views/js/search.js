@@ -11,14 +11,30 @@ $.ajax({
 			delete elem.file;
 		});
         var allMyComp = $('.thumbnail');
-        var compNames = [];
+        var compNamesFeeder = [];
+        var inheritFeeder = [];
+        var dependenciesFeeder = [];
         var myForm;
         var criteria = "NAME";
+        
+        var removeDuplicate = function (array) {
+            return array.reduce(function(accum, current) {
+                if (accum.indexOf(current) < 0) {
+                    accum.push(current);
+                }
+                return accum;
+            }, []);
+        };
+        
         /* get all comp names*/
         for (var i = 0; i<info.length; i++) {
-            compNames.push(info[i].name);
+            compNamesFeeder.push(info[i].name);
+            inheritFeeder = inheritFeeder.concat(info[i].inherit);
+            dependenciesFeeder = dependenciesFeeder.concat(info[i].dependencies);
         }
-
+        
+        dependenciesFeeder = removeDuplicate(dependenciesFeeder);
+		inheritFeeder = removeDuplicate(inheritFeeder);		
         /*
          * We extract component names where their inherit match the search
          */
@@ -132,15 +148,15 @@ $.ajax({
         ///////////////////
         // Event binding //
         ///////////////////
-
-        $('#scrollable-dropdown-menu .typeahead').typeahead({
+		var config = {
             hint: false,
             highlight: true,
             minLength: 1,
-        },{
+        };
+        $('#scrollable-dropdown-menu .typeahead').typeahead(config,{
             name: 'compNames',
             limit: 100,
-            source: substringMatcher(compNames),
+            source: substringMatcher(compNamesFeeder),
         });
 
         $('.form-search').keyup(function (e) {
@@ -158,7 +174,7 @@ $.ajax({
 
         // to be sure that only one suggestion is higlighted
         /*
-         * We get the depper div the mouse is on, and add tt-cursor class
+         * We get the deeper div the mouse is on, and add tt-cursor class
          */
         $('.tt-menu').on('mouseenter mouseleave mousemove', function() {
             $('.tt-cursor').removeClass('tt-cursor');
@@ -172,16 +188,34 @@ $.ajax({
 
         $('#nameSearch').on('shown.bs.tab', function () {
             criteria = "NAME";
+			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
+			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
+				name: 'compNames',
+				limit: 100,
+				source: substringMatcher(compNamesFeeder),
+			});
             searchFromValueInForm();
         });
 
         $('#inheritSearch').on('shown.bs.tab', function () {
             criteria = "INHERIT";
+			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
+			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
+				name: 'inherit',
+				limit: 100,
+				source: substringMatcher(inheritFeeder),
+			});
             searchFromValueInForm();
         });
 
         $('#dependenciesSearch').on('shown.bs.tab', function () {
             criteria = "DEPENDENCIES";
+			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
+			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
+				name: 'compDependencies',
+				limit: 100,
+				source: substringMatcher(dependenciesFeeder),
+			});
             searchFromValueInForm();
         });
     }
