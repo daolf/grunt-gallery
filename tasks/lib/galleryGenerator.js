@@ -22,9 +22,9 @@ module.exports = {
         var components = fs.readdirSync(componentsPath);
         //We extract example for each of them
         console.log('Extraction of examples ...');
-        for (var j = 0; j<components.length; j++) {
+        components.map(function (curr) {
             //console.log('Extraction of '+ components[i]);
-            fileName = components[j];
+            fileName = curr;
             rawCode = tools.read(path.join( componentsPath, fileName ));
             resultRegexp = myParser.extractWithRegexps( regExps, rawCode );
             var buffer = {
@@ -39,7 +39,7 @@ module.exports = {
                 extractedInformation.push(buffer);
             }
             //console.log('Extraction of '+ components[i]+ ' done');
-        }
+        });
         return extractedInformation;
     },
 
@@ -70,11 +70,11 @@ module.exports = {
         console.log('writing : '+target + 'gallery/index.html');
         tools.write(target + 'index.html',fnIndex({data: JSONdata, title: otherInfo.title}));
         // for eache component describe in file
-        for (var i = 0; i < JSONdata.length; i++) {
-            console.log('writing : '+target + 'gallery'+JSONdata[i].name+'.html');
-            tools.write(target + 'iframe/iframe_'+JSONdata[i].name+'.html',fnIframe(JSONdata[i]));
-            tools.write(target + 'gallery/'+JSONdata[i].name+'.html',fnGallery(JSONdata[i]));
-        }
+        JSONdata.map( function (curr) {
+            console.log('writing : '+target + 'gallery'+curr.name+'.html');
+            tools.write(target + 'iframe/iframe_'+curr.name+'.html',fnIframe(curr));
+            tools.write(target + 'gallery/'+curr.name+'.html',fnGallery(curr));
+        });
     }
 
 };

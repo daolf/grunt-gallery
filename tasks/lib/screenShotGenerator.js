@@ -48,10 +48,9 @@ var runPhantom = function(file,target) {
 var generate = function(originPath, target) {
     var lstFiles = fs.readdirSync(originPath);
     //console.log(lstFiles);
-
-    for (var i=0; i<lstFiles.length; i++) {
-        runPhantom(originPath+lstFiles[i],target);
-    }
+    lstFiles.map(function(curr) {
+        runPhantom(originPath+curr,target);
+    });
     console.log('Done with '+success+'sucess and '+failure+'failure(s)');
 };
 

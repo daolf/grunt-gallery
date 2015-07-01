@@ -53,17 +53,17 @@ var extractExamplesFromAst = function (ast) {
     estraverse.traverse(ast, {
         enter: function(node) {
             if (node.hasOwnProperty('comments')) {
-                for (var i=0; i<node.comments.length ; i++) {
-                    if (node.comments[i].type === 'Block' &&
-                        node.comments[i].value.search('@example') !== -1 ) {
-                        txt = node.comments[i].value;
+                node.comments.map( function(curr) {
+                    if (curr.type === 'Block' &&
+                        curr.value.search('@example') !== -1 ) {
+                        txt = curr.value;
                         computedRegExp = regExp.exec(txt);
                         while (computedRegExp !== null) {
                             extractedExamples.push(computedRegExp[1]);
                             computedRegExp = regExp.exec(txt);
                         }
                     }
-                }
+                });
             }
         }
     });
@@ -91,10 +91,9 @@ var extractRawExamples = function (text) {
 var extractCleanExamples = function (code) {
     var ast = generateAst(code);
     var examples = extractExamplesFromAst(ast);
-    for (var i=0; i<examples.length; i++) {
-        examples[i] = cleanComment(examples[i]);
-    }
-    return examples;
+    return examples.map( function(curr) {
+        return cleanComment(curr);
+    });
 };
 
 
