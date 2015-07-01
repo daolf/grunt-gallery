@@ -13,23 +13,34 @@
 				</div>
 			</div>
 			<div class="row searchRow">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<h2>Search</h2>                 
-					                    
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br>
 					<div id="scrollable-dropdown-menu" class="input-group">
-						<input type="text" placeholder="Component name" aria-describedby="basic-addon2" data-provided="typeahead" class="form-control form-search typeahead">                        <span id="basic-addon2" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-					</div>                    <br>                    <br>
+						<input type="text" placeholder="Search" aria-describedby="basic-addon2" data-provided="typeahead" class="form-control form-search typeahead">                        <span id="basic-addon2" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+					</div>
+					<ul role="tablist" class="nav nav-tabs">
+						<li role="presentation" class="active"><a id="nameSearch" aria-controls="Name" role="tab" data-toggle="tab">Name<span></span></a></li>
+						<li role="presentation"><a id="inheritSearch" aria-controls="fullCode" role="tab" data-toggle="tab">Inherit<span></span></a></li>
+						<li role="presentation"><a id="dependenciesSearch" aria-controls="fullCode" role="tab" data-toggle="tab">Dependencies<span></span></a></li>
+					</ul>
 				</div>
 			</div>
 			<div class="row">
 				<div class="galleryContainer container-fluid">
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 thumbnail">
-						<div class="thumbnailContainer"><a href="./gallery/appReact.html" class="compPict"> <img src="./img/iframe_appReact.html.png" class="img-responsive"></a><a href="./gallery/appReact.html" class="compName col-lg-12 col-md-12 col-sm-12 col-xs-12">appReact</a></div>
+						<div class="thumbnailContainer"><a href="./gallery/appReact.html" class="compPict"> <img src="./img/iframe_appReact.html.png" onerror="this.src = './img/missing.png'" class="img-responsive"></a><a href="./gallery/appReact.html" class="compName col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 compName">
+									<div>appReact</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+									<form action="./gallery/appReact.html" target="_blank">
+										<button type="submit" value="other window" data-toggle="tooltip" title="Open in other window" class="btn btn-default"><span class="glyphicon glyphicon-new-window"></span></button>
+									</form>
+								</div></a></div>
 					</div>
 				</div>
 			</div>
-			<div id="body"></div>
 		</div>
+		<div id="body"></div>
 		<script type="text/javascript" src="./js/index.js"></script>
 		<script type="text/javascript">
 			var menu = $('.searchRow');
@@ -44,6 +55,7 @@
 			}
 			 
 			document.onscroll = scroll;
+			$('.compName').quickfit({ max : 24});
 		</script>
 	</body>
 </html>
