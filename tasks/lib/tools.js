@@ -21,10 +21,12 @@ var testPathFile = function(filepath, grunt) {
     }
 };
 
+// Maybe useles but in case there is a better way of reading file
 function read(file) {
     return fs.readFileSync(file, 'utf8');
 }
 
+// Maybe useles but in case there is a better way of reading file
 function write(file, data) {
     fs.writeFileSync(file, data);
 }
