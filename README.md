@@ -1,6 +1,10 @@
 # grunt-gallery
 
-> Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)
+> Generate a web gallery presenting graphic components from various lib (ExtJS, React, etc...)
+
+## Disclaimer
+
+This plug-in was developed during a 3 months intership at [Lyra Network](http://www.lyra-network.com/)
 
 ## Getting Started
 This plugin requires Grunt.

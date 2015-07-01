@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var copy_dir = require('copy-dir');
+var copyDir = require('copy-dir');
 
 // Test is path dir exist 
 var testPathDir = function(filepath, grunt) {    
@@ -21,10 +21,12 @@ var testPathFile = function(filepath, grunt) {
     }
 };
 
+// Maybe useles but in case there is a better way of reading file
 function read(file) {
     return fs.readFileSync(file, 'utf8');
 }
 
+// Maybe useles but in case there is a better way of reading file
 function write(file, data) {
     fs.writeFileSync(file, data);
 }
@@ -63,12 +65,12 @@ function customCopyDir(src,dest) {
         if (src instanceof Array) {
             for (var i=0; i<src.length; i++) {
                 console.log(src[i]+ ' -> '+dest);
-                copy_dir.sync(src[i],dest);
+                copyDir.sync(src[i],dest);
             }
         }
         else {   
             console.log(src+ ' -> '+dest);
-            copy_dir.sync(src,dest);
+            copyDir.sync(src,dest);
         }
     }
 }
@@ -76,10 +78,11 @@ function customCopyDir(src,dest) {
 
 
 
-
-exports.testPathDir = testPathDir;
-exports.testPathFile = testPathFile;
-exports.read = read;
-exports.write = write;
-exports.extractJsFromDir = extractJsFromDir;
-exports.customCopyDir = customCopyDir;
+module.exports = {
+    testPathDir : testPathDir,
+    testPathFile : testPathFile,
+    read : read,
+    write : write,
+    extractJsFromDir : extractJsFromDir,
+    customCopyDir : customCopyDir
+};

@@ -16,11 +16,13 @@ module.exports = {
         js : [__dirname+'/../../node_modules/jquery/dist/jquery.js',
               __dirname+'/../../node_modules/codemirror/lib/codemirror.js',
               __dirname+'/../../node_modules/bootstrap/dist/js/bootstrap.min.js',
-              __dirname+'/../../node_modules/codemirror/mode/javascript/javascript.js'],
+              __dirname+'/../../node_modules/codemirror/mode/javascript/javascript.js',
+              __dirname+'/../../views/js/codeGallery.js'
+             ],
 
         css : [__dirname+'/../../node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
                __dirname+'/../../node_modules/bootstrap/dist/css/bootstrap.min.css',
                __dirname+'/../../node_modules/codemirror/lib/codemirror.css',
-               __dirname+'/../../views/css/gallery.css'],
+               __dirname+'/../../views/css/gallery.css']
     }
 };
