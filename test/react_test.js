@@ -26,29 +26,38 @@ exports.module = {
 		done();
 	},
 	react: function (test) {
-		test.expect(1);
+		test.expect(2);
 
 		var actual = grunt.file.read('test/tmp/react/index.html');
+		var actualInfo = grunt.file.read('test/tmp/react/info.json');
 		var expected = grunt.file.read('test/expected/react/index.html');
+		var expectedInfo = grunt.file.read('test/expected/react/info.json');
 		test.equal(actual, expected, 'test with react , same index.html');
+		test.equal(actualInfo, expectedInfo, 'test with react , same info.json');
 
 		test.done();
 	},
 	react_without_slash: function (test) {
-		test.expect(1);
+		test.expect(2);
 
 		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');
+		var actualInfo = grunt.file.read('test/tmp/react_without_slash/info.json');
 		var expected = grunt.file.read('test/expected/react/index.html');
+		var expectedInfo = grunt.file.read('test/expected/react/info.json');
 		test.equal(actual, expected, 'test with react without slash at the end of path, same index.html');
+		test.equal(actualInfo, expectedInfo, 'test with react , same info.json');
 
 		test.done();
 	},
 	react_wit_multiple_level: function (test) {
-		test.expect(1);
+		test.expect(2);
 
 		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');
+		var actualInfo = grunt.file.read('test/tmp/react_without_slash/info.json');
 		var expected = grunt.file.read('test/expected/react/index.html');
+		var expectedInfo = grunt.file.read('test/expected/react/info.json');
 		test.equal(actual, expected, 'test with react with a multiple level path output, same index.html');
+		test.equal(actualInfo, expectedInfo, 'test with react , same info.json');
 
 		test.done();
 	}
