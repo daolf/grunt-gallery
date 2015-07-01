@@ -55,4 +55,6 @@ var generate = function(originPath, target) {
     console.log('Done with '+success+'sucess and '+failure+'failure(s)');
 };
 
-exports.generate = generate;
+module.exports = {
+    generate : generate
+};

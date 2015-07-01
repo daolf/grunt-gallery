@@ -144,11 +144,13 @@ var extractDependencies = function (rawCode) {
     return result;
 };
 
-exports.generateAst = generateAst;
-exports.extractExamplesFromAst = extractExamplesFromAst;
-exports.extractRawExamples = extractRawExamples;
-exports.extractCleanExamples = extractCleanExamples;
-exports.removeExtension = removeExtension;
-exports.cleanComment = cleanComment;
-exports.extractWithRegexps = extractWithRegexps;
-exports.extractDependencies = extractDependencies;
+module.exports = {
+    generateAst : generateAst,
+    extractExamplesFromAst : extractExamplesFromAst,
+    extractRawExamples : extractRawExamples,
+    extractCleanExamples : extractCleanExamples,
+    removeExtension : removeExtension,
+    cleanComment : cleanComment,
+    extractWithRegexps : extractWithRegexps,
+    extractDependencies : extractDependencies
+};

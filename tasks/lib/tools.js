@@ -76,10 +76,11 @@ function customCopyDir(src,dest) {
 
 
 
-
-exports.testPathDir = testPathDir;
-exports.testPathFile = testPathFile;
-exports.read = read;
-exports.write = write;
-exports.extractJsFromDir = extractJsFromDir;
-exports.customCopyDir = customCopyDir;
+module.exports = {
+    testPathDir : testPathDir,
+    testPathFile : testPathFile,
+    read : read,
+    write : write,
+    extractJsFromDir : extractJsFromDir,
+    customCopyDir : customCopyDir
+};
