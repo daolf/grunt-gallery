@@ -112,7 +112,7 @@ var removeExtension = function (filename) {
  *  Extract information in the code from regexp object
  */
 var extractWithRegexps = function( regExps, rawCode ) {
-    var inherit = "";
+    var inherit = '';
     var inheritRegExp;
     var result = {
         inherit : []

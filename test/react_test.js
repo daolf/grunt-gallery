@@ -37,7 +37,7 @@ exports.module = {
 
 		test.done();
 	},
-	react_without_slash: function (test) {
+	reactWithoutSlash: function (test) {
 		test.expect(2);
 
 		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');
@@ -49,7 +49,7 @@ exports.module = {
 
 		test.done();
 	},
-	react_wit_multiple_level: function (test) {
+	reactWitMultipleLevel: function (test) {
 		test.expect(2);
 
 		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');

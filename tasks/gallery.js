@@ -5,6 +5,8 @@
  * Copyright (c) 2015 Pierre de Wulf
  * Licensed under the MIT license.
  */
+
+/* global JSON */
 'use strict';
 
 module.exports = function (grunt) {
@@ -16,7 +18,7 @@ module.exports = function (grunt) {
         grunt.file.defaultEncoding = 'utf-8';
         
         var path = require('path');
-        var copy_dir = require('copy-dir');
+        var copyDir = require('copy-dir');
         var concat = require('./lib/concatFiles.js');
         var dep = require('./lib/distribDependancies.js');
         var screenShotGenerator = require('./lib/screenShotGenerator.js');
@@ -27,15 +29,15 @@ module.exports = function (grunt) {
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src+'/';
         var template = config.template;
-        var targetPath = config.files.dest+'/'; 
+        var targetPath = config.files.dest+'/';
         var title = config.title || 'Gallery';
         var regExps = config.regexps;
         var jsonPath = targetPath + 'info.json';
         var extractedInformations = [];
         var pathSubDir = ['gallery','css','js','js/comp','iframe','img'];
-
-        grunt.file.delete(targetPath);
-
+        
+        grunt.file.delete(targetPath); // jshint ignore:line
+        /* */
         if (!tools.testPathDir(componentPath,grunt)) {
             grunt.fail.warn(componentPath + ' doesn t exist');
         }
@@ -59,14 +61,14 @@ module.exports = function (grunt) {
         concat.concatFiles(grunt.file.expand(config.dependencies.css), path.join(targetPath, '/css/iframe.css'));
         //copy fonts
         console.log('copying fonts');
-        copy_dir.sync(__dirname+'/../node_modules/bootstrap/fonts/',path.join( targetPath, '/fonts/'));
+        copyDir.sync(__dirname+'/../node_modules/bootstrap/fonts/',path.join( targetPath, '/fonts/'));
         //copy components
         console.log('copying components');
         console.log(componentPath+' -> '+targetPath, '/js/');
         // we extract all component in componentPath and copy them in targetPath+/js/comp
         tools.extractJsFromDir(componentPath,path.join( targetPath, '/js/comp'));
         // copy image from templates
-            tools.customCopyDir(dep.index.img, path.join( targetPath, '/img/'));
+        tools.customCopyDir(dep.index.img, path.join( targetPath, '/img/'));
         //copy image dependancies only if defined
         var images = config.dependencies.images;
         if (images !== undefined) {

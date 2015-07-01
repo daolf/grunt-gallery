@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var copy_dir = require('copy-dir');
+var copyDir = require('copy-dir');
 
 // Test is path dir exist 
 var testPathDir = function(filepath, grunt) {    
@@ -65,12 +65,12 @@ function customCopyDir(src,dest) {
         if (src instanceof Array) {
             for (var i=0; i<src.length; i++) {
                 console.log(src[i]+ ' -> '+dest);
-                copy_dir.sync(src[i],dest);
+                copyDir.sync(src[i],dest);
             }
         }
         else {   
             console.log(src+ ' -> '+dest);
-            copy_dir.sync(src,dest);
+            copyDir.sync(src,dest);
         }
     }
 }

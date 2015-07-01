@@ -47,15 +47,15 @@ module.exports = function (grunt) {
 				template : './views/extComp.jade',
 				dependencies : {
 					js : ['./privateRessources/extjs.git/src3.4.2/adapter/ext/ext-base-debug.js',
-						  './privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
+                          './privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
 					css : './privateRessources/extjs.git/src3.4.2/resources/css/ext-all.css',
 					images : './privateRessources/extjs.git/src3.4.2/resources/images/'
 
 				},
                 regexps : {
                     inherit: {
-                        pattern : "(?:Ext.extend\\()(.*),",
-                        flags : "g"
+                        pattern : '(?:Ext.extend\\()(.*),',
+                        flags : 'g'
                     }
                 }
 			},
@@ -67,11 +67,11 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim.min.js',
-						  './node_modules/react/dist/react-with-addons.min.js'],
+                          './node_modules/react/dist/react-with-addons.min.js'],
 					css : './views/css/customCss.css'
 				}
 			},
-			react_without_slash : {
+			reactWithoutSlash : {
 				files: {
 					src : './publicRessources/react',
 					dest : './test/tmp/react_without_slash'
@@ -79,11 +79,11 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim.min.js',
-						  './node_modules/react/dist/react-with-addons.min.js'],
+                          './node_modules/react/dist/react-with-addons.min.js'],
 					css : './views/css/customCss.css'
 				}
 			},
-			react_multiple_level_path : {
+			reactMultipleLevelPath : {
 				files: {
 					src : './publicRessources/react',
 					dest : './test/tmp/react_multiple/level'
@@ -91,11 +91,11 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim.min.js',
-						  './node_modules/react/dist/react-with-addons.min.js'],
+                          './node_modules/react/dist/react-with-addons.min.js'],
 					css : './views/css/customCss.css'
 				}
 			},
-            react_min_match : {
+            reactMinMatch : {
 				files: {
 					src : './publicRessources/react',
 					dest : './test/tmp/reactMinMatch/'
@@ -103,7 +103,7 @@ module.exports = function (grunt) {
 				template : './views/reactComp.jade',
 				dependencies : {
 					js : ['./node_modules/es5-shim/es5-shim*.js',
-						  './node_modules/react/dist/react-with-addons*.js'],
+                          './node_modules/react/dist/react-with-addons*.js'],
 					css : './views/css/customCs*.css'
 				}
 			}
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
 		nodeunit: {
 			tests: ['test/*_test.js']
 		},
-		jasmine_nodejs: {
+		jasmine_nodejs: { // jshint ignore:line
 			options: {
 				// specNameSuffix: 'spec.js', // also accepts an array
 				helperNameSuffix: 'helper.js',
@@ -146,9 +146,9 @@ module.exports = function (grunt) {
 	grunt.loadTasks('tasks');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 
-	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
+	// Whenever the 'test' task is run, first clean the 'tmp' dir, then run this
 	// plugin's task(s), then test the result.
-	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react', 'gallery:react_without_slash', 'gallery:react_multiple_level_path', 'nodeunit' ]);
+	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react', 'gallery:reactWithoutSlash', 'gallery:reactMultipleLevelPath', 'nodeunit' ]);
 
 	// By default, lint and run all tests.
 	grunt.registerTask('default', ['jshint', 'test']);
