@@ -12,6 +12,9 @@ module.exports = function (grunt) {
 	// load all npm grunt tasks
 	require('load-grunt-tasks')(grunt);
 
+    var persoTitle = function( path, compName) {
+        return 'test'+compName;
+    }
 	// Project configuration.
 	grunt.initConfig({
 		jshint: {
@@ -52,6 +55,28 @@ module.exports = function (grunt) {
 					images : './privateRessources/extjs.git/src3.4.2/resources/images/'
 
 				},
+                regexps : {
+                    inherit: {
+                        pattern : '(?:Ext.extend\\()(.*),',
+                        flags : 'g'
+                    }
+                }
+			},
+            extCustomName : {
+                title : 'Ext gallery',
+				files: {
+					src : './privateRessources/extComp',
+					dest : './test/tmp/extCustomName/'
+				},
+				template : './views/extComp.jade',
+				dependencies : {
+					js : ['./privateRessources/extjs.git/src3.4.2/adapter/ext/ext-base-debug.js',
+                          './privateRessources/extjs.git/src3.4.2/ext-all-debug.js'],
+					css : './privateRessources/extjs.git/src3.4.2/resources/css/ext-all.css',
+					images : './privateRessources/extjs.git/src3.4.2/resources/images/'
+
+				},
+                compNameCallback : persoTitle,
                 regexps : {
                     inherit: {
                         pattern : '(?:Ext.extend\\()(.*),',

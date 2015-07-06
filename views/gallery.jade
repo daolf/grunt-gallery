@@ -15,7 +15,10 @@ html
     row
       div.col-lg-12
         h1
-          | #{name}
+          if customName
+            | #{customName}
+          else
+            | #{name}
     row
       .col-lg-12.col-md-12.col-sm-12.col-xs-12
         a.btn.btn-default.buttonHome(href='../index.html')
