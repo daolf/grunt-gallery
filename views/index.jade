@@ -37,7 +37,10 @@ html
                                     img.img-responsive(src='./img/iframe_'+val.name+'.html.png', onerror="this.src = './img/missing.png'")
                                 a.compName.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='./gallery/'+val.name+'.html')
                                     .col-lg-9.col-md-9.col-sm-9.col-xs-9.compName
-                                        div= val.name
+                                        if val.customName
+                                            div= val.customName
+                                        else
+                                            div= val.name
                                     .col-lg-3.col-md-3.col-sm-3.col-xs-3
                                         form(action='./gallery/'+val.name+'.html', target='_blank')
                                             button.btn.btn-default(type='submit', value='other window', data-toggle='tooltip', title='Open in other window')

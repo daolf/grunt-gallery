@@ -28,6 +28,9 @@ $.ajax({
         
         /* get all comp names*/
         for (var i = 0; i<info.length; i++) {
+            if (info[i].customName) {
+				info[i].name = info[i].customName;
+			}
             compNamesFeeder.push(info[i].name);
             inheritFeeder = inheritFeeder.concat(info[i].inherit);
             dependenciesFeeder = dependenciesFeeder.concat(info[i].dependencies);

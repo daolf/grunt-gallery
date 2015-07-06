@@ -82,6 +82,14 @@ module.exports = function (grunt) {
         };
         extractedInformations = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'),regExps, myParser);
         
+        //We apply callback for custom component name if callback is defined
+        if (config.compNameCallback) {
+            extractedInformations = extractedInformations.map( function (curr) {
+                curr.customName = config.compNameCallback(curr.file, curr.name); 
+                return curr;
+            })
+        }
+        
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
         //We write result in JSON in /target/examples.json

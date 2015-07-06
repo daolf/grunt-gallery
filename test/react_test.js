@@ -40,8 +40,8 @@ exports.module = {
 	reactWithoutSlash: function (test) {
 		test.expect(2);
 
-		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');
-		var actualInfo = grunt.file.read('test/tmp/react_without_slash/info.json');
+		var actual = grunt.file.read('test/tmp/reactWithoutSlash/index.html');
+		var actualInfo = grunt.file.read('test/tmp/reactWithoutSlash/info.json');
 		var expected = grunt.file.read('test/expected/react/index.html');
 		var expectedInfo = grunt.file.read('test/expected/react/info.json');
 		test.equal(actual, expected, 'test with react without slash at the end of path, same index.html');
@@ -49,14 +49,26 @@ exports.module = {
 
 		test.done();
 	},
-	reactWitMultipleLevel: function (test) {
+	reactWithMultipleLevel: function (test) {
 		test.expect(2);
 
-		var actual = grunt.file.read('test/tmp/react_without_slash/index.html');
-		var actualInfo = grunt.file.read('test/tmp/react_without_slash/info.json');
+		var actual = grunt.file.read('test/tmp/reactMultiple/level/index.html');
+		var actualInfo = grunt.file.read('test/tmp/reactMultiple/level/info.json');
 		var expected = grunt.file.read('test/expected/react/index.html');
 		var expectedInfo = grunt.file.read('test/expected/react/info.json');
 		test.equal(actual, expected, 'test with react with a multiple level path output, same index.html');
+		test.equal(actualInfo, expectedInfo, 'test with react , same info.json');
+
+		test.done();
+	},
+    reactWithCustomName: function (test) {
+		test.expect(2);
+
+		var actual = grunt.file.read('test/tmp/reactCustomTitle/index.html');
+		var actualInfo = grunt.file.read('test/tmp/reactCustomTitle/info.json');
+		var expected = grunt.file.read('test/expected/reactCustomTitle/index.html');
+		var expectedInfo = grunt.file.read('test/expected/reactCustomTitle/info.json');
+		test.equal(actual, expected, 'test with react with a custom tilte (callback), same index.html');
 		test.equal(actualInfo, expectedInfo, 'test with react , same info.json');
 
 		test.done();
