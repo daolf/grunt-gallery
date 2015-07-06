@@ -99,7 +99,7 @@ module.exports = function (grunt) {
 			reactWithoutSlash : {
 				files: {
 					src : './publicRessources/react',
-					dest : './test/tmp/react_without_slash'
+					dest : './test/tmp/reactWithoutSlash'
 				},
 				template : './views/reactComp.jade',
 				dependencies : {
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
 			reactMultipleLevelPath : {
 				files: {
 					src : './publicRessources/react',
-					dest : './test/tmp/react_multiple/level'
+					dest : './test/tmp/reactMultiple/level'
 				},
 				template : './views/reactComp.jade',
 				dependencies : {
@@ -131,7 +131,20 @@ module.exports = function (grunt) {
                           './node_modules/react/dist/react-with-addons*.js'],
 					css : './views/css/customCs*.css'
 				}
-			}
+			},
+            reactCustomTitle : {
+                files: {
+                  src : './publicRessources/react',
+                  dest : './test/tmp/reactCustomTitle/'
+                },
+                compNameCallback : persoTitle,
+                template : './views/reactComp.jade',
+                dependencies : {
+                  js : ['./node_modules/es5-shim/es5-shim*.js',
+                        './node_modules/react/dist/react-with-addons*.js'],
+                  css : './views/css/customCs*.css'
+                }
+              }
 		},
 		nodeunit: {
 			tests: ['test/*_test.js']
@@ -173,7 +186,7 @@ module.exports = function (grunt) {
 
 	// Whenever the 'test' task is run, first clean the 'tmp' dir, then run this
 	// plugin's task(s), then test the result.
-	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react', 'gallery:reactWithoutSlash', 'gallery:reactMultipleLevelPath', 'nodeunit' ]);
+	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react', 'gallery:reactWithoutSlash', 'gallery:reactMultipleLevelPath','gallery:reactCustomTitle', 'nodeunit' ]);
 
 	// By default, lint and run all tests.
 	grunt.registerTask('default', ['jshint', 'test']);
