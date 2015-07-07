@@ -1,6 +1,6 @@
 #!/bin/bash
 branch=$TRAVIS_BRANCH
-git config credential.helper "store --file=.git/credentials"
+git config --global credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 echo "on branch $branch"
 version=${branch##*/}
