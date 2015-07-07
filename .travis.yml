@@ -9,6 +9,7 @@ node_js:
 - iojs-v1.0.4
 before_install: npm install -g grunt-cli
 before_script: grunt test
+after_success: ./deploy.sh
 install: npm install
 deploy:
   provider: npm
@@ -18,4 +19,4 @@ deploy:
   on:
     tags: true
     repo: daolf/grunt-gallery
-    branch: master
+    branch: /release.*$/
