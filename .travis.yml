@@ -19,4 +19,4 @@ deploy:
   on:
     tags: true
     repo: daolf/grunt-gallery
-    branch: /release.*$/
+    branch: release*
