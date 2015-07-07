@@ -12,4 +12,4 @@ git merge --no-ff $branch
 echo "git tag $version"
 git tag "$version"
 
-git push --tags deploy master
+git push --tags origin master
