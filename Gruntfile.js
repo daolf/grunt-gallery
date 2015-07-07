@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 
     var persoTitle = function( path, compName) {
         return 'test'+compName;
-    }
+    };
 	// Project configuration.
 	grunt.initConfig({
 		jshint: {
@@ -186,7 +186,8 @@ module.exports = function (grunt) {
 
 	// Whenever the 'test' task is run, first clean the 'tmp' dir, then run this
 	// plugin's task(s), then test the result.
-	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react', 'gallery:reactWithoutSlash', 'gallery:reactMultipleLevelPath','gallery:reactCustomTitle', 'nodeunit' ]);
+	grunt.registerTask('test', ['clean', 'jasmine_nodejs', 'gallery:react', 'gallery:reactWithoutSlash',
+                                'gallery:reactMultipleLevelPath','gallery:reactCustomTitle', 'nodeunit' ]);
 
 	// By default, lint and run all tests.
 	grunt.registerTask('default', ['jshint', 'test']);

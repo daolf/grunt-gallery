@@ -85,9 +85,9 @@ module.exports = function (grunt) {
         //We apply callback for custom component name if callback is defined
         if (config.compNameCallback) {
             extractedInformations = extractedInformations.map( function (curr) {
-                curr.customName = config.compNameCallback(curr.file, curr.name); 
+                curr.customName = config.compNameCallback(curr.file, curr.name);
                 return curr;
-            })
+            });
         }
         
         console.log('Extraction done');
