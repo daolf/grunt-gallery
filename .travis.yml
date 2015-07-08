@@ -14,6 +14,10 @@ deploy:
   on:
     repo: daolf/grunt-gallery
     branch: release*
+before_deploy:
+  - chmod ugo+x deploy.sh
+  - '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || ./deploy.sh'
 env:
   global:
+  - GH_REF: github.com/daolf/grunt-gallery.git
     secure: QqPOhF1iRWydo4FRPjDS+8ieznRaUJOYWysHpvlmoSGz9EgCWCTAQX3RYDTS7svoImClIfVay2h1Bl/2dneAPEyXBqTtTu8VFBJ6uFaBfLPVw63VpFMvfxXRpqnQXzr/oThBb3qGVw2rnFwdcqAH5JK6Zy3Nn/E4pmoLx7n1JcFJaGsn3kEAjrjaeZmoHUEm3gcOHBgGDzcqKi3Hcsh0Eq3YTw6BP+4asVURGPgIQc/AaYnVmCMh+eojF/fTUvTMQ7gEq6fK+fhfCkkdlty2iw7WMXe0FPRf/LuMvP4P/NjciWZG/mK8H8Zf6DOS1o4ghD1vfwEhnBYUsawiIX7njR58zI//QhH0pbsJ3hgoaU+BDqzZo5pMAyZmuNIrlYhqIwHeHBzwt37/S5VsYIi1PAxeDFjLWE5yfx1pEhc7gUJrouo4HG2uPg4lScM4+ixR1kqvPpiSNPu7XLabq6PAHj2l6cpQLahcelIhzmBkUYkwwRGsH+LMJWgfcU8Q1EUTZ2IP4/B55ypoOoVz85opztv42ttatim1MOFayD1O2Tm02XKllZwJroZG4Z5QDGpbjAkfsa5xzYJZQAX2/pRjKPOdb86FbtwpoChZJKf5gD/+vAlCnWGSlwlyo0gom4sN9sSDgukQIzYHrCu1Ff+fFjSDJ3EgGoe1ppuDPmuRFwo=
