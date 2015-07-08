@@ -9,7 +9,7 @@ version=${branch##*/}
 echo "Cloning master branch..."
  
 # Hide output since we use an access token here
-git clone "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" ../goodDepot
+git clone "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" ../goodDepot > /dev/null 2>&1 || exit 1
 cd ../goodDepot
 echo "Committing and pushing to GH"
 git config user.name "daolf"
@@ -27,7 +27,7 @@ git add -A .
 git commit --allow-empty -m "Travis $TRAVIS_BUILD_NUMBER" || exit 1
  
 # Push to branch
-git push --tags origin master 
+git push --tags origin master > /dev/null 2>&1 || exit 1
  
 echo "Pushed deployment successfully"
 exit 0
