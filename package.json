@@ -19,8 +19,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "3.3.*",
-    "cli-color": "1.0.*",
+    "bootstrap": "3.3.5",
+    "cli-color": "~1.0.0",
     "codemirror": "5.3.*",
     "copy-dir": "0.0.7",
     "es5-shim": "4.1.*",
