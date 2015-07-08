@@ -19,7 +19,7 @@ git checkout $branch
 echo "git checkout master"
 git checkout master
 echo "git merge --no-ff $branch"
-git merge --no-ff --on-edit $branch
+git merge --no-ff --no-edit $branch
 echo "git tag $version"
 git tag $version
 # Commit changes, allowing empty changes (when unchanged)
