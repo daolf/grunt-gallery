@@ -9,19 +9,11 @@ version=${branch##*/}
 echo "Cloning master branch..."
  
 # Hide output since we use an access token here
-git clone "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" 
-echo 'first ls'
-ls
-
-
-
+git clone "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" ../goodDepot
+cd ../goodDepot
 echo "Committing and pushing to GH"
- 
 git config user.name "Travis-CI"
 git config user.email "travis@grunt-gallery.com"
- 
-git fetch
-git branch
 echo "git checkout master"
 git checkout master
 echo "git merge --no-ff $branch"
