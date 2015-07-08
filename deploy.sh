@@ -10,6 +10,9 @@ echo "Cloning master branch..."
  
 # Hide output since we use an access token here
 git clone "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" 
+echo 'first ls'
+ls
+
 
 
 echo "Committing and pushing to GH"
