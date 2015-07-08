@@ -9,7 +9,7 @@ version=${branch##*/}
 echo "Cloning master branch..."
  
 # Hide output since we use an access token here
-git clone -b master "https://${GH_TOKEN}@${GH_REF}" 
+git clone -b master "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" 
 
 
 echo "Committing and pushing to GH"
