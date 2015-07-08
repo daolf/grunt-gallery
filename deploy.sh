@@ -14,6 +14,8 @@ cd ../goodDepot
 echo "Committing and pushing to GH"
 git config user.name "Travis-CI"
 git config user.email "travis@grunt-gallery.com"
+echo "git checkout $branch"
+git checkout $branch
 echo "git checkout master"
 git checkout master
 echo "git merge --no-ff $branch"
