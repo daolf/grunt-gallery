@@ -1,0 +1,63 @@
+doctype html
+html
+    head
+        meta(http-equiv="content-type", content="text/html; charset=UTF-8")
+        link(rel='stylesheet', type='text/css', href='./css/index.css')
+    title Home
+    |         
+    body
+        div.container-fluid
+            div.row
+                div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    h1= title
+            div.row.searchRow
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    br                   
+                    .input-group#scrollable-dropdown-menu
+                        input.form-control.form-search.typeahead(type='text', placeholder='Search', aria-describedby='basic-addon2', data-provided="typeahead")
+                        |                         
+                        span#basic-addon2.input-group-addon
+                            i.glyphicon.glyphicon-search
+                    ul.nav.nav-tabs(role='tablist')
+                        li.active(role='presentation')
+                            a#nameSearch(aria-controls='Name', role='tab', data-toggle='tab') Name
+                                span
+                        li(role='presentation')
+                            a#inheritSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Inherit
+                                span
+                        li(role='presentation')
+                            a#dependenciesSearch(aria-controls='fullCode', role='tab', data-toggle='tab') Dependencies
+                                span
+            div.row
+                div.galleryContainer.container-fluid
+                    each val in data
+                        div.col-lg-4.col-md-4.col-sm-6.col-xs-6.thumbnail
+                            div.thumbnailContainer
+                                a.compPict(href='./gallery/'+val.name+'.html') 
+                                    img.img-responsive(src='./img/iframe_'+val.name+'.html.png', onerror="this.src = './img/missing.png'")
+                                a.compName.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='./gallery/'+val.name+'.html')
+                                    .col-lg-9.col-md-9.col-sm-9.col-xs-9.compName
+                                        if val.customName
+                                            div= val.customName
+                                        else
+                                            div= val.name
+                                    .col-lg-3.col-md-3.col-sm-3.col-xs-3
+                                        form(action='./gallery/'+val.name+'.html', target='_blank')
+                                            button.btn.btn-default(type='submit', value='other window', data-toggle='tooltip', title='Open in other window')
+                                                span.glyphicon.glyphicon-new-window
+        div#body
+        script(type='text/javascript', src='./js/index.js')
+        script(type='text/javascript')
+            | var menu = $('.searchRow');
+            | var origOffsetY = menu.offset().top;
+            | 
+            | function scroll() {
+            |     if ($(window).scrollTop() >= origOffsetY) {
+            |         menu.addClass('navbar-fixed-top container-fluid');
+            |     } else {
+            |         menu.removeClass('navbar-fixed-top container-fluid');
+            |     }
+            | }
+            | 
+            | document.onscroll = scroll;
+            | $('.compName').quickfit({ max : 24});

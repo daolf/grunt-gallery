@@ -1,0 +1,177 @@
+h1 {
+    text-align: center;
+    font-size: 40pt;
+}
+
+.galleryContainer {
+    background: grey;
+    z-index: inherit;
+}
+
+.row {
+}
+
+.searchRow {
+    background-color: white
+}
+
+.nav-tabs {
+    border : 0;
+    height: 50px;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border: 0;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.nav-tabs>li.active>a>span {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: dimgrey;
+
+    transition: all 0.5s;
+}
+
+.nav-tabs>li.active>a {
+    font-weight: 600
+}
+
+.nav-tabs>li>a {
+    color: dimgray;
+    border : 0;
+    margin : 0px;
+    display: block;
+    cursor:pointer;
+}
+
+.nav-tabs>li>a:hover {
+    background-color: #fff;
+}
+
+.thumbnail {
+    background-color: grey;
+    height: 330px;
+    padding: 2%;
+    overflow: hidden;
+    margin: 0px;
+    border: 0px;
+    border-radius: 0px;
+}
+
+.thumbnailContainer {
+    -webkit-transition: all 0.5s ease; /* Safari and Chrome */
+    -moz-transition: all 0.5s ease; /* Firefox */
+    -o-transition: all 0.5s ease; /* IE 9 */
+    -ms-transition: all 0.5s ease; /* Opera */
+    transition: all 0.5s ease;
+    height: 100%
+}
+
+.img-responsive {
+    height: 240px;
+    max-height: 240px;
+    width: 300px;
+    max-width: 300px;
+    
+}
+
+.thumbnailContainer:hover {
+    -webkit-transform:scale(1.10); /* Safari and Chrome */
+    -moz-transform:scale(1.10); /* Firefox */
+    -ms-transform:scale(1.10); /* IE 9 */
+    -o-transform:scale(1.10); /* Opera */
+    transform:scale(1.10);
+    text-decoration: none;
+}
+
+.compName {
+    line-height: 40pt;
+    text-align: center;
+    font-size: 24px;
+    color: whitesmoke;
+}
+
+.compName:hover {
+    color:whitesmoke;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+/* For typeaheadjs bootstrap integration*/
+
+
+span.twitter-typeahead {
+    width: 100%;
+}
+.input-group span.twitter-typeahead {
+    display: block !important;
+}
+.input-group span.twitter-typeahead .tt-dropdown-menu {
+    top: 32px !important;
+}
+.input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
+    top: 44px !important;
+}
+.input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
+    top: 28px !important;
+}
+
+.tt-query { /* UPDATE: newer versions use tt-input instead of tt-query */
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border: 1px solid transparent;
+    border-radius:4px;
+    color: #999;
+}
+     
+.tt-menu { /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+    width: 422px;
+    margin-top: 35px;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    display: block;
+    overflow-y: auto;
+    max-height: 200px;
+}
+.tt-highlight {
+    font-weight: 700;
+    color: black;
+}
+.tt-suggestion {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+
+.tt-suggestion.tt-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+    margin: 0;
+}

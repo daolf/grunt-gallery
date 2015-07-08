@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script src="../js/gallery.js"></script>
+		<link rel="stylesheet" href="../css/gallery.css">
+		<title>appReact</title>
+		<script type="text/javascript">
+			var refreshIframe = function() {
+			    var iframe = document.getElementById('iframe');
+			    iframe.src = iframe.src;
+			}
+			
+		</script>
+	</head>
+	<body>
+		<row>
+			<div class="col-lg-12">
+				<h1>testappReact
+				</h1>
+			</div>
+		</row>
+		<row>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><a href="../index.html" class="btn btn-default buttonHome"><span aria-hidden="true" class="glyphicon glyphicon-home"></span>                            <span> Home</span>                        </a>
+				<div class="btn-group"><a href="../iframe/iframe_appReact.html" target="_blank" class="btn btn-default"><span aria-hidden="true" class="glyphicon glyphicon-console"></span>                                <span> Debug</span>                            </a>
+					<button onclick="refreshIframe()" class="btn btn-default btnRefresh"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span>                                <span> Refresh Component</span></button>
+				</div><br />
+				<br />
+			</div>
+		</row>
+		<row>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 iframeContainer">
+				<iframe src="../iframe/iframe_appReact.html" id="iframe"></iframe>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelsCodeMirror">
+				<ul role="tablist" class="nav nav-tabs">
+					<li role="presentation" class="active"><a id="tabExample0" href="#example0" aria-controls="Example0" role="tab" data-toggle="tab">Example</a></li>
+					<li role="presentation"><a id="tabFullCode" href="#fullCode" aria-controls="fullCode" role="tab" data-toggle="tab">Full code
+							<button style="cursor:pointer" class="btn btn-default btnNewWindow"><span class="glyphicon glyphicon-new-window"></span></button></a></li>
+				</ul>
+				<div class="tab-content">
+					<div role="tabpanel" id="example0" class="tab-pane fade in active">
+						<textarea id="exCodeTx0">React.render(
+React.createElement(MenuExample, {items:  ['Home', 'Services', 'About', 'Contact us'] }),
+document.body
+);</textarea>
+					</div>
+					<div id="fullCode" role="tabpanel" class="tab-pane fade">
+						<textarea id="fullCodeTx"></textarea>
+					</div>
+				</div>
+			</div>
+		</row>
+		<script type="text/javascript">
+			// Loading full code of component
+			var fullData;
+			$.ajax({
+			       url : ".././js/comp/appReact.js",
+			       dataType: "text",
+			       success : function (data) {
+			           fullData = data;
+			       }
+			    });
+			
+			/*tanks to Marijn Haverbeke */
+			var indentAll = function(cm) { 
+			    var last = cm.lineCount(); 
+			    cm.operation(function() { 
+			        for (var i = 0; i < last; ++i) cm.indentLine(i); 
+			    }); 
+			}; 
+			
+			var config = {
+			    mode:  "javascript",
+			    lineNumbers: true
+			};
+			var myCodeMirrorFull;
+			var myCodeMirrorEx0 = CodeMirror.fromTextArea(document.getElementById('exCodeTx0'), config);
+			indentAll(myCodeMirrorEx0);
+			$('#tabExample0').on('shown.bs.tab', function (e) {
+			    if (myCodeMirrorEx0 instanceof CodeMirror ) {
+			        myCodeMirrorEx0.refresh();
+			    } else {
+			        indentAll(myCodeMirrorEx0);
+			    }
+			}) 
+			
+			$('#tabFullCode').on('shown.bs.tab', function (e) {
+			    if (myCodeMirrorFull instanceof CodeMirror ) {
+			        myCodeMirrorFull.refresh();
+			    } else {
+			        $("#fullCodeTx").text(fullData);
+			        myCodeMirrorFull = CodeMirror.fromTextArea(document.getElementById('fullCodeTx'), config);
+			    }
+			})
+			$('.btnNewWindow').click( function () {
+			    var windowFullCode = window.open("../js/comp/appReact.js", "wFormx", "width=800,height=600,location=no,menubar=no,status=no,titilebar=no,resizable=no,");
+			    var fullCode = document.getElementById('fullCodeTx');
+			    windowFullCode.onload = function() {
+			        console.log('yolo');
+			    }
+			})
+		</script>
+	</body>
+</html>

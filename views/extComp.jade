@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        meta(http-equiv="content-type", content="text/html; charset=UTF-8")
+        title #{name}
+        |         
+        link(rel='stylesheet', type='text/css', href='../css/iframe.css')
+        |         
+        // ENDLIBS
+        // Component
+    body
+        button#button-ct
+    script(type='text/javascript', src='../js/iframe.js')
+    script(type='text/javascript', src='../'+file)
+    each ex in example
+      script(type='text/javascript')
+          | Ext.onReady( function() {
+          | #{ex} 
+          | });

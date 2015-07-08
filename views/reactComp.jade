@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        meta(http-equiv="content-type", content="text/html; charset=UTF-8")
+        title #{name}
+        |         
+        link(rel='stylesheet', type='text/css', href='../css/iframe.css')
+        script(type='text/javascript', src='../js/iframe.js')
+        // LIBS
+        // Component
+        script(type='text/javascript', src='../'+file)
+    body
+        h1
+            | #{name}
+        div#body
+        button#button-ct
+    script(type='text/javascript')
+        | #{example} 
+
