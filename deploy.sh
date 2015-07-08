@@ -16,20 +16,27 @@ git config user.name "daolf"
 git config user.email "pierredewulf31@gmail.com"
 echo "git checkout $branch"
 git checkout $branch
+
+echo "git checkout develop"
+git checkout develop
+echo "git merge --no-ff $branch"
+git merge --no-ff --no-edit $branch
+
 echo "git checkout master"
 git checkout master
 echo "git merge --no-ff $branch"
 git merge --no-ff --no-edit $branch
+
 echo "git tag $version"
 git tag $version
 # Commit changes, allowing empty changes (when unchanged)
 git add -A .
 git commit --allow-empty -m "Travis $TRAVIS_BUILD_NUMBER" || exit 1
- 
- echo 'show repo'
- git remote show origin
 # Push to branch
 git push --tags origin master > /dev/null 
+
+echo "remove release branch"
+git push origin :$branch
  
 echo "Pushed deployment successfully"
 exit 0

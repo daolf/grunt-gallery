@@ -5,7 +5,9 @@ before_install: npm install -g grunt-cli
 before_script: grunt test
 install: npm install
 branches:
-  only: /^release.*$/
+  only: 
+    - /^release.*$/
+    - master
 deploy:
   provider: npm
   email: pjr.dewulf@gmail.com
