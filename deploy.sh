@@ -10,6 +10,7 @@ echo "Cloning master branch..."
  
 # Hide output since we use an access token here
 git clone -b master "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" 
+git fetch
 
 
 echo "Committing and pushing to GH"
@@ -17,9 +18,12 @@ echo "Committing and pushing to GH"
 git config user.name "Travis-CI"
 git config user.email "travis@grunt-gallery.com"
  
+echo "git checkout master"
 git checkout master
+echo "git merge --no-ff $branch)"
 git merge --no-ff $branch
 echo "git tag $version"
+git tag $version
 # Commit changes, allowing empty changes (when unchanged)
 git add -A .
 git commit --allow-empty -m "Travis $TRAVIS_BUILD_NUMBER" || exit 1
