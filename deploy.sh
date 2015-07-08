@@ -33,10 +33,10 @@ git tag $version
 git add -A .
 git commit --allow-empty -m "Travis $TRAVIS_BUILD_NUMBER" || exit 1
 # Push to branch
-git push --tags origin master > /dev/null 
+git push --tags origin master > /dev/null > /dev/null 2>&1 || exit 1
 
 echo "remove release branch"
-git push origin :$branch
+git push origin :$branch > /dev/null 2>&1 || exit 1
  
 echo "Pushed deployment successfully"
 exit 0
