@@ -1,12 +1,17 @@
 language: node_js
 node_js:
 - '0.12'
-- '0.11'
-- iojs
-- iojs-v1.0.4
 before_install: npm install -g grunt-cli
 before_script: grunt test
 install: npm install
+deploy:
+  provider: npm
+  email: pjr.dewulf@gmail.com
+  api_key:
+    secure: l22ns2DLoHq9mgx4VkGEY7MYbtxl6nwFe7vJQt2NyTu0sSCIXCHHZYuBjv+VZeaHaRs6tFRSpffQNsiv5CB4YJbRMQQtSReN1A19EUf5p509acOf0Z1M31DSU7JcQyUZ/J8z3dUzpw3RuVOhqkZoNmMngnW+noRGamWQyZJEzpaR7pMWtWGUFQwgMqrMxX8jleG5l9r+I5m77zbVwcKgxeCa62rKvC23wJriBh4iql+obYG4aBM8ySMPXvtYJ9j/B9pPUelM0xMXfqLEvPgzOqv8eWXzNOwdZcu3S92h/j4TBULVIxvm11z+gObXcrngjbWErZADrdX8PRTEDRd4vWHwf0NOMfX9awXu87NutZ1SGxAPdU9SV1HjO5ylIH97Ol72fQb8EqpSmertCUW0LbgDW6Xh7cme3Yq/44tmXARVsIJrG0VWr25B9GXMYz8EnkmbSu/Ez+F9gjWp+YUr4QjXpViSjtymOfNQPCMMshlhlmXCiN1+k+xaEzvsC7Ob4VXQOaBQLDCwwNkcSzfGUieWcgl3Dj243T0Bjt7MJ5E+7NR36IQYmOJ6rbim9PFIbGyEjqvPYKkznFRwfl/5e7Imbo4EabvUQ3B6S+3nY+kEQHxqv12WuhkNeD9quqG5UlOt/hi39p7M1F0JH6Tc9ifDTf3QiDDAuhTafaeHSb4=
+  on:
+    repo: daolf/grunt-gallery
+    branch: release*
 env:
   global:
     secure: QqPOhF1iRWydo4FRPjDS+8ieznRaUJOYWysHpvlmoSGz9EgCWCTAQX3RYDTS7svoImClIfVay2h1Bl/2dneAPEyXBqTtTu8VFBJ6uFaBfLPVw63VpFMvfxXRpqnQXzr/oThBb3qGVw2rnFwdcqAH5JK6Zy3Nn/E4pmoLx7n1JcFJaGsn3kEAjrjaeZmoHUEm3gcOHBgGDzcqKi3Hcsh0Eq3YTw6BP+4asVURGPgIQc/AaYnVmCMh+eojF/fTUvTMQ7gEq6fK+fhfCkkdlty2iw7WMXe0FPRf/LuMvP4P/NjciWZG/mK8H8Zf6DOS1o4ghD1vfwEhnBYUsawiIX7njR58zI//QhH0pbsJ3hgoaU+BDqzZo5pMAyZmuNIrlYhqIwHeHBzwt37/S5VsYIi1PAxeDFjLWE5yfx1pEhc7gUJrouo4HG2uPg4lScM4+ixR1kqvPpiSNPu7XLabq6PAHj2l6cpQLahcelIhzmBkUYkwwRGsH+LMJWgfcU8Q1EUTZ2IP4/B55ypoOoVz85opztv42ttatim1MOFayD1O2Tm02XKllZwJroZG4Z5QDGpbjAkfsa5xzYJZQAX2/pRjKPOdb86FbtwpoChZJKf5gD/+vAlCnWGSlwlyo0gom4sN9sSDgukQIzYHrCu1Ff+fFjSDJ3EgGoe1ppuDPmuRFwo=
