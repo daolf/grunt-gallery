@@ -26,6 +26,8 @@ git tag $version
 git add -A .
 git commit --allow-empty -m "Travis $TRAVIS_BUILD_NUMBER" || exit 1
  
+ echo 'show repo'
+ git remote show origin
 # Push to branch
 git push --tags origin master > /dev/null 
  
