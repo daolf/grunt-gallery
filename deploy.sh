@@ -12,8 +12,8 @@ echo "Cloning master branch..."
 git clone "https://${GH_TOKEN}@github.com/daolf/grunt-gallery.git" ../goodDepot
 cd ../goodDepot
 echo "Committing and pushing to GH"
-git config user.name "Travis-CI"
-git config user.email "travis@grunt-gallery.com"
+git config user.name "daolf"
+git config user.email "pierredewulf31@gmail.com"
 echo "git checkout $branch"
 git checkout $branch
 echo "git checkout master"
