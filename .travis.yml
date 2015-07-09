@@ -14,6 +14,7 @@ deploy:
     secure: necIyqg8WDduhyNCJKZRcKD2pxOEJ1ZmLicYFA+yrQcL7XJX8wZXFKgMbcZ2EOElNxX5u5S67+B/ctjmdXIHNz8kvnYa4EL4w1rqjz3RZz7YFWvdfg7jjcM06gBRyR19GkeMJtVjixYtrkms+cIptIZ09vCumzXVnl6jWdM093Ft+gDy9Q1tsv8y7WhEp2ZuWP6X+g4SreKfB9zIPNJOY93oQN8HbUWKSAAvX2vJkvtr2itCwZEe8sh7ny5AhIffJ/9hgBnwc8d50JdAAQaryOmZPQSXMUvXw5KPNCeZR+E94K+0dURvU4jCM9IsqCVRo1d+rellscvgaqgK0dxCyOfBY60BKQwV5qqdAebCXTWAH0sxFRuyPCG7LW2eJwnF8dDGDxEMnMK5kM0ul9adFHp9tA/Rc/d985cefWo5a2ZiNg72DVt99w7vmHRHiuyBlvrQFrEHdFTHYxloOLcqk+N+xrE0To7J+4y5k8DKUzAnEK1RqnK/iwxHpM3bu9XWRmFVmV2gT3KLrucIbI5aQgngsw+pOLYmq5gvhJJLZaLUxvl8a71x+/AnaOniv3BvdNyFZUNKIuZlJqqF3bWGS39hyLmTDEkr+n+Di6kSF4MHMJ2zNngqsG8lXLbJ8xjiYj48nRHGAf6x+rpIz+fATWvDnvOnUfYxlOLnUO8hyqY=
   on:
     repo: daolf/grunt-gallery
+    branch: /^release.*$/
 after_deploy:
   - chmod ugo+x deploy.sh
   - '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || ./deploy.sh'
