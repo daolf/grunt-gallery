@@ -2,6 +2,8 @@
 
 > Generate a web gallery presenting graphic components from various lib (ExtJS, React, etc...)
 
+[![Build Status](https://travis-ci.org/daolf/grunt-gallery.svg?branch=release%2Fv0.0.1)](https://travis-ci.org/daolf/grunt-gallery)
+
 ## Disclaimer
 
 This plug-in was developed during a 3 months intership at [Lyra Network](http://www.lyra-network.com/)
@@ -57,21 +59,21 @@ In your project's Gruntfile, add a section named `gallery` to the data object pa
 ```
 ### Title
 
-The future title of the gallery, defaul : 'Gallery'
+The future title of the gallery, default : 'Gallery'
 
 ### Files
 
 #### Files.src
 
-The directory containing all the component you want to generate gallery from. Be careful, only put one and only onde directory, multiple source dir is currently not supported.
+The directory containing all the component you want to generate gallery from. Be careful, only put one and only one directory, multiple source dir is currently not supported.
 
 #### Files.dest
 
-Directory you to put the gallery in.
+Directory you want to put the gallery in.
 
 ### Template
 
-The jade template where each component will be rendered, it is important to note that in order to correctly render component for some lib you will have to slightly modify the folowing template by changing instantation js code.
+The jade template where each component will be rendered, it is important to note that in order to correctly render component for some lib you will have to slightly modify the folowing template by changing instantiation js code.
 
 Example
 
@@ -96,9 +98,9 @@ Example
                 | });
 ```
 
-### Dependancies
+### Dependencies
 
-Write here all the dependancies of your templates, all those files will be later concat in a single file.
+Write here all the dependencies of your templates, all those files will be later concat in a single file.
 
 
 ### CompNameCallback
