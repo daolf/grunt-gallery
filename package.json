@@ -2,7 +2,7 @@
   "name": "grunt-gallery",
   "license": "MIT",
   "copyright": "PW for Lyra Network",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)",
   "repository": "daolf/grunt-gallery",
   "author": {
