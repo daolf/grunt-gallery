@@ -4,10 +4,10 @@
   "copyright": "PW for Lyra Network",
   "version": "0.0.2",
   "description": "Generate a web gallery presenting graphic components from various lib (Ext, React, etc...)",
-  "repository": "git@git.lbg.office.lyra:pdewulf/grunt-gallery.git",
+  "repository": "daolf/grunt-gallery",
   "author": {
     "name": "Pierre de Wulf",
-    "email": "pierredewulf\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D.dewulf\u001b[2~@lyra-network.com",
+    "email": "pjr.dewulf@gmail.com",
     "url": ""
   },
   "keywords": [
