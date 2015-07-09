@@ -2,7 +2,7 @@
 
 > Generate a web gallery presenting graphic components from various lib (ExtJS, React, etc...)
 
-[![Build Status](https://travis-ci.org/daolf/grunt-gallery.svg?branch=release%2Fv0.0.1)](https://travis-ci.org/daolf/grunt-gallery) [![Codacy Badge](https://www.codacy.com/project/badge/25668a9997e4447b851dd0c6509eb196)](https://www.codacy.com/app/pierredewulf31/grunt-gallery)
+[![Build Status](https://travis-ci.org/daolf/grunt-gallery.svg?branch=release%2Fv0.0.1)](https://travis-ci.org/daolf/grunt-gallery) [![Codacy Badge](https://www.codacy.com/project/badge/25668a9997e4447b851dd0c6509eb196)](https://www.codacy.com/app/pierredewulf31/grunt-gallery) [![Code Climate](https://codeclimate.com/github/daolf/grunt-gallery/badges/gpa.svg)](https://codeclimate.com/github/daolf/grunt-gallery)
 
 ## Disclaimer
 
