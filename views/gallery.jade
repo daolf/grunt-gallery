@@ -38,6 +38,12 @@ html
             span  Refresh Component
         | <br />
         | <br />
+    if info.length > 0
+      row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .panel.panel-default
+            .panel-body.bg-info
+              | #{info}
     row
       if dependencies.length > 0 || inherit.length > 0
         div.col-lg-9.col-md-9.col-sm-9.col-xs-9.iframeContainer
