@@ -80,13 +80,12 @@ function customCopyDir(src,dest) {
  * @param extracted information
  * @return sorted information
  */
-function sortInformations( extractedInformation) {
-    extractedInformation.map( function(curr) {
+function sortInformations( extractedInformations ) {
+    return extractedInformations.map( function(curr) {
         curr.dependencies = curr.dependencies.sort();
         curr.inherit = curr.inherit.sort();
         return curr;
     });
-    return extractedInformation;
 }
 
 
