@@ -2,8 +2,8 @@
 
 /* reading JSON files*/
 $.ajax({
-    url : "./info.json",
-    dataType: "text",
+    url : './info.json',
+    dataType: 'text',
     success: function(data) {
         var info = JSON.parse(data);
         info.filter(function (elem) {
@@ -15,7 +15,7 @@ $.ajax({
         var inheritFeeder = [];
         var dependenciesFeeder = [];
         var myForm;
-        var criteria = "NAME";
+        var criteria = 'NAME';
         
         var removeDuplicate = function (array) {
             return array.reduce(function(accum, current) {
@@ -90,6 +90,10 @@ $.ajax({
          */
         var displayComponents = function (compList) {
             var compName;
+			var found = false;
+			if ($('#emptyResult')) {
+				$('#emptyResult').remove();
+			}
             for (var i = 0; i<allMyComp.length; i++) {
                 // very very ugly !!!
                 compName = allMyComp.eq(i).children().eq(0).children().eq(1).children().eq(0).children().eq(0).text();
@@ -100,20 +104,26 @@ $.ajax({
                 /* else we display it*/
                 else {
                     allMyComp.eq(i).css('display','block');
-                }
+					found = true;
+				}
             }
+			// if no comp to display we explicitely say it
+			if(!found) {
+				$('.galleryContainer').append('<h2 id=\'emptyResult\'> Sorry, no result for <strong>\'' + $('.form-search').val() + '\'</strong> </h2>');
+			}
+			
         };
 
         var search = function (data) {
             var compList;
             switch (criteria) {
-                case "NAME" :
+                case 'NAME' :
                     compList = extractCompNamesFromNamesSearch(data);
                     break;
-                case "INHERIT" :
+                case 'INHERIT' :
                     compList = extractCompNamesFromInheritSearch(data);
                     break;
-                case "DEPENDENCIES" :
+                case 'DEPENDENCIES' :
                     compList = extractCompNamesFromDependenciesSearch(data);
                     break;
             }
@@ -154,12 +164,12 @@ $.ajax({
 		var config = {
             hint: false,
             highlight: true,
-            minLength: 1,
+            minLength: 1
         };
         $('#scrollable-dropdown-menu .typeahead').typeahead(config,{
             name: 'compNames',
             limit: 100,
-            source: substringMatcher(compNamesFeeder),
+            source: substringMatcher(compNamesFeeder)
         });
 
         $('.form-search').keyup(function (e) {
@@ -190,34 +200,34 @@ $.ajax({
         });
 
         $('#nameSearch').on('shown.bs.tab', function () {
-            criteria = "NAME";
+            criteria = 'NAME';
 			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
 			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
 				name: 'compNames',
 				limit: 100,
-				source: substringMatcher(compNamesFeeder),
+				source: substringMatcher(compNamesFeeder)
 			});
             searchFromValueInForm();
         });
 
         $('#inheritSearch').on('shown.bs.tab', function () {
-            criteria = "INHERIT";
+            criteria = 'INHERIT';
 			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
 			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
 				name: 'inherit',
 				limit: 100,
-				source: substringMatcher(inheritFeeder),
+				source: substringMatcher(inheritFeeder)
 			});
             searchFromValueInForm();
         });
 
         $('#dependenciesSearch').on('shown.bs.tab', function () {
-            criteria = "DEPENDENCIES";
+            criteria = 'DEPENDENCIES';
 			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
 			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
 				name: 'compDependencies',
 				limit: 100,
-				source: substringMatcher(dependenciesFeeder),
+				source: substringMatcher(dependenciesFeeder)
 			});
             searchFromValueInForm();
         });

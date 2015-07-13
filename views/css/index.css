@@ -98,7 +98,9 @@ h1 {
     text-decoration: none;
 }
 
-
+#emptyResult {
+	text-align : center;
+}
 
 
 
