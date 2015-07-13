@@ -2,7 +2,7 @@
 
 > Generate a web gallery presenting graphic components from various lib (ExtJS, React, etc...)
 
-[![Build Status](https://travis-ci.org/daolf/grunt-gallery.svg?branch=release%2Fv0.0.1)](https://travis-ci.org/daolf/grunt-gallery) [![Codacy Badge](https://www.codacy.com/project/badge/25668a9997e4447b851dd0c6509eb196)](https://www.codacy.com/app/pierredewulf31/grunt-gallery)
+[![Build Status](https://travis-ci.org/daolf/grunt-gallery.svg?branch=release%2Fv0.0.1)](https://travis-ci.org/daolf/grunt-gallery) [![Codacy Badge](https://www.codacy.com/project/badge/25668a9997e4447b851dd0c6509eb196)](https://www.codacy.com/app/pierredewulf31/grunt-gallery) [![Code Climate](https://codeclimate.com/github/daolf/grunt-gallery/badges/gpa.svg)](https://codeclimate.com/github/daolf/grunt-gallery)
 
 ## Disclaimer
 
@@ -25,8 +25,23 @@ grunt.loadNpmTasks('grunt-gallery');
 
 ## The "gallery" task
 
-### Overview
+### Documenting your components
+
+All you have to do is add tag within bloc comment like javadoc. 
+
+WARNING : only put thos tag in bloc comment (/\* */) no single comment line.
+
+Currently this plug-in support two tags :
+- @example (instantion code for your component)
+- @info (complementary information)
+
+Others informations (inherit, dependencies, ... ) are directly extracted from the code.
+
+
+### Generating the gallery
 In your project's Gruntfile, add a section named `gallery` to the data object passed into `grunt.initConfig()`.
+
+example :
 
 ```js
     var persoTitle = function( path, compName) {

@@ -20,7 +20,7 @@ iframe {
 .btnRefresh:focus {
     border-color: #ccc;
     background-color: #fff;
-    outline:0px !important;
+    outline:0 !important;
     -webkit-appearance:none;
 }
 

@@ -8,8 +8,6 @@ h1 {
     z-index: inherit;
 }
 
-.row {
-}
 
 .searchRow {
     background-color: white
@@ -43,7 +41,7 @@ h1 {
 .nav-tabs>li>a {
     color: dimgray;
     border : 0;
-    margin : 0px;
+    margin : 0;
     display: block;
     cursor:pointer;
 }
@@ -57,9 +55,9 @@ h1 {
     height: 330px;
     padding: 2%;
     overflow: hidden;
-    margin: 0px;
-    border: 0px;
-    border-radius: 0px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
 }
 
 .thumbnailContainer {
@@ -100,7 +98,9 @@ h1 {
     text-decoration: none;
 }
 
-
+#emptyResult {
+	text-align : center;
+}
 
 
 
@@ -149,7 +149,7 @@ span.twitter-typeahead {
     background-color: #fff;
     border: 1px solid #ccc;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0px;
+    border-radius: 0;
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
     display: block;
     overflow-y: auto;
