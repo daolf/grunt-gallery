@@ -9,7 +9,7 @@ describe('Test with one example per bloc', function () {
             '* @example\n' +
             '* var a = 0;\n' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n');
     });
 
@@ -19,19 +19,19 @@ describe('Test with one example per bloc', function () {
             '* var a = 0;\n' +
             '* var b = 5;\n' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n'+'* var b = 5;\n');
     });
 
     it('Test of multiline with different spacing example', function() {
         var simpleComment = '/**\n' +
-            '* @example\n' +
+            '* @info\n' +
             '* var a = 0;\n' +
             '*   var b = 5;\n' +
             '* \n' +
             '*    var c = 50 \n' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@info');
         expect(comments[0]).toEqual('* var a = 0;\n'+
                                     '*   var b = 5;\n'+
                                     '* \n'+
@@ -44,7 +44,7 @@ describe('Test with one example per bloc', function () {
             '* var a = 0;\n' +
             '* @misc' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n* ');
     });
 
@@ -55,7 +55,7 @@ describe('Test with one example per bloc', function () {
             '* var b = 5;\n' +
             '* @misc' +
             '**/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n'+'* var b = 5;\n* ');
     });
 
@@ -68,7 +68,7 @@ describe('Test with one example per bloc', function () {
             '*    var c = 50 \n' +
             '* @misc' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n'+
                                     '*   var b = 5;\n'+
                                     '* \n'+
@@ -86,7 +86,7 @@ describe('Test with one example per bloc', function () {
             '* \n' +
             '* @misc2' +
             '**/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n'+
                                     '*   var b = 5;\n'+
                                     '* \n'+
@@ -103,7 +103,7 @@ describe('Test with one example per bloc', function () {
             '* @misc \n' +
             '* @misc2' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n'+
                                     '*   var b = 5;\n'+
                                     '* \n'+
@@ -120,7 +120,7 @@ describe('Test with one example per bloc', function () {
             '* @misc \n' +
             '* @misc2' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n'+
                                     '*   var b = 5;\n'+
                                     '* \n'+
@@ -132,7 +132,7 @@ describe('Test with one example per bloc', function () {
             '* @example\n' +
             '* var a = 0;\n' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n');
     });
 
@@ -143,7 +143,7 @@ describe('Test with one example per bloc', function () {
             '* var b = 5;\n' +
             '* @misc' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n'+'* var b = 5;\n* ');
     });
 });
@@ -156,7 +156,7 @@ describe('Test with several example per bloc', function () {
             '* @example\n' +
             '* var b = 5;\n' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n* ');
         expect(comments[1]).toEqual('* var b = 5;\n');
     });
@@ -171,7 +171,7 @@ describe('Test with several example per bloc', function () {
             '* @example\n' +
             '* var b = 5;\n' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n* ');
         expect(comments[1]).toEqual('* var b = 5;\n');
     });
@@ -190,7 +190,7 @@ describe('Test with several example per bloc', function () {
             '* @example\n' +
             '* var c = 7;\n' +
             '*/';
-        var comments = parser.extractRawExamples(simpleComment);
+        var comments = parser.extractRawInfos(simpleComment, '@example');
         expect(comments[0]).toEqual('* var a = 0;\n* ');
         expect(comments[1]).toEqual('* var b = 5;\n* ');
         expect(comments[2]).toEqual('* var c = 7;\n');
@@ -226,55 +226,55 @@ describe('Test of removeExtension', function() {
 
 });
 
-describe('Test of cleanComment', function() {
-    it ('Test with single line comment with multiple spacing in the begining', function() {
-        var comment = '* var a = 5;';
-        var comment2 = '  * var b = 5;';
-        var comment3 = ' *var c = 6;';
+describe('Test of cleanInfo', function() {
+    it ('Test with single line Info with multiple spacing in the begining', function() {
+        var Info = '* var a = 5;';
+        var Info2 = '  * var b = 5;';
+        var Info3 = ' *var c = 6;';
         
-        expect(parser.cleanComment(comment)).toEqual('var a = 5;');
-        expect(parser.cleanComment(comment2)).toEqual('var b = 5;');
-        expect(parser.cleanComment(comment3)).toEqual('var c = 6;');
+        expect(parser.cleanInfo(Info)).toEqual('var a = 5;');
+        expect(parser.cleanInfo(Info2)).toEqual('var b = 5;');
+        expect(parser.cleanInfo(Info3)).toEqual('var c = 6;');
     });
     
-    it ('Test with multiline comment with multiple spacing in the begining', function() {
-        var comment =   '* var a = 5;\n' +
+    it ('Test with multiline Info with multiple spacing in the begining', function() {
+        var Info =   '* var a = 5;\n' +
                         '  * var b = 5;\n' +
                         ' *var c = 6;';
         
-        expect(parser.cleanComment(comment)).toEqual('var a = 5;\nvar b = 5;\nvar c = 6;');
+        expect(parser.cleanInfo(Info)).toEqual('var a = 5;\nvar b = 5;\nvar c = 6;');
     });
     
-    it ('Test with multiline comment with multiple spacing in the begining and \r\n at the end', function() {
-        var comment =   '* var a = 5;\r\n' +
+    it ('Test with multiline Info with multiple spacing in the begining and \r\n at the end', function() {
+        var Info =   '* var a = 5;\r\n' +
                         '  * var b = 5;\r\n' +
                         ' *var c = 6;';
         
-        expect(parser.cleanComment(comment)).toEqual('var a = 5;\nvar b = 5;\nvar c = 6;');
+        expect(parser.cleanInfo(Info)).toEqual('var a = 5;\nvar b = 5;\nvar c = 6;');
     });
     
     it ('Test with lonely *', function() {
-        var comment =   '* var a = 5;\r\n' +
+        var Info =   '* var a = 5;\r\n' +
                         '  * \n' +
                         ' *var c = 6;';
         
-        expect(parser.cleanComment(comment)).toEqual('var a = 5;\nvar c = 6;');
+        expect(parser.cleanInfo(Info)).toEqual('var a = 5;\nvar c = 6;');
     });
     
     it ('Test with mutiple lonely *', function() {
-        var comment =   '* var a = 5;\r\n' +
+        var Info =   '* var a = 5;\r\n' +
                         '  * \n' +
                         '*\n' +
                         ' *var c = 6;';
         
-        expect(parser.cleanComment(comment)).toEqual('var a = 5;\nvar c = 6;');
+        expect(parser.cleanInfo(Info)).toEqual('var a = 5;\nvar c = 6;');
     });
     
     it ('Test removal of trailing white space', function () {
-        var comment =   '* var a = 5;\r\n\t\n';
-        var comment2 = '* var a = 5;\n * var b = 6;  \n';
-        expect(parser.cleanComment(comment)).toEqual('var a = 5;');
-        expect(parser.cleanComment(comment2)).toEqual('var a = 5;\nvar b = 6;');
+        var Info =   '* var a = 5;\r\n\t\n';
+        var Info2 = '* var a = 5;\n * var b = 6;  \n';
+        expect(parser.cleanInfo(Info)).toEqual('var a = 5;');
+        expect(parser.cleanInfo(Info2)).toEqual('var a = 5;\nvar b = 6;');
     });
 });
 
@@ -301,6 +301,13 @@ describe( ' Test of extractedWithRegexp', function () {
             expect(result.inherit).toEqual(["Ext.DatePicker1","Ext.DatePicker2"]);
         });
 });
+
+describe (' Test of extractCleanInfo', function() {
+    it ('Test with @info tag', function () {
+        expect(parser.extractCleanInfos('/*\n* @info\n * blabla\n */', '@info')).toEqual(['blabla']); 
+    });
+});
+
 
 describe( ' Test of extractDependencies', function () {
     it ('Test with 1 dependencies', function () {

@@ -25,8 +25,23 @@ grunt.loadNpmTasks('grunt-gallery');
 
 ## The "gallery" task
 
-### Overview
+### Documenting your components
+
+All you have to do is add tag within bloc comment like javadoc. 
+
+WARNING : only put thos tag in bloc comment (/\* */) no single comment line.
+
+Currently this plug-in support two tags :
+- @example (instantion code for your component)
+- @info (complementary information)
+
+Others informations (inherit, dependencies, ... ) are directly extracted from the code.
+
+
+### Generating the gallery
 In your project's Gruntfile, add a section named `gallery` to the data object passed into `grunt.initConfig()`.
+
+example :
 
 ```js
     var persoTitle = function( path, compName) {
