@@ -75,6 +75,19 @@ function customCopyDir(src,dest) {
     }
 }
 
+/*
+ * sort inherit and dependencies of informations previously extracted
+ * @param extracted information
+ * @return sorted information
+ */
+function sortInformations( extractedInformation) {
+    extractedInformation.map( function(curr) {
+        curr.dependencies = curr.dependencies.sort();
+        curr.inherit = curr.inherit.sort();
+        return curr;
+    });
+    return extractedInformation;
+}
 
 
 
@@ -84,5 +97,6 @@ module.exports = {
     read : read,
     write : write,
     extractJsFromDir : extractJsFromDir,
-    customCopyDir : customCopyDir
+    customCopyDir : customCopyDir,
+    sortInformations : sortInformations
 };

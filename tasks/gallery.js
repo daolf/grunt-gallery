@@ -89,6 +89,8 @@ module.exports = function (grunt) {
                 return curr;
             });
         }
+        //We order alphabetically 
+        extractedInformations = tools.sortInformations(extractedInformations);
         
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);
