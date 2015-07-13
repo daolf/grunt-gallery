@@ -14,15 +14,15 @@ var generateAst = function (text) {
 };
 
 /*
- * Clean extrated comment by removing useles tab and * in beginning of line and changing all \r\n to \n
- * @param comment   comment we want to clean
+ * Clean extrated Info by removing useles tab and * in beginning of line and changing all \r\n to \n
+ * @param Info   Info we want to clean
  *
- * @return cleanText    comments cleaned
+ * @return cleanText    Info cleaned
  */
-var cleanComment = function (comment) {
+var cleanInfo = function (Info) {
     // removing * in begining of line
     var regexp = /^[\s*\*\s*]*/gm;
-    var cleanText = comment.replace(regexp,'');
+    var cleanText = Info.replace(regexp,'');
     // replacing all \r and \r\n with conventional \n
     var regexp2 = /[\r|\r\n]/gm;
     cleanText = cleanText.replace(regexp2,'\n');
@@ -35,19 +35,22 @@ var cleanComment = function (comment) {
 };
 
 /*
- * Extract example of an ast, for the extraction to work examples need :
- *         - to be preceded by @example 
+ * Extract info of an ast, for the extraction to work infos need :
+ *         - to be preceded by @tag 
  *         - to be in a commentary block style, NOT line style
  *         - to be ended with either a close block comment or with another javadoc
  *         marker '@dummy'
- * @param ast       the ast we want to extract information from 
+ * @param ast       the ast we want to extract information from
+ * @param tag       the tag you want to extract information after
  *
  * @return          array of extractec examples
  */
-var extractExamplesFromAst = function (ast) {
-    var extractedExamples = [];
+var extractInfosFromAst = function (ast, tag) {
+    var extractedInfos = [];
     /* see wiki for explanation*/
-    var regExp = /(?:@example[\r\n|\n|\s+])([^@]*)/g;
+    var pattern = '(?:'+tag+'[\r\n|\n|\s+])([^@]*)';
+    var flag = 'g';
+    var regExp = new RegExp(pattern, flag);
     var computedRegExp;
     var txt;
     estraverse.traverse(ast, {
@@ -55,11 +58,11 @@ var extractExamplesFromAst = function (ast) {
             if (node.hasOwnProperty('comments')) {
                 node.comments.map( function(curr) {
                     if (curr.type === 'Block' &&
-                        curr.value.search('@example') !== -1 ) {
+                        curr.value.search(tag) !== -1 ) {
                         txt = curr.value;
                         computedRegExp = regExp.exec(txt);
                         while (computedRegExp !== null) {
-                            extractedExamples.push(computedRegExp[1]);
+                            extractedInfos.push(computedRegExp[1]);
                             computedRegExp = regExp.exec(txt);
                         }
                     }
@@ -67,32 +70,34 @@ var extractExamplesFromAst = function (ast) {
             }
         }
     });
-    return extractedExamples;
+    return extractedInfos;
 };
 
 /*
- *  Extract raw examples from plain code 
- *  @param text     raw text we want to extract comments from
+ *  Extract raw informations from plain code 
+ *  @param text     raw text we want to extract informations from
+ *  @param tag      tag you want to extract information after
  *
- *  @return         array of comment
+ *  @return         array of informations
  */
-var extractRawExamples = function (text) {
+var extractRawInfos = function (text, tag) {
     var ast = generateAst(text);
-    var examples = extractExamplesFromAst(ast);
-    return examples;
+    var infos = extractInfosFromAst(ast, tag);
+    return infos;
 };
 
 /*
- *  Extract clean examples from plain code 
- *  @param text     raw text we want to extract comments from
+ *  Extract clean informations from plain code 
+ *  @param text     raw text we want to extract informations from
+ *  @param tag      tag you want to extract information after
  *
  *  @return         array of comment
  */
-var extractCleanExamples = function (code) {
+var extractCleanInfos = function (code, tag) {
     var ast = generateAst(code);
-    var examples = extractExamplesFromAst(ast);
-    return examples.map( function(curr) {
-        return cleanComment(curr);
+    var infos = extractInfosFromAst(ast, tag);
+    return infos.map( function(curr) {
+        return cleanInfo(curr);
     });
 };
 
@@ -145,11 +150,11 @@ var extractDependencies = function (rawCode) {
 
 module.exports = {
     generateAst : generateAst,
-    extractExamplesFromAst : extractExamplesFromAst,
-    extractRawExamples : extractRawExamples,
-    extractCleanExamples : extractCleanExamples,
+    extractInfosFromAst : extractInfosFromAst,
+    extractRawInfos : extractRawInfos,
+    extractCleanInfos : extractCleanInfos,
     removeExtension : removeExtension,
-    cleanComment : cleanComment,
+    cleanInfo : cleanInfo,
     extractWithRegexps : extractWithRegexps,
     extractDependencies : extractDependencies
 };

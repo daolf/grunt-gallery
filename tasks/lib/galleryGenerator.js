@@ -30,7 +30,7 @@ module.exports = {
             var buffer = {
                 name : myParser.removeExtension(path.basename(fileName)),
                 file : './js/comp/'+fileName,
-                example : myParser.extractCleanExamples(rawCode),
+                example : myParser.extractCleanInfos(rawCode, '@example'),
                 inherit : resultRegexp.inherit, 
                 dependencies : myParser.extractDependencies(rawCode)
             };
