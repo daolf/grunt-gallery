@@ -28,9 +28,9 @@ describe(title, function () {
                'aaaa'
            ],
            inherit : [
-               'bbbb',
+               'BBBB',
                'aaaa',
-               'cccc',
+               'CCCC',
                'cccc'
            ]
         }];
@@ -42,13 +42,36 @@ describe(title, function () {
            ],
            inherit : [
                'aaaa',
-               'bbbb',
-               'cccc',
+               'BBBB',
+               'CCCC',
                'cccc'
            ]
         }];
         expect(tools.sortInformations(unsorted)).toEqual(sorted);
         expect(tools.sortInformations(sorted)).toEqual(sorted);
+    });
+    it ('Test of applyTitleCallBack', function() {
+        var callBack = function(file, name) {
+           return name+file;
+        };
+        
+        var info = [{
+            name : 'name1',
+            file : 'file1'
+        },{
+            name : 'name2',
+            file : 'file2'
+        }];
+         var expected = [{
+            name : 'name1',
+            file : 'file1',
+            customName : 'name1file1'
+        },{
+            name : 'name2',
+            file : 'file2',
+            customName : 'name2file2'
+        }];
+        expect(tools.applyTitleCallback(info,callBack)).toEqual(expected);
     });
 
 });
