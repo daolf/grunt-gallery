@@ -144,7 +144,7 @@ module.exports = function (grunt) {
                         './node_modules/react/dist/react-with-addons*.js'],
                   css : './views/css/customCs*.css'
                 }
-              }
+            }
 		},
 		nodeunit: {
 			tests: ['test/*_test.js']

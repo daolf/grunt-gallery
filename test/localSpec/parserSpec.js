@@ -25,13 +25,13 @@ describe('Test with one example per bloc', function () {
 
     it('Test of multiline with different spacing example', function() {
         var simpleComment = '/**\n' +
-            '* @example\n' +
+            '* @info\n' +
             '* var a = 0;\n' +
             '*   var b = 5;\n' +
             '* \n' +
             '*    var c = 50 \n' +
             '*/';
-        var comments = parser.extractRawInfos(simpleComment, '@example');
+        var comments = parser.extractRawInfos(simpleComment, '@info');
         expect(comments[0]).toEqual('* var a = 0;\n'+
                                     '*   var b = 5;\n'+
                                     '* \n'+
@@ -301,6 +301,13 @@ describe( ' Test of extractedWithRegexp', function () {
             expect(result.inherit).toEqual(["Ext.DatePicker1","Ext.DatePicker2"]);
         });
 });
+
+describe (' Test of extractCleanInfo', function() {
+    it ('Test with @info tag', function () {
+        expect(parser.extractCleanInfos('/*\n* @info\n * blabla\n */', '@info')).toEqual(['blabla']); 
+    });
+});
+
 
 describe( ' Test of extractDependencies', function () {
     it ('Test with 1 dependencies', function () {
