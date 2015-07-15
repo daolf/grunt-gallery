@@ -1,5 +1,3 @@
-/* global $*/
-
 /* reading JSON files*/
 $.ajax({
     url : './info.json',
@@ -14,8 +12,9 @@ $.ajax({
         var compNamesFeeder = [];
         var inheritFeeder = [];
         var dependenciesFeeder = [];
-        var myForm;
-        var criteria = 'NAME';
+		$('.form-name').val('');
+        $('.form-inherit').val('');
+        $('.form-dependencies').val('');
         
         var removeDuplicate = function (array) {
             return array.reduce(function(accum, current) {
@@ -25,6 +24,20 @@ $.ajax({
                 return accum;
             }, []);
         };
+		
+		var intersectArray = function (array1, array2) {
+			var t;
+			if (array2.length > array1.length) {
+                t = array2;
+                array2 = array1;
+                array1 = t; 
+            }// indexOf to loop over shorter
+			return array1.filter(function (current) {
+				if (array2.indexOf(current) !== -1) {
+                    return true;
+                }
+			});
+		};
         
         /* get all comp names*/
         for (var i = 0; i<info.length; i++) {
@@ -114,26 +127,24 @@ $.ajax({
 			
         };
 
-        var search = function (data) {
-            var compList;
-            switch (criteria) {
-                case 'NAME' :
-                    compList = extractCompNamesFromNamesSearch(data);
-                    break;
-                case 'INHERIT' :
-                    compList = extractCompNamesFromInheritSearch(data);
-                    break;
-                case 'DEPENDENCIES' :
-                    compList = extractCompNamesFromDependenciesSearch(data);
-                    break;
-            }
+        var search = function (dataName, dataInherit, dataDependencies) {
+            var resultFromNames = extractCompNamesFromNamesSearch(dataName) ;
+			var resultFromInherit = extractCompNamesFromInheritSearch(dataInherit) ;
+            var resultFromDependencies = extractCompNamesFromDependenciesSearch(dataDependencies) ;
+			console.log('datas ' + resultFromNames +', --- '+resultFromInherit+', --- '+resultFromDependencies+', ');
+			compList = intersectArray(resultFromNames, resultFromDependencies);
+			console.log('list1 '+compList);
+			compList = intersectArray(compList, resultFromInherit);
+			console.log('list2 '+compList);
             displayComponents(compList);
         };
 
-        var searchFromValueInForm = function () {
-            myForm = $('.form-search');
-            var currSearch = myForm.val();
-            search(currSearch);
+        var searchFromValueInForms = function () {
+            var nameSearch = $('.form-name').val();
+            var inheritSearch = $('.form-inherit').val();
+            var dependenciesSearch = $('.form-dependencies').val();
+			console.log('search for :'+nameSearch+' ,'+inheritSearch+' ,'+dependenciesSearch);
+            search(nameSearch, inheritSearch, dependenciesSearch);
         };
 
         var substringMatcher = function(strs) {
@@ -177,7 +188,7 @@ $.ajax({
             if (e.keyCode === 13 ) {
                 $('.form-search').blur();
             } else {
-                searchFromValueInForm();
+                searchFromValueInForms();
             }
         });
 
@@ -199,37 +210,16 @@ $.ajax({
             }
         });
 
-        $('#nameSearch').on('shown.bs.tab', function () {
-            criteria = 'NAME';
-			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
-			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
-				name: 'compNames',
-				limit: 100,
-				source: substringMatcher(compNamesFeeder)
-			});
-            searchFromValueInForm();
-        });
-
-        $('#inheritSearch').on('shown.bs.tab', function () {
-            criteria = 'INHERIT';
-			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
-			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
-				name: 'inherit',
-				limit: 100,
-				source: substringMatcher(inheritFeeder)
-			});
-            searchFromValueInForm();
-        });
-
-        $('#dependenciesSearch').on('shown.bs.tab', function () {
-            criteria = 'DEPENDENCIES';
-			$('#scrollable-dropdown-menu .typeahead').typeahead('destroy');
-			$('#scrollable-dropdown-menu .typeahead').typeahead(config,{
-				name: 'compDependencies',
-				limit: 100,
-				source: substringMatcher(dependenciesFeeder)
-			});
-            searchFromValueInForm();
-        });
+        $('.form-name').keyup( function() {
+			searchFromValueInForms();
+		});
+		
+		$('.form-inherit').keyup( function() {
+			searchFromValueInForms();
+		});
+		
+		$('.form-dependencies').keyup( function() {
+			searchFromValueInForms();
+		});
     }
 });
