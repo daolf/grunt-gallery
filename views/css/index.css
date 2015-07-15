@@ -19,15 +19,19 @@ h1 {
 .additionalSearch {
 	height : 0;
 	position : relative;  
+    -webkit-transition: display, height 0.8s ease;
+	-moz-transition: display, height 0.8s ease;
+	-o-transition: display, height 0.8s ease;
+	transition: display, height 0.8s ease;
+	z-index : auto;
 }
 
 #expandSearch {
 	position : relative;
-	left : 45%;
+	left : 44%;
 	top : 15px;
 	z-index : 10;
 }
-
 .inherit-group,.dependencies-group {
 	display : none;
 }

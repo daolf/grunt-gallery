@@ -55,31 +55,38 @@ html
         script(type='text/javascript', src='./js/index.js')
         script(type='text/javascript')
             | var menu = $('.searchRow');
-            | var origOffsetY = menu.offset().top;
-            | 
-            | function scroll() {
-            |     if ($(window).scrollTop() >= origOffsetY) {
-            |         menu.addClass('navbar-fixed-top container-fluid');
-            |     } else {
-            |         menu.removeClass('navbar-fixed-top container-fluid');
-            |     }
-            | }
-            | $('#expandSearch').click( function(event) {
-            |   if ($('.additionalSearchExpanded').length !== 0 ) {
-            |       $('.additionalSearch').removeClass('additionalSearchExpanded');
-            |       $('.additionalSearch').css('height','0')
-            |       $('.inherit-group').css('display','none');
-            |       $('.dependencies-group').css('display','none');
-            |       $('.iconExpanded').removeClass('glyphicon-triangle-top');
-            |       $('.iconExpanded').addClass('glyphicon-triangle-bottom');
-            |   } else {
-            |       $('.additionalSearch').addClass('additionalSearchExpanded');
-            |       $('.inherit-group').css('display','table');
-            |       $('.dependencies-group').css('display','table');
-            |       $('.additionalSearch').css('height','100%')
-            |       $('.iconExpanded').removeClass('glyphicon-triangle-bottom');
-            |       $('.iconExpanded').addClass('glyphicon-triangle-top');
-            |   }
-            | }) 
-            | document.onscroll = scroll;
-            | $('.compName').quickfit({ max : 24});
+            |  var origOffsetY = menu.offset().top;
+            |  function scroll() {
+            |      if ($(window).scrollTop() >= origOffsetY) {
+            |          menu.addClass('navbar-fixed-top container-fluid');
+            |      } else {
+            |          menu.removeClass('navbar-fixed-top container-fluid');
+            |      }
+            |  }
+            |  $('#expandSearch').click( function(event) {
+            |    if ($('.additionalSearchExpanded').length !== 0 ) {
+            |          $('.additionalSearch').removeClass('additionalSearchExpanded');
+            |          $('.additionalSearch').css('height','0');
+            |          setTimeout(function() {
+            |              $('.inherit-group').css('display','none');
+            |          },'400');
+            |          setTimeout(function() {
+            |              $('.dependencies-group').css('display','none');
+            |          },'200');       
+            |          $('.iconExpanded').removeClass('glyphicon-triangle-top');
+            |          $('.iconExpanded').addClass('glyphicon-triangle-bottom');
+            |    } else {
+            |          $('.additionalSearch').addClass('additionalSearchExpanded');
+            |          $('.additionalSearch').css('height','108px')
+            |          setTimeout(function() {
+            |              $('.inherit-group').css('display','table');
+            |          },'200');
+            |          setTimeout(function() {
+            |              $('.dependencies-group').css('display','table');
+            |          },'400');         
+            |          $('.iconExpanded').removeClass('glyphicon-triangle-bottom');
+            |          $('.iconExpanded').addClass('glyphicon-triangle-top');
+            |    }
+            |  }) 
+            |  document.onscroll = scroll;
+            |  $('.compName').quickfit({ max : 24});

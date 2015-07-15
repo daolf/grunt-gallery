@@ -55,6 +55,10 @@ $.ajax({
          * We extract component names where their inherit match the search
          */
         var extractCompNamesFromInheritSearch = function (search) {
+            // if search is empty we return all component names
+			if (search === '') {
+				return compNamesFeeder;
+			}
             var result = [];
             var currInherit;
             for (var i = 0; i<info.length; i++) {
@@ -72,6 +76,10 @@ $.ajax({
          * We extract component names where their dependencies match the search
          */
         var extractCompNamesFromDependenciesSearch = function (search) {
+            // if search is empty we return all component names
+			if (search === '') {
+				return compNamesFeeder;
+			}
             var result = [];
             var currDependencies;
             for (var i = 0; i<info.length; i++) {
