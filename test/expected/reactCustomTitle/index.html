@@ -14,14 +14,18 @@
 			</div>
 			<div class="row searchRow">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br>
-					<div id="scrollable-dropdown-menu" class="input-group">
-						<input type="text" placeholder="Search" aria-describedby="basic-addon2" data-provided="typeahead" class="form-control form-search typeahead">                        <span id="basic-addon2" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+					<div id="scrollable-dropdown-menu" class="input-group name-group"><span class="input-group-addon">Name</span>
+						<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-name typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
 					</div>
-					<ul role="tablist" class="nav nav-tabs">
-						<li role="presentation" class="active"><a id="nameSearch" aria-controls="Name" role="tab" data-toggle="tab">Name<span></span></a></li>
-						<li role="presentation"><a id="inheritSearch" aria-controls="fullCode" role="tab" data-toggle="tab">Inherit<span></span></a></li>
-						<li role="presentation"><a id="dependenciesSearch" aria-controls="fullCode" role="tab" data-toggle="tab">Dependencies<span></span></a></li>
-					</ul>
+					<div class="additionalSearch"><br>
+						<div class="input-group inherit-group"><span class="input-group-addon">Inherit from</span>
+							<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-inherit typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+						</div><br>
+						<div class="input-group dependencies-group"><span class="input-group-addon">Dependencies (require) </span>
+							<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-dependencies typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+						</div>
+					</div>
+					<button id="expandSearch" type="button" aria-haspopup="true" aria-expanded="false" class="btn btn-default">Advanced search <span class="iconExpanded glyphicon glyphicon-triangle-bottom">  </span></button>
 				</div>
 			</div>
 			<div class="row">
@@ -55,18 +59,41 @@
 		<script type="text/javascript" src="./js/index.js"></script>
 		<script type="text/javascript">
 			var menu = $('.searchRow');
-			var origOffsetY = menu.offset().top;
-			 
-			function scroll() {
-			    if ($(window).scrollTop() >= origOffsetY) {
-			        menu.addClass('navbar-fixed-top container-fluid');
-			    } else {
-			        menu.removeClass('navbar-fixed-top container-fluid');
-			    }
-			}
-			 
-			document.onscroll = scroll;
-			$('.compName').quickfit({ max : 24});
+			 var origOffsetY = menu.offset().top;
+			 function scroll() {
+			     if ($(window).scrollTop() >= origOffsetY) {
+			         menu.addClass('navbar-fixed-top container-fluid');
+			     } else {
+			         menu.removeClass('navbar-fixed-top container-fluid');
+			     }
+			 }
+			 $('#expandSearch').click( function(event) {
+			   if ($('.additionalSearchExpanded').length !== 0 ) {
+			         $('.additionalSearch').removeClass('additionalSearchExpanded');
+			         $('.additionalSearch').css('height','0');
+			         setTimeout(function() {
+			             $('.inherit-group').css('display','none');
+			         },'400');
+			         setTimeout(function() {
+			             $('.dependencies-group').css('display','none');
+			         },'200');       
+			         $('.iconExpanded').removeClass('glyphicon-triangle-top');
+			         $('.iconExpanded').addClass('glyphicon-triangle-bottom');
+			   } else {
+			         $('.additionalSearch').addClass('additionalSearchExpanded');
+			         $('.additionalSearch').css('height','108px')
+			         setTimeout(function() {
+			             $('.inherit-group').css('display','table');
+			         },'200');
+			         setTimeout(function() {
+			             $('.dependencies-group').css('display','table');
+			         },'400');         
+			         $('.iconExpanded').removeClass('glyphicon-triangle-bottom');
+			         $('.iconExpanded').addClass('glyphicon-triangle-top');
+			   }
+			 }) 
+			 document.onscroll = scroll;
+			 $('.compName').quickfit({ max : 24});
 		</script>
 	</body>
 </html>
