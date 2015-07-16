@@ -220,7 +220,7 @@ $.ajax({
 		$('.tt-cursor').on('click', function() {
 			console.log('click');
 			$('.typeahead').typeahead('close');
-		})
+		});
 
         $('.form-name').keyup( function() {
 			searchFromValueInForms();
