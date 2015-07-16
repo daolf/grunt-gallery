@@ -33,8 +33,19 @@ function computeJson (extractedInformations, callback) {
     return sortInformations(extractedInformations);
 }
 
+function parseTags (extractedInformations) {
+    return extractedInformations.map( function (curr) {
+        curr.tags = curr.tags.map(function (curr) {
+            return curr.split(/\s*,\s*/g);
+        });
+        curr.tags = [].concat.apply([],curr.tags);
+        return curr;
+    });
+}
+
 module.exports = {
     sortInformations : sortInformations,
     applyTitleCallback : applyTitleCallback,
-    computeJson : computeJson
+    computeJson : computeJson,
+    parseTags : parseTags
 };

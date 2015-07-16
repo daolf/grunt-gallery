@@ -59,5 +59,20 @@ describe(title, function () {
         }];
         expect(jsonTools.applyTitleCallback(info,callBack)).toEqual(expected);
     });
-
+    it('Test of parsing tags', function() {
+        var info = [{
+           tags : ['bonjour, hello']
+        }];
+        var info2 = [{
+            tags : [ 'bonjour, hello', 'home']
+        }];
+        var infoParsed = [{
+            tags : ['bonjour','hello']
+        }];
+        var info2Parsed = [{
+            tags : ['bonjour','hello','home']
+        }];
+        expect(jsonTools.parseTags(info)).toEqual(infoParsed);
+        expect(jsonTools.parseTags(info2)).toEqual(info2Parsed);
+    });
 });
