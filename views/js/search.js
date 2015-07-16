@@ -47,7 +47,8 @@ $.ajax({
             inheritFeeder = inheritFeeder.concat(info[i].inherit);
             dependenciesFeeder = dependenciesFeeder.concat(info[i].dependencies);
         }
-        
+        $('.resultNumber').text(compNamesFeeder.length);  
+      
         dependenciesFeeder = removeDuplicate(dependenciesFeeder);
 		inheritFeeder = removeDuplicate(inheritFeeder);		
         /*
@@ -167,6 +168,7 @@ $.ajax({
 			compList = intersectArray(compList, resultFromTags);
 			//console.log('list2 '+compList);
             displayComponents(compList);
+            $('.resultNumber').text(compList.length);
         };
 
         var searchFromValueInForms = function () {

@@ -26,9 +26,11 @@ h1 {
 	z-index : auto;
 }
 
+
+
 #expandSearch {
 	position : relative;
-	left : 44%;
+	left : -6%;
 	top : 15px;
 	z-index : 10;
 }
