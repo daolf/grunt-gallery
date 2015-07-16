@@ -278,6 +278,30 @@ describe('Test of cleanInfo', function() {
     });
 });
 
+describe( 'Test of extractClean info', function() {
+    it('Test with dummy commit with @info, @example and @tags', function() {
+        var rawCode = '/*\n' +
+                         '* @example\n' +
+                         '* React.render(\n' +
+                         '*     React.createElement(MenuExample, {items:  [\'Home\', \'Services\', \'About\', \'Contact us\'] }),\n' +
+                         '*     document.body\n' +
+                         '* );\n' +
+                         '*\n' +
+                         '* @tags\n' +
+                         '* bonjour, hello \n' +
+                         '*\n' +
+                         '*\n' +
+                         '* @info \n' +
+                         '* random info \n' +
+                         '*\n' +
+                         '*/';
+        var info = parser.extractCleanInfos(rawCode, '@info');
+        var tags = parser.extractCleanInfos(rawCode, '@tags');
+        expect(info).toEqual([ 'random info' ]);
+        expect(tags).toEqual([ 'bonjour, hello' ]);
+    });
+});
+
 describe( ' Test of extractedWithRegexp', function () {
     var regExps = {
         inherit : {

@@ -8,6 +8,8 @@
  *     React.createElement(MenuExample, {items:  ['Home', 'Services', 'About', 'Contact us'] }),
  *     document.body
  * );
+ * 
+ * @tags tag1, tag2
  */
 
 /*
