@@ -83,12 +83,8 @@ module.exports = function (grunt) {
         };
         extractedInformations = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'),regExps, myParser);
         
-        //We apply callback for custom component name if callback is defined
-        if (config.compNameCallback) {
-            extractedInformations = jsonTools.applyTitleCallback(extractedInformations, config.compNameCallback);
-        }
-        //We order alphabetically 
-        extractedInformations = jsonTools.sortInformations(extractedInformations);
+        //We transform our Json by applying callBack, sorting him, parsing tags ...
+        extractedInformations = jsonTools.computeJson(extractedInformations,config.compNameCallback);
         
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);

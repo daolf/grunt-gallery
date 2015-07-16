@@ -24,7 +24,17 @@ function applyTitleCallback (extractedInformations, callback) {
     });
 }
 
+function computeJson (extractedInformations, callback) {
+    //We apply callback for custom component name if callback is defined
+    if (callback) {
+        extractedInformations = applyTitleCallback(extractedInformations, callback);
+    }
+    //We order alphabetically 
+    return sortInformations(extractedInformations);
+}
+
 module.exports = {
     sortInformations : sortInformations,
-    applyTitleCallback : applyTitleCallback
+    applyTitleCallback : applyTitleCallback,
+    computeJson : computeJson
 };
