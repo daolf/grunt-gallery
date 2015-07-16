@@ -91,6 +91,27 @@ $.ajax({
             }
             return result;
         };
+		
+		/*
+         * We extract component names where their dependencies match the search
+         */
+        var extractCompNamesFromTagsSearch = function (search) {
+            // if search is empty we return all component names
+			if (search === '' || search === undefined) {
+				return compNamesFeeder;
+			}
+            var result = [];
+            var currTags;
+            for (var i = 0; i<info.length; i++) {
+                currTags = info[i].tags;
+                for (var j = 0; j<currTags.length; j++) {
+                    if ( currTags[j].toLowerCase().indexOf(search.toLowerCase()) !== -1 ) {
+                        result.push(info[i].name);
+                    }
+                }
+            }
+            return result;
+        };
 
         /*
          * We extract component names where their names match the search
@@ -134,14 +155,16 @@ $.ajax({
 			
         };
 
-        var search = function (dataName, dataInherit, dataDependencies) {
+        var search = function (dataName, dataInherit, dataDependencies, dataTags) {
             var resultFromNames = extractCompNamesFromNamesSearch(dataName) ;
 			var resultFromInherit = extractCompNamesFromInheritSearch(dataInherit) ;
             var resultFromDependencies = extractCompNamesFromDependenciesSearch(dataDependencies) ;
+            var resultFromTags = extractCompNamesFromTagsSearch(dataTags) ;
 			//console.log('datas ' + resultFromNames +', --- '+resultFromInherit+', --- '+resultFromDependencies+', ');
 			compList = intersectArray(resultFromNames, resultFromDependencies);
 			//console.log('list1 '+compList);
 			compList = intersectArray(compList, resultFromInherit);
+			compList = intersectArray(compList, resultFromTags);
 			//console.log('list2 '+compList);
             displayComponents(compList);
         };
@@ -150,8 +173,9 @@ $.ajax({
             var nameSearch = $('.form-name').val();
             var inheritSearch = $('.form-inherit').val();
             var dependenciesSearch = $('.form-dependencies').val();
+            var tagsSearch = $('.form-tags').val();
 			//console.log('search for :'+nameSearch+' ,'+inheritSearch+' ,'+dependenciesSearch);
-            search(nameSearch, inheritSearch, dependenciesSearch);
+            search(nameSearch, inheritSearch, dependenciesSearch, tagsSearch);
         };
 
         var substringMatcher = function(strs) {
