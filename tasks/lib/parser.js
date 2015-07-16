@@ -48,7 +48,7 @@ var cleanInfo = function (Info) {
 var extractInfosFromAst = function (ast, tag) {
     var extractedInfos = [];
     /* see wiki for explanation*/
-    var pattern = '(?:'+tag+'[\r\n|\n|\s+])([^@]*)';
+    var pattern = '(?:'+tag+'[\\r\\n|\\n|\\s+])([^@]*)';
     var flag = 'g';
     var regExp = new RegExp(pattern, flag);
     var computedRegExp;

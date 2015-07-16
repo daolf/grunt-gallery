@@ -25,6 +25,7 @@ module.exports = function (grunt) {
         var myParser = require('./lib/parser.js');
         var galleryGenerator = require('./lib/galleryGenerator.js');
         var tools = require ('./lib/tools.js');
+        var jsonTools = require('./lib/jsonTools.js');
         
         var config = grunt.config.get([this.name, this.target]);
         var componentPath = config.files.src+'/';
@@ -82,12 +83,8 @@ module.exports = function (grunt) {
         };
         extractedInformations = galleryGenerator.extractInformation(path.join( targetPath, '/js/comp'),regExps, myParser);
         
-        //We apply callback for custom component name if callback is defined
-        if (config.compNameCallback) {
-            extractedInformations = tools.applyTitleCallback(extractedInformations, config.compNameCallback);
-        }
-        //We order alphabetically 
-        extractedInformations = tools.sortInformations(extractedInformations);
+        //We transform our Json by applying callBack, sorting him, parsing tags ...
+        extractedInformations = jsonTools.computeJson(extractedInformations,config.compNameCallback);
         
         console.log('Extraction done');
         console.log('Writing result in '+jsonPath);

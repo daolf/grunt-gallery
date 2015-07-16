@@ -14,18 +14,27 @@
 			</div>
 			<div class="row searchRow">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br>
-					<div id="scrollable-dropdown-menu" class="input-group name-group"><span class="input-group-addon">Name</span>
-						<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-name typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-					</div>
-					<div class="additionalSearch"><br>
-						<div class="input-group inherit-group"><span class="input-group-addon">Inherit from</span>
-							<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-inherit typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-						</div><br>
-						<div class="input-group dependencies-group"><span class="input-group-addon">Dependencies (require) </span>
-							<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-dependencies typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div id="scrollable-dropdown-menu" class="input-group name-group"><span class="input-group-addon">Name</span>
+							<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-name typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+						</div>
+						<div class="additionalSearch"><br>
+							<div class="input-group dependencies-group"><span class="input-group-addon">Dependencies (require) </span>
+								<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-dependencies typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+							</div>
 						</div>
 					</div>
-					<button id="expandSearch" type="button" aria-haspopup="true" aria-expanded="false" class="btn btn-default">Advanced search <span class="iconExpanded glyphicon glyphicon-triangle-bottom">  </span></button>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="input-group inherit-group"><span class="input-group-addon">Inherit from</span>
+							<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-inherit typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+						</div>
+						<div class="additionalSearch"><br>
+							<div class="input-group tags-group"><span class="input-group-addon">Tags </span>
+								<input type="text" placeholder="Search" data-provided="typeahead" aria-label="Search" style="border-radius:0" class="form-control form-search form-dependencies typeahead"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+							</div><br>
+						</div>
+					</div>
+					<button id="expandSearch" type="button" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-primary">Advanced search <span class="iconExpanded glyphicon glyphicon-triangle-bottom">  </span></button>
 				</div>
 			</div>
 			<div class="row">
@@ -72,22 +81,18 @@
 			         $('.additionalSearch').removeClass('additionalSearchExpanded');
 			         $('.additionalSearch').css('height','0');
 			         setTimeout(function() {
-			             $('.inherit-group').css('display','none');
-			         },'400');
-			         setTimeout(function() {
+			             $('.tags-group').css('display','none');
 			             $('.dependencies-group').css('display','none');
 			         },'200');       
 			         $('.iconExpanded').removeClass('glyphicon-triangle-top');
 			         $('.iconExpanded').addClass('glyphicon-triangle-bottom');
 			   } else {
 			         $('.additionalSearch').addClass('additionalSearchExpanded');
-			         $('.additionalSearch').css('height','108px')
+			         $('.additionalSearch').css('height','50px')
 			         setTimeout(function() {
-			             $('.inherit-group').css('display','table');
-			         },'200');
-			         setTimeout(function() {
+			             $('.tags-group').css('display','table');
 			             $('.dependencies-group').css('display','table');
-			         },'400');         
+			         },'200');       
 			         $('.iconExpanded').removeClass('glyphicon-triangle-bottom');
 			         $('.iconExpanded').addClass('glyphicon-triangle-top');
 			   }

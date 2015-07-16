@@ -10,27 +10,36 @@ html
           div.row
               div.col-lg-12.col-md-12.col-sm-12.col-xs-12
                   h1= title
-          div.row.searchRow
+          .row.searchRow
             .col-lg-12.col-md-12.col-sm-12.col-xs-12
               br
-              #scrollable-dropdown-menu.input-group.name-group
-                span.input-group-addon Name
-                input.form-control.form-search.form-name.typeahead(type='text', placeholder='Search', data-provided='typeahead', aria-label='Search', style='border-radius:0')
-                span.input-group-addon
-                  i.glyphicon.glyphicon-search
-              .additionalSearch
-                br
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                #scrollable-dropdown-menu.input-group.name-group
+                  span.input-group-addon Name
+                  input.form-control.form-search.form-name.typeahead(type='text', placeholder='Search', data-provided='typeahead', aria-label='Search', style='border-radius:0')
+                  span.input-group-addon
+                    i.glyphicon.glyphicon-search
+                .additionalSearch
+                  br
+                  .input-group.dependencies-group
+                    span.input-group-addon Dependencies (require) 
+                    input.form-control.form-search.form-dependencies.typeahead(type='text', placeholder='Search', data-provided='typeahead', aria-label='Search', style='border-radius:0')
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-search
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
                 .input-group.inherit-group
                   span.input-group-addon Inherit from
                   input.form-control.form-search.form-inherit.typeahead(type='text', placeholder='Search', data-provided='typeahead', aria-label='Search', style='border-radius:0')
                   span.input-group-addon
                     i.glyphicon.glyphicon-search
-                br
-                .input-group.dependencies-group
-                  span.input-group-addon Dependencies (require) 
-                  input.form-control.form-search.form-dependencies.typeahead(type='text', placeholder='Search', data-provided='typeahead', aria-label='Search', style='border-radius:0')
-                  span.input-group-addon
-                    i.glyphicon.glyphicon-search
+                .additionalSearch
+                  br
+                  .input-group.tags-group
+                    span.input-group-addon Tags 
+                    input.form-control.form-search.form-tags.typeahead(type='text', placeholder='Search', data-provided='typeahead', aria-label='Search', style='border-radius:0')
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-search
+                  br
               button#expandSearch.btn.btn-default.btn-primary(type='button', aria-haspopup='true', aria-expanded='false')
                 | Advanced search 
                 span.iconExpanded.glyphicon.glyphicon-triangle-bottom   
@@ -68,22 +77,18 @@ html
             |          $('.additionalSearch').removeClass('additionalSearchExpanded');
             |          $('.additionalSearch').css('height','0');
             |          setTimeout(function() {
-            |              $('.inherit-group').css('display','none');
-            |          },'400');
-            |          setTimeout(function() {
+            |              $('.tags-group').css('display','none');
             |              $('.dependencies-group').css('display','none');
             |          },'200');       
             |          $('.iconExpanded').removeClass('glyphicon-triangle-top');
             |          $('.iconExpanded').addClass('glyphicon-triangle-bottom');
             |    } else {
             |          $('.additionalSearch').addClass('additionalSearchExpanded');
-            |          $('.additionalSearch').css('height','108px')
+            |          $('.additionalSearch').css('height','50px')
             |          setTimeout(function() {
-            |              $('.inherit-group').css('display','table');
-            |          },'200');
-            |          setTimeout(function() {
+            |              $('.tags-group').css('display','table');
             |              $('.dependencies-group').css('display','table');
-            |          },'400');         
+            |          },'200');       
             |          $('.iconExpanded').removeClass('glyphicon-triangle-bottom');
             |          $('.iconExpanded').addClass('glyphicon-triangle-top');
             |    }

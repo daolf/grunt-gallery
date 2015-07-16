@@ -353,8 +353,16 @@ iframe {
 .btnRefresh:focus {
     border-color: #ccc;
     background-color: #fff;
-    outline:0px !important;
+    outline:0 !important;
     -webkit-appearance:none;
+}
+
+.tagsInfo {
+    margin-top: 7px;    
+}
+
+.tags {
+    font-size : 13pt;
 }
 
 .menuInfo {
