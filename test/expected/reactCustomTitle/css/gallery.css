@@ -357,6 +357,14 @@ iframe {
     -webkit-appearance:none;
 }
 
+.tagsInfo {
+    margin-top: 7px;    
+}
+
+.tags {
+    font-size : 13pt;
+}
+
 .menuInfo {
     padding-left: 5px;
     height: 400px;
