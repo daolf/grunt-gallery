@@ -24,14 +24,6 @@ function applyTitleCallback (extractedInformations, callback) {
     });
 }
 
-function computeJson (extractedInformations, callback) {
-    //We apply callback for custom component name if callback is defined
-    if (callback) {
-        extractedInformations = applyTitleCallback(extractedInformations, callback);
-    }
-    //We order alphabetically 
-    return sortInformations(extractedInformations);
-}
 
 function parseTags (extractedInformations) {
     return extractedInformations.map( function (curr) {
@@ -43,6 +35,16 @@ function parseTags (extractedInformations) {
     });
 }
 
+function computeJson (extractedInformations, callback) {
+    //We apply callback for custom component name if callback is defined
+    if (callback) {
+        extractedInformations = applyTitleCallback(extractedInformations, callback);
+    }
+    //We order alphabetically 
+    extractedInformations = sortInformations(extractedInformations);
+    extractedInformations = parseTags(extractedInformations);
+    return extractedInformations;
+}
 module.exports = {
     sortInformations : sortInformations,
     applyTitleCallback : applyTitleCallback,
