@@ -1,4 +1,3 @@
-/* reading JSON files*/
 $.ajax({
     url : './info.json',
     dataType: 'text',
@@ -56,7 +55,7 @@ $.ajax({
          */
         var extractCompNamesFromInheritSearch = function (search) {
             // if search is empty we return all component names
-			if (search === '') {
+			if (search === '' || search === undefined) {
 				return compNamesFeeder;
 			}
             var result = [];
@@ -77,7 +76,7 @@ $.ajax({
          */
         var extractCompNamesFromDependenciesSearch = function (search) {
             // if search is empty we return all component names
-			if (search === '') {
+			if (search === '' || search === undefined) {
 				return compNamesFeeder;
 			}
             var result = [];
@@ -139,11 +138,11 @@ $.ajax({
             var resultFromNames = extractCompNamesFromNamesSearch(dataName) ;
 			var resultFromInherit = extractCompNamesFromInheritSearch(dataInherit) ;
             var resultFromDependencies = extractCompNamesFromDependenciesSearch(dataDependencies) ;
-			console.log('datas ' + resultFromNames +', --- '+resultFromInherit+', --- '+resultFromDependencies+', ');
+			//console.log('datas ' + resultFromNames +', --- '+resultFromInherit+', --- '+resultFromDependencies+', ');
 			compList = intersectArray(resultFromNames, resultFromDependencies);
-			console.log('list1 '+compList);
+			//console.log('list1 '+compList);
 			compList = intersectArray(compList, resultFromInherit);
-			console.log('list2 '+compList);
+			//console.log('list2 '+compList);
             displayComponents(compList);
         };
 
@@ -151,7 +150,7 @@ $.ajax({
             var nameSearch = $('.form-name').val();
             var inheritSearch = $('.form-inherit').val();
             var dependenciesSearch = $('.form-dependencies').val();
-			console.log('search for :'+nameSearch+' ,'+inheritSearch+' ,'+dependenciesSearch);
+			//console.log('search for :'+nameSearch+' ,'+inheritSearch+' ,'+dependenciesSearch);
             search(nameSearch, inheritSearch, dependenciesSearch);
         };
 
@@ -217,6 +216,11 @@ $.ajax({
                 domElement.addClass('tt-cursor');
             }
         });
+		
+		$('.tt-cursor').on('click', function() {
+			console.log('click');
+			$('.typeahead').typeahead('close');
+		})
 
         $('.form-name').keyup( function() {
 			searchFromValueInForms();
