@@ -10,8 +10,42 @@ h1 {
 
 
 .searchRow {
-    background-color: white
+    background-color: white;
+	-webkit-box-shadow: 0px 54px 89px -33px rgba(0,0,0,0.51);
+	-moz-box-shadow: 0px 54px 89px -33px rgba(0,0,0,0.51);
+	box-shadow: 0px 54px 89px -33px rgba(0,0,0,0.51);
 }
+
+.additionalSearch {
+	height : 0;
+	position : relative;  
+    -webkit-transition: display, height 0.4s ease;
+	-moz-transition: display, height 0.4s ease;
+	-o-transition: display, height 0.4s ease;
+	transition: display, height 0.4s ease;
+	z-index : auto;
+}
+
+
+
+#expandSearch {
+	position : relative;
+	left : -6%;
+	top : 15px;
+	z-index : 10;
+}
+
+.clearSearch {
+  height: 25px;
+  padding: 3px;
+  position: relative;
+  top: 7px;
+  left: 31%;
+}
+.tags-group,.dependencies-group {
+	display : none;
+}
+
 
 .nav-tabs {
     border : 0;

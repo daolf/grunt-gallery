@@ -1,1 +1,0 @@
-[{"name":"appReact","file":"./js/comp/appReact.js","example":["React.render(\nReact.createElement(MenuExample, {items:  ['Home', 'Services', 'About', 'Contact us'] }),\ndocument.body\n);"]}]

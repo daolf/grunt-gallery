@@ -31,6 +31,7 @@ module.exports = {
                 name : myParser.removeExtension(path.basename(fileName)),
                 file : './js/comp/'+fileName,
                 info : myParser.extractCleanInfos(rawCode, '@info'),
+                tags : myParser.extractCleanInfos(rawCode, '@tags'),
                 example : myParser.extractCleanInfos(rawCode, '@example'),
                 inherit : resultRegexp.inherit, 
                 dependencies : myParser.extractDependencies(rawCode)

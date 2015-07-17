@@ -4,7 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<script src="../js/gallery.js"></script>
 		<link rel="stylesheet" href="../css/gallery.css">
-		<title>appReact</title>
+		<title>appReactWithInfo</title>
 		<script type="text/javascript">
 			var refreshIframe = function() {
 			    var iframe = document.getElementById('iframe');
@@ -16,30 +16,30 @@
 	<body>
 		<row>
 			<div class="col-lg-12">
-				<h1>testappReact
+				<h1>appReactWithInfo
 				</h1>
 			</div>
 		</row>
 		<row>
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><a href="../index.html" class="btn btn-default buttonHome"><span aria-hidden="true" class="glyphicon glyphicon-home"></span>                            <span> Home</span>                        </a>
-				<div class="btn-group"><a href="../iframe/iframe_appReact.html" target="_blank" class="btn btn-default"><span aria-hidden="true" class="glyphicon glyphicon-console"></span>                                <span> Debug</span>                            </a>
+				<div class="btn-group"><a href="../iframe/iframe_appReactWithInfo.html" target="_blank" class="btn btn-default"><span aria-hidden="true" class="glyphicon glyphicon-console"></span>                                <span> Debug</span>                            </a>
 					<button onclick="refreshIframe()" class="btn btn-default btnRefresh"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span>                                <span> Refresh Component</span></button>
 				</div><br />
 				<br />
 			</div>
-			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 tagsInfo"><span class="label label-primary tags">bonjour</span> <span class="label label-primary tags">hello</span> 
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 tagsInfo"><span class="label label-primary tags">tag1</span> <span class="label label-primary tags">tag2</span> 
 			</div>
 		</row>
 		<row>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="panel panel-default">
-					<div class="panel-body bg-info">bonjour, hello</div>
+					<div class="panel-body bg-info">This is a brand new component</div>
 				</div>
 			</div>
 		</row>
 		<row>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 iframeContainer">
-				<iframe src="../iframe/iframe_appReact.html" id="iframe"></iframe>
+				<iframe src="../iframe/iframe_appReactWithInfo.html" id="iframe"></iframe>
 			</div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panelsCodeMirror">
 				<ul role="tablist" class="nav nav-tabs">
@@ -64,7 +64,7 @@ document.body
 			// Loading full code of component
 			var fullData;
 			$.ajax({
-			       url : ".././js/comp/appReact.js",
+			       url : ".././js/comp/appReactWithInfo.js",
 			       dataType: "text",
 			       success : function (data) {
 			           fullData = data;
@@ -103,7 +103,7 @@ document.body
 			    }
 			})
 			$('.btnNewWindow').click( function () {
-			    var windowFullCode = window.open("../js/comp/appReact.js", "wFormx", "width=800,height=600,location=no,menubar=no,status=no,titilebar=no,resizable=no,");
+			    var windowFullCode = window.open("../js/comp/appReactWithInfo.js", "wFormx", "width=800,height=600,location=no,menubar=no,status=no,titilebar=no,resizable=no,");
 			    var fullCode = document.getElementById('fullCodeTx');
 			    windowFullCode.onload = function() {
 			        console.log('yolo');

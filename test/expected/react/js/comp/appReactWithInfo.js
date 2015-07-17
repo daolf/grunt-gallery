@@ -1,11 +1,20 @@
 /** @jsx React.DOM */
 
+
+
 /*
  * @example
  * React.render(
  *     React.createElement(MenuExample, {items:  ['Home', 'Services', 'About', 'Contact us'] }),
  *     document.body
  * );
+ * 
+ * @tags tag1, tag2
+ */
+
+/*
+ * @info
+ * This is a brand new component
  */
 
 var MenuExample = React.createClass({displayName: "MenuExample",
