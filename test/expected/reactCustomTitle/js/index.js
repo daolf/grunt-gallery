@@ -9270,7 +9270,8 @@ d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector
             inheritFeeder = inheritFeeder.concat(info[i].inherit);
             dependenciesFeeder = dependenciesFeeder.concat(info[i].dependencies);
         }
-        
+        $('.resultNumber').text(compNamesFeeder.length);  
+      
         dependenciesFeeder = removeDuplicate(dependenciesFeeder);
 		inheritFeeder = removeDuplicate(inheritFeeder);		
         /*
@@ -9308,6 +9309,27 @@ d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector
                 currDependencies = info[i].dependencies;
                 for (var j = 0; j<currDependencies.length; j++) {
                     if ( currDependencies[j].toLowerCase().indexOf(search.toLowerCase()) !== -1 ) {
+                        result.push(info[i].name);
+                    }
+                }
+            }
+            return result;
+        };
+		
+		/*
+         * We extract component names where their dependencies match the search
+         */
+        var extractCompNamesFromTagsSearch = function (search) {
+            // if search is empty we return all component names
+			if (search === '' || search === undefined) {
+				return compNamesFeeder;
+			}
+            var result = [];
+            var currTags;
+            for (var i = 0; i<info.length; i++) {
+                currTags = info[i].tags;
+                for (var j = 0; j<currTags.length; j++) {
+                    if ( currTags[j].toLowerCase().indexOf(search.toLowerCase()) !== -1 ) {
                         result.push(info[i].name);
                     }
                 }
@@ -9357,24 +9379,28 @@ d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector
 			
         };
 
-        var search = function (dataName, dataInherit, dataDependencies) {
+        var search = function (dataName, dataInherit, dataDependencies, dataTags) {
             var resultFromNames = extractCompNamesFromNamesSearch(dataName) ;
 			var resultFromInherit = extractCompNamesFromInheritSearch(dataInherit) ;
             var resultFromDependencies = extractCompNamesFromDependenciesSearch(dataDependencies) ;
+            var resultFromTags = extractCompNamesFromTagsSearch(dataTags) ;
 			//console.log('datas ' + resultFromNames +', --- '+resultFromInherit+', --- '+resultFromDependencies+', ');
 			compList = intersectArray(resultFromNames, resultFromDependencies);
 			//console.log('list1 '+compList);
 			compList = intersectArray(compList, resultFromInherit);
+			compList = intersectArray(compList, resultFromTags);
 			//console.log('list2 '+compList);
             displayComponents(compList);
+            $('.resultNumber').text(compList.length);
         };
 
         var searchFromValueInForms = function () {
             var nameSearch = $('.form-name').val();
             var inheritSearch = $('.form-inherit').val();
             var dependenciesSearch = $('.form-dependencies').val();
+            var tagsSearch = $('.form-tags').val();
 			//console.log('search for :'+nameSearch+' ,'+inheritSearch+' ,'+dependenciesSearch);
-            search(nameSearch, inheritSearch, dependenciesSearch);
+            search(nameSearch, inheritSearch, dependenciesSearch, tagsSearch);
         };
 
         var substringMatcher = function(strs) {

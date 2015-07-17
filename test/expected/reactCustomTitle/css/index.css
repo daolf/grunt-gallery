@@ -27,18 +27,28 @@
 .additionalSearch {
 	height : 0;
 	position : relative;  
-    -webkit-transition: display, height 0.8s ease;
-	-moz-transition: display, height 0.8s ease;
-	-o-transition: display, height 0.8s ease;
-	transition: display, height 0.8s ease;
+    -webkit-transition: display, height 0.4s ease;
+	-moz-transition: display, height 0.4s ease;
+	-o-transition: display, height 0.4s ease;
+	transition: display, height 0.4s ease;
 	z-index : auto;
 }
 
+
+
 #expandSearch {
 	position : relative;
-	left : 44%;
+	left : -6%;
 	top : 15px;
 	z-index : 10;
+}
+
+.clearSearch {
+  height: 25px;
+  padding: 3px;
+  position: relative;
+  top: 7px;
+  left: 31%;
 }
 .tags-group,.dependencies-group {
 	display : none;

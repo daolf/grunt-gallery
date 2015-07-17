@@ -37,7 +37,8 @@
 							</div><br>
 						</div>
 					</div>
-					<button id="expandSearch" type="button" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-primary">Advanced search <span class="iconExpanded glyphicon glyphicon-triangle-bottom">  </span></button>
+					<button id="expandSearch" type="button" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-primary">Advanced search <span class="iconExpanded glyphicon glyphicon-triangle-bottom"> </span></button>
+					<button type="button" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-danger clearSearch">Reset  <span class="glyphicon glyphicon-remove-circle">  </span></button>
 				</div>
 			</div>
 			<div class="row">
@@ -99,7 +100,10 @@
 			         $('.iconExpanded').removeClass('glyphicon-triangle-bottom');
 			         $('.iconExpanded').addClass('glyphicon-triangle-top');
 			   }
-			 }) 
+			 })
+			$('.clearSearch').click( function(event) {
+			 $('.form-control').each(function(){ $(this).val("")});
+			})
 			 document.onscroll = scroll;
 			 $('.compName').quickfit({ max : 24});
 		</script>

@@ -46,7 +46,10 @@ html
                   br
               button#expandSearch.btn.btn-default.btn-primary(type='button', aria-haspopup='true', aria-expanded='false')
                 | Advanced search 
-                span.iconExpanded.glyphicon.glyphicon-triangle-bottom   
+                span.iconExpanded.glyphicon.glyphicon-triangle-bottom  
+              button.btn.btn-default.btn-danger.clearSearch(type='button', aria-haspopup='true', aria-expanded='false')
+                | Reset  
+                span.glyphicon.glyphicon-remove-circle   
           div.row
               div.galleryContainer.container-fluid
                   each val in data
@@ -96,6 +99,9 @@ html
             |          $('.iconExpanded').removeClass('glyphicon-triangle-bottom');
             |          $('.iconExpanded').addClass('glyphicon-triangle-top');
             |    }
-            |  }) 
+            |  })
+            | $('.clearSearch').click( function(event) {
+            |  $('.form-control').each(function(){ $(this).val("")});
+            | })
             |  document.onscroll = scroll;
             |  $('.compName').quickfit({ max : 24});
