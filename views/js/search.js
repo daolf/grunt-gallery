@@ -151,7 +151,11 @@ $.ajax({
             }
 			// if no comp to display we explicitely say it
 			if(!found) {
-				$('.galleryContainer').append('<h2 id=\'emptyResult\'> Sorry, no result for <strong>\'' + $('.form-search').val() + '\'</strong> </h2>');
+        if($('.form-search').val() !== '') {
+				  $('.galleryContainer').append('<h2 id=\'emptyResult\'> Sorry, no results for <strong>\'' + $('.form-search').val() + '\'</strong> </h2>');
+        } else {
+          $('.galleryContainer').append('<h2 id=\'emptyResult\'> Sorry, no results </h2>');
+        }
 			}
 			
         };
