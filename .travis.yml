@@ -5,16 +5,16 @@ before_install: npm install -g grunt-cli
 before_script: grunt test
 install: npm install
 branches:
-  only: 
-    - /^release.*$/
+  only:
+  - /^release.*$/
 deploy:
   provider: npm
   email: pjr.dewulf@gmail.com
   api_key:
-    secure: necIyqg8WDduhyNCJKZRcKD2pxOEJ1ZmLicYFA+yrQcL7XJX8wZXFKgMbcZ2EOElNxX5u5S67+B/ctjmdXIHNz8kvnYa4EL4w1rqjz3RZz7YFWvdfg7jjcM06gBRyR19GkeMJtVjixYtrkms+cIptIZ09vCumzXVnl6jWdM093Ft+gDy9Q1tsv8y7WhEp2ZuWP6X+g4SreKfB9zIPNJOY93oQN8HbUWKSAAvX2vJkvtr2itCwZEe8sh7ny5AhIffJ/9hgBnwc8d50JdAAQaryOmZPQSXMUvXw5KPNCeZR+E94K+0dURvU4jCM9IsqCVRo1d+rellscvgaqgK0dxCyOfBY60BKQwV5qqdAebCXTWAH0sxFRuyPCG7LW2eJwnF8dDGDxEMnMK5kM0ul9adFHp9tA/Rc/d985cefWo5a2ZiNg72DVt99w7vmHRHiuyBlvrQFrEHdFTHYxloOLcqk+N+xrE0To7J+4y5k8DKUzAnEK1RqnK/iwxHpM3bu9XWRmFVmV2gT3KLrucIbI5aQgngsw+pOLYmq5gvhJJLZaLUxvl8a71x+/AnaOniv3BvdNyFZUNKIuZlJqqF3bWGS39hyLmTDEkr+n+Di6kSF4MHMJ2zNngqsG8lXLbJ8xjiYj48nRHGAf6x+rpIz+fATWvDnvOnUfYxlOLnUO8hyqY=
+    secure: W1LIGfeCs+xhNGddqio74MX0OSuplZJRfWiKWNJu5EsH1t/wA98RI0qchEid5eXjDGvIEyNVav2PIM7J/vMf/3nO6+bmNOUsZkKZ2ojVqp1c1Smwd5IiSapD+iy+ee0uwnE+75e7DaRuQtC1MY8EUGXXNxnDnbW+VrCVHS7dyDRkSlPyWbYUVeoYliL+O7COBQn5t45GxPtJI1+AzSBQT4hvJQftYnnBKnJMVzNE8ctRId+EagO0H089jJkOTRTMeKu0aGqpmVwN8eZnAvXhxsWfvTRMv/azl/oOQnDPUKPPNmijGrNBUjKTMmMd23H5Pz1PEClFuaqVx2focIYTQ4TykzYx7KmLYw/5xwA+hkdR8dKa/hqbr0bGj6HqoXC0p0bQWzzntHZNVfxGjeB8KM6NjlJkgwu0+yR1Wp3q0qpT5hIsJPeT077JM/IDkmhixj2U0Rps3Xb3WWAVJha8NcvziiTwWPMr3MLPK3+Cx+RPukHoX/ZVM5BULSBo66cW9XyPgZk2VNMoBM7h6LnEzk38BQk1u4KeLqnozMjF7iDV9OaArPzrhIW+xg27NA0NCRz0NUisN8uT6JVituaWi+OgviRVrIIgxWcZc58CpJsGjxdrfnBwto9gcMe26jnrVhAibJFWIZd867NW7jU4V+xVVU3sjho/pf4D0PqBvsg=
   on:
     repo: daolf/grunt-gallery
     all_branches: true
 after_deploy:
-  - chmod ugo+x deploy.sh
-  - '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || ./deploy.sh'
+- chmod ugo+x deploy.sh
+- '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || ./deploy.sh'
