@@ -182,6 +182,9 @@ html
             datatype : "text",
             success : function (data) {
                 $('#iframe')[0].contentWindow.document.open($('#iframe').attr('src'));
+                document.getElementById("iframe").contentWindow.onerror=function(errorMsg, url, lineNumber) {
+                  $('#iframe')[0].contentWindow.document.write('error : '+errorMsg);
+                }
                 $('#iframe')[0].contentWindow.document.write(replaceExample(data,instance.getValue()));
                 $('#iframe')[0].contentWindow.document.close();
                 
