@@ -263,5 +263,12 @@ $.ajax({
 		$('.form-dependencies').keyup( function() {
 			searchFromValueInForms();
 		});
+      
+    $('.clearSearch').click( function(event) {
+			  $('.form-control').each(function(){ 
+            $(this).val('');
+        });
+       searchFromValueInForms();
+		});
     }
 });
