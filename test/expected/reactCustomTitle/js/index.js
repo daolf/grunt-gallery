@@ -9486,6 +9486,13 @@ d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector
 		$('.form-dependencies').keyup( function() {
 			searchFromValueInForms();
 		});
+      
+    $('.clearSearch').click( function(event) {
+			  $('.form-control').each(function(){ 
+            $(this).val('');
+        });
+       searchFromValueInForms();
+		});
     }
 });/*
  * Author chunksnbits, url:https://github.com/chunksnbits/jquery-quickfit/blob/master/jquery.quickfit.js
