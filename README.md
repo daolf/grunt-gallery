@@ -33,7 +33,7 @@ WARNING : only put those tags in bloc comment (/\* */) no single comment line.
 
 Currently this plug-in support two tags :
 - @example (instantion code for your component)
-- @info (complementary information)
+- @description (complementary information)
 _ @tags (if you want to add tags for component, all tags must be separated by ',')
 
 Others informations (inherit, dependencies, ... ) are directly extracted from the code.
