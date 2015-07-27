@@ -13,7 +13,7 @@
  */
 
 /*
- * @info
+ * @description
  * This is a brand new component
  */
 

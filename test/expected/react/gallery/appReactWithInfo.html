@@ -110,5 +110,26 @@ document.body
 			    }
 			})
 		</script>
+		<script type="text/javascript">
+			var replaceExample = function(iframeContent, newExample) {
+			    return iframeContent.replace(/\/\/beginExample[\s\S]*\/\/endExample/,newExample);
+			}
+			myCodeMirrorEx0.on("change", function(instance, changeObj) {
+			    console.log("Change");
+			    $.ajax({
+			    url : $('#iframe').attr('src'),
+			    datatype : "text",
+			    success : function (data) {
+			        $('#iframe')[0].contentWindow.document.open($('#iframe').attr('src'));
+			        document.getElementById("iframe").contentWindow.onerror=function(errorMsg, url, lineNumber) {
+			          $('#iframe')[0].contentWindow.document.write('error : '+errorMsg);
+			        }
+			        $('#iframe')[0].contentWindow.document.write(replaceExample(data,instance.getValue()));
+			        $('#iframe')[0].contentWindow.document.close();
+			        
+			    }
+			});
+			})
+		</script>
 	</body>
 </html>
